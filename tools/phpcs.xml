@@ -1,0 +1,29 @@
+<ruleset
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="./../vendor/squizlabs/php_codesniffer/phpcs.xsd">
+
+	<!-- Show only relevant part of path -->
+	<arg name="basepath" value="./.."/>
+
+	<!-- Configure cache -->
+	<arg name="cache" value="./../var/tools/PHP_CodeSniffer/cache.dat"/>
+
+	<!-- Import coding-standard -->
+	<rule ref="./../vendor/orisai/coding-standard/src/ruleset-7.4.xml"/>
+
+	<!-- Configure PSR-4 rule -->
+	<rule ref="SlevomatCodingStandard.Files.TypeNameMatchesFileName">
+		<properties>
+			<property name="rootNamespaces" type="array">
+				<element key="src" value="Orisai\ReflectionMeta"/>
+				<element key="tests" value="Tests\Orisai\ReflectionMeta"/>
+			</property>
+		</properties>
+	</rule>
+
+	<!-- Test-specific formatting -->
+	<exclude-pattern>tests/Doubles/Finder/same-line-traits.php</exclude-pattern>
+	<exclude-pattern>tests/Doubles/Finder/same-line-traits-static.php</exclude-pattern>
+	<exclude-pattern>tests/Doubles/Finder/traits.php</exclude-pattern>
+
+</ruleset>
