@@ -7,3 +7,7 @@ parameters:
 
 	scanDirectories:
 		- ../src
+
+	ignoreErrors:
+		# It does not have to
+		- '#^Attribute class (Foo|Bar) does not exist\.$#'
