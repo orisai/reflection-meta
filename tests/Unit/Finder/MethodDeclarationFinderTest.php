@@ -61,9 +61,9 @@ final class MethodDeclarationFinderTest extends TestCase
 Context: Checking which trait declared method
          'Tests\Orisai\ReflectionMeta\Doubles\Finder\SameLineTraits\SameLineTraitsClass->a()'
 Problem: These traits are on the same line:
-         'Tests\Orisai\ReflectionMeta\Doubles\Finder\SameLineTraits\A3',
-         'Tests\Orisai\ReflectionMeta\Doubles\Finder\SameLineTraits\A2',
          'Tests\Orisai\ReflectionMeta\Doubles\Finder\SameLineTraits\A1',
+         'Tests\Orisai\ReflectionMeta\Doubles\Finder\SameLineTraits\A2',
+         'Tests\Orisai\ReflectionMeta\Doubles\Finder\SameLineTraits\A3',
          'Tests\Orisai\ReflectionMeta\Doubles\Finder\SameLineTraits\B1'
 Solution: Don't place them on the same line.
 MSG,
@@ -84,8 +84,8 @@ MSG,
 Context: Checking which trait declared method
          'Tests\Orisai\ReflectionMeta\Doubles\Finder\SameLineTraitsStatic\SameLineTraitsStaticClass::a()'
 Problem: These traits are on the same line:
-         'Tests\Orisai\ReflectionMeta\Doubles\Finder\SameLineTraitsStatic\A2',
-         'Tests\Orisai\ReflectionMeta\Doubles\Finder\SameLineTraitsStatic\A1'
+         'Tests\Orisai\ReflectionMeta\Doubles\Finder\SameLineTraitsStatic\A1',
+         'Tests\Orisai\ReflectionMeta\Doubles\Finder\SameLineTraitsStatic\A2'
 Solution: Don't place them on the same line.
 MSG,
 		);

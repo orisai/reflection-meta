@@ -66,6 +66,11 @@ final class MethodDeclaratorFinder
 				continue;
 			}
 
+			$possibleByTrait[] = self::getPossibleDeclaringTraits(
+				$trait->getTraits(),
+				$methodReflector,
+			);
+
 			// It may be the trait declaring method, method is on matching line of the same file
 			if (
 				$trait->getFileName() === $methodReflector->getFileName()
@@ -74,11 +79,6 @@ final class MethodDeclaratorFinder
 			) {
 				$possibleByTrait[][] = $trait;
 			}
-
-			$possibleByTrait[] = self::getPossibleDeclaringTraits(
-				$trait->getTraits(),
-				$methodReflector,
-			);
 		}
 
 		return array_merge(...$possibleByTrait);
