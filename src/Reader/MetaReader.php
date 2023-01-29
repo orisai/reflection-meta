@@ -12,29 +12,39 @@ interface MetaReader
 {
 
 	/**
+	 * @template T of object
 	 * @param ReflectionClass<object> $class
-	 * @return list<object>
+	 * @param class-string<T>         $attributeClass
+	 * @return list<T>
 	 */
-	public function readClass(ReflectionClass $class): array;
+	public function readClass(ReflectionClass $class, string $attributeClass): array;
 
 	/**
-	 * @return list<object>
+	 * @template T of object
+	 * @param class-string<T> $attributeClass
+	 * @return list<T>
 	 */
-	public function readClassConstant(ReflectionClassConstant $constant): array;
+	public function readClassConstant(ReflectionClassConstant $constant, string $attributeClass): array;
 
 	/**
-	 * @return list<object>
+	 * @template T of object
+	 * @param class-string<T> $attributeClass
+	 * @return list<T>
 	 */
-	public function readProperty(ReflectionProperty $property): array;
+	public function readProperty(ReflectionProperty $property, string $attributeClass): array;
 
 	/**
-	 * @return list<object>
+	 * @template T of object
+	 * @param class-string<T> $attributeClass
+	 * @return list<T>
 	 */
-	public function readMethod(ReflectionMethod $method): array;
+	public function readMethod(ReflectionMethod $method, string $attributeClass): array;
 
 	/**
-	 * @return list<object>
+	 * @template T of object
+	 * @param class-string<T> $attributeClass
+	 * @return list<T>
 	 */
-	public function readParameter(ReflectionParameter $parameter): array;
+	public function readParameter(ReflectionParameter $parameter, string $attributeClass): array;
 
 }

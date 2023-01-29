@@ -4,8 +4,3 @@ includes:
 parameters:
 	level: 8
 	resultCachePath: %currentWorkingDirectory%/var/tools/PHPStan/resultCache.src.php
-
-	ignoreErrors:
-		# Missing type in dependency
-		- message: '#^Method (.+)\:\:read(Class|Property|Method)\(\) should return list\<object\> but returns array\<object\>\.$#'
-		  path: '../src/Reader/AnnotationsMetaReader.php'

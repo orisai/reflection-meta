@@ -5,54 +5,74 @@ namespace Tests\Orisai\ReflectionMeta\Doubles\Structure\Reader\ReaderCombined;
 use Attribute;
 use Doctrine\Common\Annotations\Annotation\Target;
 
-/**
- * @Annotation
- * @Target({"ALL"})
- */
-#[Attribute(Attribute::TARGET_ALL | Attribute::IS_REPEATABLE)]
-final class TestAttribute
+abstract class BaseTestAttribute
 {
 
 }
 
 /**
- * @TestAttribute()
- * @TestAttribute()
+ * @Annotation
+ * @Target({"ALL"})
  */
-#[TestAttribute]
-#[TestAttribute]
+#[Attribute(Attribute::TARGET_ALL | Attribute::IS_REPEATABLE)]
+final class TestAttribute1 extends BaseTestAttribute
+{
+
+}
+
+/**
+ * @Annotation
+ * @Target({"ALL"})
+ */
+#[Attribute(Attribute::TARGET_ALL | Attribute::IS_REPEATABLE)]
+final class TestAttribute2 extends BaseTestAttribute
+{
+
+}
+
+final class UnusedAttribute
+{
+
+}
+
+/**
+ * @TestAttribute1()
+ * @TestAttribute2()
+ */
+#[TestAttribute1]
+#[TestAttribute2]
 final class ReaderDouble
 {
 
 	/**
-	 * @TestAttribute()
-	 * @TestAttribute()
+	 * @TestAttribute1()
+	 * @TestAttribute2()
 	 */
-	#[TestAttribute]
-	#[TestAttribute]
+	#[TestAttribute1]
+	#[TestAttribute2]
 	public const A = 'a';
 
 	/**
-	 * @TestAttribute()
-	 * @TestAttribute()
+	 * @TestAttribute1()
+	 * @TestAttribute2()
 	 */
-	#[TestAttribute]
-	#[TestAttribute]
+	#[TestAttribute1]
+	#[TestAttribute2]
 	public string $a;
 
 	/**
-	 * @TestAttribute()
-	 * @TestAttribute()
+	 * @TestAttribute1()
+	 * @TestAttribute2()
 	 */
-	#[TestAttribute]
-	#[TestAttribute]
+	#[TestAttribute1]
+	#[TestAttribute2]
 	public function a(
 		/**
-		 * @TestAttribute()
-		 * @TestAttribute()
+		 * @TestAttribute1()
+		 * @TestAttribute2()
 		 */
-		#[TestAttribute]
-		#[TestAttribute]
+		#[TestAttribute1]
+		#[TestAttribute2]
 		string $a
 	): void
 	{

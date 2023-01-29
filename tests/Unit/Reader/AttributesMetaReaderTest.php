@@ -6,8 +6,11 @@ use Orisai\Exceptions\Logic\InvalidState;
 use Orisai\ReflectionMeta\Reader\AttributesMetaReader;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
+use Tests\Orisai\ReflectionMeta\Doubles\Structure\Reader\ReaderCombined\BaseTestAttribute;
 use Tests\Orisai\ReflectionMeta\Doubles\Structure\Reader\ReaderCombined\ReaderDouble;
-use Tests\Orisai\ReflectionMeta\Doubles\Structure\Reader\ReaderCombined\TestAttribute;
+use Tests\Orisai\ReflectionMeta\Doubles\Structure\Reader\ReaderCombined\TestAttribute1;
+use Tests\Orisai\ReflectionMeta\Doubles\Structure\Reader\ReaderCombined\TestAttribute2;
+use Tests\Orisai\ReflectionMeta\Doubles\Structure\Reader\ReaderCombined\UnusedAttribute;
 use const PHP_VERSION_ID;
 
 final class AttributesMetaReaderTest extends TestCase
@@ -26,34 +29,72 @@ final class AttributesMetaReaderTest extends TestCase
 		$reader = new AttributesMetaReader();
 		$class = new ReflectionClass(ReaderDouble::class);
 		$expected = [
-			new TestAttribute(),
-			new TestAttribute(),
+			new TestAttribute1(),
+			new TestAttribute2(),
+		];
+		$expected2 = [
+			new TestAttribute2(),
 		];
 
 		self::assertEquals(
-			$reader->readClass($class),
+			$reader->readClass($class, BaseTestAttribute::class),
 			$expected,
 		);
 
+		$constant = $class->getReflectionConstant('A');
 		self::assertEquals(
-			$reader->readClassConstant($class->getReflectionConstant('A')),
+			$reader->readClassConstant($constant, BaseTestAttribute::class),
 			$expected,
 		);
-
 		self::assertEquals(
-			$reader->readProperty($class->getProperty('a')),
+			$reader->readClassConstant($constant, TestAttribute2::class),
+			$expected2,
+		);
+		self::assertEquals(
+			$reader->readClassConstant($constant, UnusedAttribute::class),
+			[],
+		);
+
+		$property = $class->getProperty('a');
+		self::assertEquals(
+			$reader->readProperty($property, BaseTestAttribute::class),
 			$expected,
+		);
+		self::assertEquals(
+			$reader->readProperty($property, TestAttribute2::class),
+			$expected2,
+		);
+		self::assertEquals(
+			$reader->readProperty($property, UnusedAttribute::class),
+			[],
 		);
 
 		$method = $class->getMethod('a');
 		self::assertEquals(
-			$reader->readMethod($method),
+			$reader->readMethod($method, BaseTestAttribute::class),
 			$expected,
 		);
-
 		self::assertEquals(
-			$reader->readParameter($method->getParameters()[0]),
+			$reader->readMethod($method, TestAttribute2::class),
+			$expected2,
+		);
+		self::assertEquals(
+			$reader->readMethod($method, UnusedAttribute::class),
+			[],
+		);
+
+		$parameter = $method->getParameters()[0];
+		self::assertEquals(
+			$reader->readParameter($parameter, BaseTestAttribute::class),
 			$expected,
+		);
+		self::assertEquals(
+			$reader->readParameter($parameter, TestAttribute2::class),
+			$expected2,
+		);
+		self::assertEquals(
+			$reader->readParameter($parameter, UnusedAttribute::class),
+			[],
 		);
 	}
 

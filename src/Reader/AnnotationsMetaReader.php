@@ -35,31 +35,60 @@ final class AnnotationsMetaReader implements MetaReader
 		return Dependencies::getNotLoadedPackages(['doctrine/annotations']) === [];
 	}
 
-	public function readClass(ReflectionClass $class): array
+	public function readClass(ReflectionClass $class, string $attributeClass): array
 	{
-		return $this->reader->getClassAnnotations($class);
+		return $this->filterInstances(
+			$this->reader->getClassAnnotations($class),
+			$attributeClass,
+		);
 	}
 
-	public function readClassConstant(ReflectionClassConstant $constant): array
+	public function readClassConstant(ReflectionClassConstant $constant, string $attributeClass): array
 	{
 		// Not supported
 		return [];
 	}
 
-	public function readProperty(ReflectionProperty $property): array
+	public function readProperty(ReflectionProperty $property, string $attributeClass): array
 	{
-		return $this->reader->getPropertyAnnotations($property);
+		return $this->filterInstances(
+			$this->reader->getPropertyAnnotations($property),
+			$attributeClass,
+		);
 	}
 
-	public function readMethod(ReflectionMethod $method): array
+	public function readMethod(ReflectionMethod $method, string $attributeClass): array
 	{
-		return $this->reader->getMethodAnnotations($method);
+		return $this->filterInstances(
+			$this->reader->getMethodAnnotations($method),
+			$attributeClass,
+		);
 	}
 
-	public function readParameter(ReflectionParameter $parameter): array
+	public function readParameter(ReflectionParameter $parameter, string $attributeClass): array
 	{
 		// Not supported
 		return [];
+	}
+
+	/**
+	 * @template T of object
+	 * @param array<object>   $attributes
+	 * @param class-string<T> $attributeClass
+	 * @return list<T>
+	 */
+	private function filterInstances(array $attributes, string $attributeClass): array
+	{
+		$instances = [];
+		foreach ($attributes as $attribute) {
+			if (!$attribute instanceof $attributeClass) {
+				continue;
+			}
+
+			$instances[] = $attribute;
+		}
+
+		return $instances;
 	}
 
 }

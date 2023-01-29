@@ -9,6 +9,8 @@ use ReflectionClassConstant;
 use ReflectionMethod;
 use ReflectionParameter;
 use ReflectionProperty;
+use function assert;
+use function is_a;
 use const PHP_VERSION_ID;
 
 final class AttributesMetaReader implements MetaReader
@@ -27,40 +29,48 @@ final class AttributesMetaReader implements MetaReader
 		return PHP_VERSION_ID >= 8_00_00;
 	}
 
-	public function readClass(ReflectionClass $class): array
+	public function readClass(ReflectionClass $class, string $attributeClass): array
 	{
-		return $this->attributesToInstances($class->getAttributes());
+		return $this->attributesToInstances($class->getAttributes(), $attributeClass);
 	}
 
-	public function readClassConstant(ReflectionClassConstant $constant): array
+	public function readClassConstant(ReflectionClassConstant $constant, string $attributeClass): array
 	{
-		return $this->attributesToInstances($constant->getAttributes());
+		return $this->attributesToInstances($constant->getAttributes(), $attributeClass);
 	}
 
-	public function readProperty(ReflectionProperty $property): array
+	public function readProperty(ReflectionProperty $property, string $attributeClass): array
 	{
-		return $this->attributesToInstances($property->getAttributes());
+		return $this->attributesToInstances($property->getAttributes(), $attributeClass);
 	}
 
-	public function readMethod(ReflectionMethod $method): array
+	public function readMethod(ReflectionMethod $method, string $attributeClass): array
 	{
-		return $this->attributesToInstances($method->getAttributes());
+		return $this->attributesToInstances($method->getAttributes(), $attributeClass);
 	}
 
-	public function readParameter(ReflectionParameter $parameter): array
+	public function readParameter(ReflectionParameter $parameter, string $attributeClass): array
 	{
-		return $this->attributesToInstances($parameter->getAttributes());
+		return $this->attributesToInstances($parameter->getAttributes(), $attributeClass);
 	}
 
 	/**
+	 * @template T of object
 	 * @param array<ReflectionAttribute<object>> $attributes
-	 * @return list<object>
+	 * @param class-string<T>                    $attributeClass
+	 * @return list<T>
 	 */
-	private function attributesToInstances(array $attributes): array
+	private function attributesToInstances(array $attributes, string $attributeClass): array
 	{
 		$instances = [];
 		foreach ($attributes as $attribute) {
-			$instances[] = $attribute->newInstance();
+			if (!is_a($attribute->getName(), $attributeClass, true)) {
+				continue;
+			}
+
+			$instance = $attribute->newInstance();
+			assert($instance instanceof $attributeClass);
+			$instances[] = $instance;
 		}
 
 		return $instances;
