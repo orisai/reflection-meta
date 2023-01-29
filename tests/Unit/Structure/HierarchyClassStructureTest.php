@@ -3,9 +3,9 @@
 namespace Tests\Orisai\ReflectionMeta\Unit\Structure;
 
 use Orisai\ReflectionMeta\Structure\ClassConstantStructure;
-use Orisai\ReflectionMeta\Structure\ClassStructure;
+use Orisai\ReflectionMeta\Structure\HierarchyClassStructure;
 use Orisai\ReflectionMeta\Structure\MethodStructure;
-use Orisai\ReflectionMeta\Structure\PropertyStructure;
+use Orisai\ReflectionMeta\Structure\PropertyWithDuplicatesStructure;
 use Orisai\SourceMap\ClassConstantSource;
 use Orisai\SourceMap\ClassSource;
 use Orisai\SourceMap\MethodSource;
@@ -20,7 +20,7 @@ use Tests\Orisai\ReflectionMeta\Doubles\Structure\Classes\ClassStructureDouble1;
 use Tests\Orisai\ReflectionMeta\Doubles\Structure\Classes\ClassStructureDoubleInterface1;
 use Tests\Orisai\ReflectionMeta\Doubles\Structure\Classes\ClassStructureDoubleTrait1;
 
-final class ClassStructureTest extends TestCase
+final class HierarchyClassStructureTest extends TestCase
 {
 
 	public function testBase(): void
@@ -28,7 +28,7 @@ final class ClassStructureTest extends TestCase
 		$reflector = new ReflectionClass(stdClass::class);
 		$source = new ClassSource($reflector);
 
-		$class = new ClassStructure(
+		$class = new HierarchyClassStructure(
 			null,
 			[],
 			[],
@@ -49,13 +49,13 @@ final class ClassStructureTest extends TestCase
 
 	public function testExtra(): void
 	{
-		require_once __DIR__ . '/../../Doubles/Structure/class-structure.php';
+		require_once __DIR__ . '/../../Doubles/Structure/hierarchy-class-structure.php';
 
 		$reflector = new ReflectionClass(ClassStructureDouble1::class);
 		$source = new ClassSource($reflector);
 
-		$class = new ClassStructure(
-			$parent = new ClassStructure(
+		$class = new HierarchyClassStructure(
+			$parent = new HierarchyClassStructure(
 				null,
 				[],
 				[],
@@ -65,7 +65,7 @@ final class ClassStructureTest extends TestCase
 				new ClassSource(new ReflectionClass(stdClass::class)),
 			),
 			$interfaces = [
-				new ClassStructure(
+				new HierarchyClassStructure(
 					null,
 					[],
 					[],
@@ -76,7 +76,7 @@ final class ClassStructureTest extends TestCase
 				),
 			],
 			$traits = [
-				new ClassStructure(
+				new HierarchyClassStructure(
 					null,
 					[],
 					[],
@@ -92,7 +92,7 @@ final class ClassStructureTest extends TestCase
 				)),
 			],
 			$properties = [
-				new PropertyStructure(
+				new PropertyWithDuplicatesStructure(
 					$reflector,
 					[],
 					new PropertySource(

@@ -3,10 +3,10 @@
 namespace Tests\Orisai\ReflectionMeta\Unit\Structure;
 
 use Orisai\ReflectionMeta\Structure\ClassConstantStructure;
-use Orisai\ReflectionMeta\Structure\ClassStructure;
+use Orisai\ReflectionMeta\Structure\HierarchyClassStructure;
 use Orisai\ReflectionMeta\Structure\MethodStructure;
 use Orisai\ReflectionMeta\Structure\ParameterStructure;
-use Orisai\ReflectionMeta\Structure\PropertyStructure;
+use Orisai\ReflectionMeta\Structure\PropertyWithDuplicatesStructure;
 use Orisai\ReflectionMeta\Structure\StructureBuilder;
 use Orisai\SourceMap\ClassConstantSource;
 use Orisai\SourceMap\ClassSource;
@@ -78,7 +78,7 @@ final class StructureBuilderTest extends TestCase
 		$class = new ReflectionClass(BuilderParentDouble::class);
 		$structure = $builder->build($class);
 
-		$parent1 = new ClassStructure(
+		$parent1 = new HierarchyClassStructure(
 			null,
 			[],
 			[],
@@ -92,7 +92,7 @@ final class StructureBuilderTest extends TestCase
 			$builder->build(new ReflectionClass(BuilderParentDoubleParent1::class)),
 		);
 
-		$parent2 = new ClassStructure(
+		$parent2 = new HierarchyClassStructure(
 			$parent1,
 			[],
 			[],
@@ -107,7 +107,7 @@ final class StructureBuilderTest extends TestCase
 		);
 
 		self::assertEquals(
-			new ClassStructure(
+			new HierarchyClassStructure(
 				$parent2,
 				[],
 				[],
@@ -128,7 +128,7 @@ final class StructureBuilderTest extends TestCase
 		$class = new ReflectionClass(BuilderInterfaceDouble::class);
 		$structure = $builder->build($class);
 
-		$i1 = new ClassStructure(
+		$i1 = new HierarchyClassStructure(
 			null,
 			[],
 			[],
@@ -142,7 +142,7 @@ final class StructureBuilderTest extends TestCase
 			$builder->build(new ReflectionClass(BuilderInterfaceDoubleInterface1::class)),
 		);
 
-		$i2 = new ClassStructure(
+		$i2 = new HierarchyClassStructure(
 			null,
 			[
 				$i1,
@@ -158,7 +158,7 @@ final class StructureBuilderTest extends TestCase
 			$builder->build(new ReflectionClass(BuilderInterfaceDoubleInterface2::class)),
 		);
 
-		$i3 = new ClassStructure(
+		$i3 = new HierarchyClassStructure(
 			null,
 			[
 				$i1,
@@ -175,7 +175,7 @@ final class StructureBuilderTest extends TestCase
 		);
 
 		self::assertEquals(
-			new ClassStructure(
+			new HierarchyClassStructure(
 				null,
 				[
 					$i2,
@@ -203,7 +203,7 @@ final class StructureBuilderTest extends TestCase
 		$class = new ReflectionClass(BuilderTraitDouble::class);
 		$structure = $builder->build($class);
 
-		$t1 = new ClassStructure(
+		$t1 = new HierarchyClassStructure(
 			null,
 			[],
 			[],
@@ -217,7 +217,7 @@ final class StructureBuilderTest extends TestCase
 			$builder->build(new ReflectionClass(BuilderTraitDoubleTrait1::class)),
 		);
 
-		$t2 = new ClassStructure(
+		$t2 = new HierarchyClassStructure(
 			null,
 			[],
 			[
@@ -233,7 +233,7 @@ final class StructureBuilderTest extends TestCase
 			$builder->build(new ReflectionClass(BuilderTraitDoubleTrait2::class)),
 		);
 
-		$t3 = new ClassStructure(
+		$t3 = new HierarchyClassStructure(
 			null,
 			[],
 			[
@@ -250,7 +250,7 @@ final class StructureBuilderTest extends TestCase
 		);
 
 		self::assertEquals(
-			new ClassStructure(
+			new HierarchyClassStructure(
 				null,
 				[],
 				[
@@ -274,7 +274,7 @@ final class StructureBuilderTest extends TestCase
 		$class = new ReflectionClass(BuilderParentTraitDouble::class);
 		$structure = $builder->build($class);
 
-		$trait1 = new ClassStructure(
+		$trait1 = new HierarchyClassStructure(
 			null,
 			[],
 			[],
@@ -288,7 +288,7 @@ final class StructureBuilderTest extends TestCase
 			$builder->build(new ReflectionClass(BuilderParentTraitDoubleTrait1::class)),
 		);
 
-		$parent1 = new ClassStructure(
+		$parent1 = new HierarchyClassStructure(
 			null,
 			[],
 			[
@@ -305,7 +305,7 @@ final class StructureBuilderTest extends TestCase
 		);
 
 		self::assertEquals(
-			new ClassStructure(
+			new HierarchyClassStructure(
 				$parent1,
 				[],
 				[],
@@ -326,7 +326,7 @@ final class StructureBuilderTest extends TestCase
 		$class = new ReflectionClass(BuilderParentInterfaceDouble::class);
 		$structure = $builder->build($class);
 
-		$interface1 = new ClassStructure(
+		$interface1 = new HierarchyClassStructure(
 			null,
 			[],
 			[],
@@ -340,7 +340,7 @@ final class StructureBuilderTest extends TestCase
 			$builder->build(new ReflectionClass(BuilderParentInterfaceDoubleInterface1::class)),
 		);
 
-		$parent1 = new ClassStructure(
+		$parent1 = new HierarchyClassStructure(
 			null,
 			[
 				$interface1,
@@ -357,7 +357,7 @@ final class StructureBuilderTest extends TestCase
 		);
 
 		self::assertEquals(
-			new ClassStructure(
+			new HierarchyClassStructure(
 				$parent1,
 				[
 					$interface1,
@@ -380,7 +380,7 @@ final class StructureBuilderTest extends TestCase
 		$class = new ReflectionClass(BuilderConstantDouble::class);
 		$structure = $builder->build($class);
 
-		$interface1 = new ClassStructure(
+		$interface1 = new HierarchyClassStructure(
 			null,
 			[],
 			[],
@@ -398,7 +398,7 @@ final class StructureBuilderTest extends TestCase
 			$builder->build(new ReflectionClass(BuilderConstantDoubleInterface1::class)),
 		);
 
-		$parent1 = new ClassStructure(
+		$parent1 = new HierarchyClassStructure(
 			null,
 			[],
 			[],
@@ -417,7 +417,7 @@ final class StructureBuilderTest extends TestCase
 		);
 
 		self::assertEquals(
-			new ClassStructure(
+			new HierarchyClassStructure(
 				$parent1,
 				[
 					$interface1,
@@ -447,13 +447,13 @@ final class StructureBuilderTest extends TestCase
 		$class = new ReflectionClass(BuilderPropertyDouble::class);
 		$structure = $builder->build($class);
 
-		$trait1 = new ClassStructure(
+		$trait1 = new HierarchyClassStructure(
 			null,
 			[],
 			[],
 			[],
 			[
-				new PropertyStructure(
+				new PropertyWithDuplicatesStructure(
 					new ReflectionClass(BuilderPropertyDoubleTrait1::class),
 					[],
 					new PropertySource(
@@ -464,13 +464,13 @@ final class StructureBuilderTest extends TestCase
 			[],
 			new ClassSource(new ReflectionClass(BuilderPropertyDoubleTrait1::class)),
 		);
-		$trait1InContextOfClass = new ClassStructure(
+		$trait1InContextOfClass = new HierarchyClassStructure(
 			null,
 			[],
 			[],
 			[],
 			[
-				new PropertyStructure(
+				new PropertyWithDuplicatesStructure(
 					new ReflectionClass(BuilderPropertyDoubleParent1::class),
 					[],
 					new PropertySource(
@@ -487,7 +487,7 @@ final class StructureBuilderTest extends TestCase
 		);
 		self::assertNotEquals($trait1InContextOfClass, $trait1);
 
-		$parent1 = new ClassStructure(
+		$parent1 = new HierarchyClassStructure(
 			null,
 			[],
 			[
@@ -495,14 +495,14 @@ final class StructureBuilderTest extends TestCase
 			],
 			[],
 			[
-				new PropertyStructure(
+				new PropertyWithDuplicatesStructure(
 					new ReflectionClass(BuilderPropertyDoubleParent1::class),
 					[],
 					new PropertySource(
 						new ReflectionProperty(BuilderPropertyDoubleParent1::class, 'b'),
 					),
 				),
-				new PropertyStructure(
+				new PropertyWithDuplicatesStructure(
 					new ReflectionClass(BuilderPropertyDoubleParent1::class),
 					[
 						new ReflectionClass(BuilderPropertyDoubleTrait1::class),
@@ -520,13 +520,13 @@ final class StructureBuilderTest extends TestCase
 			$builder->build(new ReflectionClass(BuilderPropertyDoubleParent1::class)),
 		);
 
-		$trait2 = new ClassStructure(
+		$trait2 = new HierarchyClassStructure(
 			null,
 			[],
 			[],
 			[],
 			[
-				new PropertyStructure(
+				new PropertyWithDuplicatesStructure(
 					new ReflectionClass(BuilderPropertyDoubleTrait2::class),
 					[],
 					new PropertySource(
@@ -537,13 +537,13 @@ final class StructureBuilderTest extends TestCase
 			[],
 			new ClassSource(new ReflectionClass(BuilderPropertyDoubleTrait2::class)),
 		);
-		$trait2InContextOfClass = new ClassStructure(
+		$trait2InContextOfClass = new HierarchyClassStructure(
 			null,
 			[],
 			[],
 			[],
 			[
-				new PropertyStructure(
+				new PropertyWithDuplicatesStructure(
 					$class,
 					[],
 					new PropertySource(
@@ -561,7 +561,7 @@ final class StructureBuilderTest extends TestCase
 		self::assertNotEquals($trait2InContextOfClass, $trait2);
 
 		self::assertEquals(
-			new ClassStructure(
+			new HierarchyClassStructure(
 				$parent1,
 				[],
 				[
@@ -569,21 +569,21 @@ final class StructureBuilderTest extends TestCase
 				],
 				[],
 				[
-					new PropertyStructure(
+					new PropertyWithDuplicatesStructure(
 						$class,
 						[],
 						new PropertySource(
 							new ReflectionProperty(BuilderPropertyDouble::class, 'd1'),
 						),
 					),
-					new PropertyStructure(
+					new PropertyWithDuplicatesStructure(
 						$class,
 						[],
 						new PropertySource(
 							new ReflectionProperty(BuilderPropertyDouble::class, 'd2'),
 						),
 					),
-					new PropertyStructure(
+					new PropertyWithDuplicatesStructure(
 						$class,
 						[
 							new ReflectionClass(BuilderPropertyDoubleTrait2::class),
@@ -608,7 +608,7 @@ final class StructureBuilderTest extends TestCase
 		$class = new ReflectionClass(BuilderMethodDouble::class);
 		$structure = $builder->build($class);
 
-		$trait1 = new ClassStructure(
+		$trait1 = new HierarchyClassStructure(
 			null,
 			[],
 			[],
@@ -625,7 +625,7 @@ final class StructureBuilderTest extends TestCase
 			],
 			new ClassSource(new ReflectionClass(BuilderMethodDoubleTrait1::class)),
 		);
-		$trait1InContextOfClass = new ClassStructure(
+		$trait1InContextOfClass = new HierarchyClassStructure(
 			null,
 			[],
 			[],
@@ -648,7 +648,7 @@ final class StructureBuilderTest extends TestCase
 		);
 		self::assertNotEquals($trait1InContextOfClass, $trait1);
 
-		$parent1 = new ClassStructure(
+		$parent1 = new HierarchyClassStructure(
 			null,
 			[],
 			[
@@ -672,7 +672,7 @@ final class StructureBuilderTest extends TestCase
 			$builder->build(new ReflectionClass(BuilderMethodDoubleParent1::class)),
 		);
 
-		$trait2 = new ClassStructure(
+		$trait2 = new HierarchyClassStructure(
 			null,
 			[],
 			[],
@@ -689,7 +689,7 @@ final class StructureBuilderTest extends TestCase
 			],
 			new ClassSource(new ReflectionClass(BuilderMethodDoubleTrait2::class)),
 		);
-		$trait2InContextOfClass = new ClassStructure(
+		$trait2InContextOfClass = new HierarchyClassStructure(
 			null,
 			[],
 			[],
@@ -713,7 +713,7 @@ final class StructureBuilderTest extends TestCase
 		self::assertNotEquals($trait2InContextOfClass, $trait2);
 
 		self::assertEquals(
-			new ClassStructure(
+			new HierarchyClassStructure(
 				$parent1,
 				[],
 				[

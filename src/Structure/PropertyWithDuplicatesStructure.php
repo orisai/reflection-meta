@@ -5,7 +5,7 @@ namespace Orisai\ReflectionMeta\Structure;
 use Orisai\SourceMap\PropertySource;
 use ReflectionClass;
 
-final class PropertyStructure implements Structure
+final class PropertyWithDuplicatesStructure implements Structure
 {
 
 	/** @var ReflectionClass<object> */

@@ -2,7 +2,7 @@
 
 namespace Tests\Orisai\ReflectionMeta\Unit\Structure;
 
-use Orisai\ReflectionMeta\Structure\PropertyStructure;
+use Orisai\ReflectionMeta\Structure\PropertyWithDuplicatesStructure;
 use Orisai\SourceMap\PropertySource;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
@@ -11,7 +11,7 @@ use Tests\Orisai\ReflectionMeta\Doubles\Structure\Property\PropertyStructureDoub
 use Tests\Orisai\ReflectionMeta\Doubles\Structure\Property\PropertyStructureDoubleTrait1;
 use Tests\Orisai\ReflectionMeta\Doubles\Structure\Property\PropertyStructureDoubleTrait2;
 
-final class PropertyStructureTest extends TestCase
+final class PropertyWithDuplicatesStructureTest extends TestCase
 {
 
 	public function testBase(): void
@@ -27,7 +27,7 @@ final class PropertyStructureTest extends TestCase
 		$duplicates = [];
 		$source = new PropertySource($reflector);
 
-		$property = new PropertyStructure($contextClass, $duplicates, $source);
+		$property = new PropertyWithDuplicatesStructure($contextClass, $duplicates, $source);
 
 		self::assertSame($contextClass, $property->getContextClass());
 		self::assertSame($duplicates, $property->getDuplicateDeclarations());
@@ -50,7 +50,7 @@ final class PropertyStructureTest extends TestCase
 		];
 		$source = new PropertySource($reflector);
 
-		$property = new PropertyStructure($contextClass, $duplicates, $source);
+		$property = new PropertyWithDuplicatesStructure($contextClass, $duplicates, $source);
 
 		self::assertSame($contextClass, $property->getContextClass());
 		self::assertSame($duplicates, $property->getDuplicateDeclarations());

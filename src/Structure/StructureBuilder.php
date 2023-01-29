@@ -18,7 +18,7 @@ final class StructureBuilder
 	/**
 	 * @param ReflectionClass<object> $class
 	 */
-	public function build(ReflectionClass $class): ClassStructure
+	public function build(ReflectionClass $class): HierarchyClassStructure
 	{
 		return $this->createClassStructure($class, $class);
 	}
@@ -30,9 +30,9 @@ final class StructureBuilder
 	private function createClassStructure(
 		ReflectionClass $declaringClass,
 		ReflectionClass $contextClass
-	): ClassStructure
+	): HierarchyClassStructure
 	{
-		return new ClassStructure(
+		return new HierarchyClassStructure(
 			$this->createParentStructure($declaringClass),
 			$this->createInterfacesStructure($declaringClass, $contextClass),
 			$this->createTraitsStructure($declaringClass, $contextClass),
@@ -46,7 +46,7 @@ final class StructureBuilder
 	/**
 	 * @param ReflectionClass<object> $class
 	 */
-	private function createParentStructure(ReflectionClass $class): ?ClassStructure
+	private function createParentStructure(ReflectionClass $class): ?HierarchyClassStructure
 	{
 		$parentClass = $class->getParentClass();
 
@@ -60,7 +60,7 @@ final class StructureBuilder
 	/**
 	 * @param ReflectionClass<object> $declaringClass
 	 * @param ReflectionClass<object> $contextClass
-	 * @return list<ClassStructure>
+	 * @return list<HierarchyClassStructure>
 	 */
 	private function createInterfacesStructure(
 		ReflectionClass $declaringClass,
@@ -78,7 +78,7 @@ final class StructureBuilder
 	/**
 	 * @param ReflectionClass<object> $declaringClass
 	 * @param ReflectionClass<object> $contextClass
-	 * @return list<ClassStructure>
+	 * @return list<HierarchyClassStructure>
 	 */
 	private function createTraitsStructure(
 		ReflectionClass $declaringClass,
@@ -118,7 +118,7 @@ final class StructureBuilder
 	/**
 	 * @param ReflectionClass<object> $declaringClass
 	 * @param ReflectionClass<object> $contextClass
-	 * @return list<PropertyStructure>
+	 * @return list<PropertyWithDuplicatesStructure>
 	 */
 	private function createPropertiesStructure(
 		ReflectionClass $declaringClass,
@@ -132,7 +132,7 @@ final class StructureBuilder
 				continue;
 			}
 
-			$properties[] = new PropertyStructure(
+			$properties[] = new PropertyWithDuplicatesStructure(
 				$contextClass,
 				// We have to keep duplicates because they can be sourced in different code paths
 				PropertyDeclaratorFinder::getDeclaringTraits($property),

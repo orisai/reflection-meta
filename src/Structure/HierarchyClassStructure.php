@@ -4,21 +4,21 @@ namespace Orisai\ReflectionMeta\Structure;
 
 use Orisai\SourceMap\ClassSource;
 
-final class ClassStructure
+final class HierarchyClassStructure
 {
 
-	private ?ClassStructure $parent;
+	private ?HierarchyClassStructure $parent;
 
-	/** @var list<ClassStructure> */
+	/** @var list<HierarchyClassStructure> */
 	private array $interfaces;
 
-	/** @var list<ClassStructure> */
+	/** @var list<HierarchyClassStructure> */
 	private array $traits;
 
 	/** @var list<ClassConstantStructure> */
 	private array $constants;
 
-	/** @var list<PropertyStructure> */
+	/** @var list<PropertyWithDuplicatesStructure> */
 	private array $properties;
 
 	/** @var list<MethodStructure> */
@@ -27,14 +27,14 @@ final class ClassStructure
 	private ClassSource $source;
 
 	/**
-	 * @param list<ClassStructure>         $interfaces
-	 * @param list<ClassStructure>         $traits
-	 * @param list<ClassConstantStructure> $constants
-	 * @param list<PropertyStructure>      $properties
-	 * @param list<MethodStructure>        $methods
+	 * @param list<HierarchyClassStructure>         $interfaces
+	 * @param list<HierarchyClassStructure>         $traits
+	 * @param list<ClassConstantStructure>          $constants
+	 * @param list<PropertyWithDuplicatesStructure> $properties
+	 * @param list<MethodStructure>                 $methods
 	 */
 	public function __construct(
-		?ClassStructure $parent,
+		?HierarchyClassStructure $parent,
 		array $interfaces,
 		array $traits,
 		array $constants,
@@ -52,13 +52,13 @@ final class ClassStructure
 		$this->source = $source;
 	}
 
-	public function getParent(): ?ClassStructure
+	public function getParent(): ?HierarchyClassStructure
 	{
 		return $this->parent;
 	}
 
 	/**
-	 * @return list<ClassStructure>
+	 * @return list<HierarchyClassStructure>
 	 */
 	public function getInterfaces(): array
 	{
@@ -66,7 +66,7 @@ final class ClassStructure
 	}
 
 	/**
-	 * @return list<ClassStructure>
+	 * @return list<HierarchyClassStructure>
 	 */
 	public function getTraits(): array
 	{
@@ -82,7 +82,7 @@ final class ClassStructure
 	}
 
 	/**
-	 * @return list<PropertyStructure>
+	 * @return list<PropertyWithDuplicatesStructure>
 	 */
 	public function getProperties(): array
 	{
