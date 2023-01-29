@@ -58,14 +58,6 @@ final class StructureFlattenerTest extends TestCase
 				new ClassStructure(new ClassSource(
 					new ReflectionClass(FlattenerStructureParent1::class),
 				)),
-				// Duplicate
-				new ClassStructure(new ClassSource(
-					new ReflectionClass(FlattenerStructureParentInterface1::class),
-				)),
-				// Duplicate
-				new ClassStructure(new ClassSource(
-					new ReflectionClass(FlattenerStructureParentInterface2::class),
-				)),
 				new ClassStructure(new ClassSource(
 					new ReflectionClass(FlattenerStructureInterface1::class),
 				)),
@@ -90,14 +82,6 @@ final class StructureFlattenerTest extends TestCase
 				new ClassConstantStructure(new ClassConstantSource(
 					new ReflectionClassConstant(FlattenerStructureParentInterface1::class, 'ParentInterface1'),
 				)),
-				new ClassConstantStructure(new ClassConstantSource(
-					new ReflectionClassConstant(FlattenerStructureParentInterface1::class, 'ParentInterface2'),
-				)),
-				// Duplicate caused by duplicate interface
-				new ClassConstantStructure(new ClassConstantSource(
-					new ReflectionClassConstant(FlattenerStructureParentInterface1::class, 'ParentInterface1'),
-				)),
-				// Duplicate caused by duplicate interface
 				new ClassConstantStructure(new ClassConstantSource(
 					new ReflectionClassConstant(FlattenerStructureParentInterface1::class, 'ParentInterface2'),
 				)),
@@ -166,14 +150,6 @@ final class StructureFlattenerTest extends TestCase
 					[],
 					new MethodSource(
 						new ReflectionMethod(FlattenerStructureParent1::class, 'parentInterface1'),
-					),
-				),
-				// Duplicate - child does not override parent method
-				new MethodStructure(
-					new ReflectionClass(FlattenerStructureDouble::class),
-					[],
-					new MethodSource(
-						new ReflectionMethod(FlattenerStructureParentInterface1::class, 'parentInterface1'),
 					),
 				),
 				new MethodStructure(

@@ -3,13 +3,14 @@
 namespace Orisai\ReflectionMeta\Structure;
 
 use function array_merge;
+use function array_values;
 
 final class StructureFlattener
 {
 
 	public function flatten(HierarchyClassStructure $classStructure): StructuresList
 	{
-		$classes = $this->flattenClasses($classStructure);
+		$classes = $this->removeDuplicateClasses($this->flattenClasses($classStructure));
 		$constants = $this->flattenConstants($classes);
 		$properties = $this->reduceProperties($this->flattenProperties($classes));
 		$methods = $this->flattenMethods($classes);
@@ -41,6 +42,26 @@ final class StructureFlattener
 		$groups[][] = $structure;
 
 		return array_merge(...$groups);
+	}
+
+	/**
+	 * @param list<HierarchyClassStructure> $classes
+	 * @return list<HierarchyClassStructure>
+	 */
+	private function removeDuplicateClasses(array $classes): array
+	{
+		$deduplicated = [];
+		foreach ($classes as $class) {
+			$name = $class->getSource()->getReflector()->getName();
+
+			if (isset($deduplicated[$name])) {
+				continue;
+			}
+
+			$deduplicated[$name] = $class;
+		}
+
+		return array_values($deduplicated);
 	}
 
 	/**
