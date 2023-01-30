@@ -103,20 +103,6 @@ final class StructureFlattenerTest extends TestCase
 						new ReflectionProperty(FlattenerStructureParentTrait1::class, 'parentTrait2'),
 					),
 				),
-				// Duplicate caused by not filtering property duplicates
-				new PropertyStructure(
-					new ReflectionClass(FlattenerStructureParent1::class),
-					new PropertySource(
-						new ReflectionProperty(FlattenerStructureParent1::class, 'parentTrait1'),
-					),
-				),
-				// Duplicate caused by not filtering property duplicates
-				new PropertyStructure(
-					new ReflectionClass(FlattenerStructureParent1::class),
-					new PropertySource(
-						new ReflectionProperty(FlattenerStructureParent1::class, 'parentTrait2'),
-					),
-				),
 			],
 			$list->getProperties(),
 		);
