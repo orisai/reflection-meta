@@ -43,36 +43,66 @@ final class StructureFlattenerTest extends TestCase
 
 		self::assertEquals(
 			[
-				new ClassStructure(new ClassSource(
-					new ReflectionClass(FlattenerStructureParentInterface1::class),
-				)),
-				new ClassStructure(new ClassSource(
-					new ReflectionClass(FlattenerStructureParentInterface2::class),
-				)),
-				new ClassStructure(new ClassSource(
-					new ReflectionClass(FlattenerStructureParentTrait1::class),
-				)),
-				new ClassStructure(new ClassSource(
-					new ReflectionClass(FlattenerStructureParentTrait2::class),
-				)),
-				new ClassStructure(new ClassSource(
+				new ClassStructure(
 					new ReflectionClass(FlattenerStructureParent1::class),
-				)),
-				new ClassStructure(new ClassSource(
-					new ReflectionClass(FlattenerStructureInterface1::class),
-				)),
-				new ClassStructure(new ClassSource(
-					new ReflectionClass(FlattenerStructureInterface2::class),
-				)),
-				new ClassStructure(new ClassSource(
-					new ReflectionClass(FlattenerStructureTrait1::class),
-				)),
-				new ClassStructure(new ClassSource(
-					new ReflectionClass(FlattenerStructureTrait2::class),
-				)),
-				new ClassStructure(new ClassSource(
+					new ClassSource(
+						new ReflectionClass(FlattenerStructureParentInterface1::class),
+					),
+				),
+				new ClassStructure(
+					new ReflectionClass(FlattenerStructureParent1::class),
+					new ClassSource(
+						new ReflectionClass(FlattenerStructureParentInterface2::class),
+					),
+				),
+				new ClassStructure(
+					new ReflectionClass(FlattenerStructureParent1::class),
+					new ClassSource(
+						new ReflectionClass(FlattenerStructureParentTrait1::class),
+					),
+				),
+				new ClassStructure(
+					new ReflectionClass(FlattenerStructureParent1::class),
+					new ClassSource(
+						new ReflectionClass(FlattenerStructureParentTrait2::class),
+					),
+				),
+				new ClassStructure(
+					new ReflectionClass(FlattenerStructureParent1::class),
+					new ClassSource(
+						new ReflectionClass(FlattenerStructureParent1::class),
+					),
+				),
+				new ClassStructure(
 					new ReflectionClass(FlattenerStructureDouble::class),
-				)),
+					new ClassSource(
+						new ReflectionClass(FlattenerStructureInterface1::class),
+					),
+				),
+				new ClassStructure(
+					new ReflectionClass(FlattenerStructureDouble::class),
+					new ClassSource(
+						new ReflectionClass(FlattenerStructureInterface2::class),
+					),
+				),
+				new ClassStructure(
+					new ReflectionClass(FlattenerStructureDouble::class),
+					new ClassSource(
+						new ReflectionClass(FlattenerStructureTrait1::class),
+					),
+				),
+				new ClassStructure(
+					new ReflectionClass(FlattenerStructureDouble::class),
+					new ClassSource(
+						new ReflectionClass(FlattenerStructureTrait2::class),
+					),
+				),
+				new ClassStructure(
+					new ReflectionClass(FlattenerStructureDouble::class),
+					new ClassSource(
+						new ReflectionClass(FlattenerStructureDouble::class),
+					),
+				),
 			],
 			$list->getClasses(),
 		);

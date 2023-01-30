@@ -29,6 +29,7 @@ final class HierarchyClassStructureTest extends TestCase
 		$source = new ClassSource($reflector);
 
 		$class = new HierarchyClassStructure(
+			$reflector,
 			null,
 			[],
 			[],
@@ -38,6 +39,7 @@ final class HierarchyClassStructureTest extends TestCase
 			$source,
 		);
 
+		self::assertSame($reflector, $class->getContextClass());
 		self::assertNull($class->getParent());
 		self::assertSame([], $class->getInterfaces());
 		self::assertSame([], $class->getTraits());
@@ -55,7 +57,9 @@ final class HierarchyClassStructureTest extends TestCase
 		$source = new ClassSource($reflector);
 
 		$class = new HierarchyClassStructure(
+			$reflector,
 			$parent = new HierarchyClassStructure(
+				new ReflectionClass(stdClass::class),
 				null,
 				[],
 				[],
@@ -66,6 +70,7 @@ final class HierarchyClassStructureTest extends TestCase
 			),
 			$interfaces = [
 				new HierarchyClassStructure(
+					$reflector,
 					null,
 					[],
 					[],
@@ -77,6 +82,7 @@ final class HierarchyClassStructureTest extends TestCase
 			],
 			$traits = [
 				new HierarchyClassStructure(
+					$reflector,
 					null,
 					[],
 					[],

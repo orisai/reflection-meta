@@ -35,8 +35,11 @@ final class StructuresListTest extends TestCase
 		$reflector = new ReflectionClass(ClassStructureDouble1::class);
 
 		$classes = [
-			new ClassStructure(new ClassSource(new ReflectionClass(stdClass::class))),
-			new ClassStructure(new ClassSource($reflector)),
+			new ClassStructure(
+				new ReflectionClass(stdClass::class),
+				new ClassSource(new ReflectionClass(stdClass::class)),
+			),
+			new ClassStructure($reflector, new ClassSource($reflector)),
 		];
 		$constants = [
 			new ClassConstantStructure(new ClassConstantSource($reflector->getReflectionConstant('A'))),

@@ -13,9 +13,11 @@ final class ClassStructureTest extends TestCase
 
 	public function test(): void
 	{
-		$source = new ClassSource(new ReflectionClass(stdClass::class));
-		$structure = new ClassStructure($source);
+		$reflector = new ReflectionClass(stdClass::class);
+		$source = new ClassSource($reflector);
+		$structure = new ClassStructure($reflector, $source);
 
+		self::assertSame($reflector, $structure->getContextClass());
 		self::assertSame($source, $structure->getSource());
 	}
 

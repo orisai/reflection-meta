@@ -3,6 +3,7 @@
 namespace Orisai\ReflectionMeta\Structure;
 
 use Orisai\SourceMap\ClassSource;
+use ReflectionClass;
 
 final class HierarchyClassStructure
 {
@@ -26,7 +27,11 @@ final class HierarchyClassStructure
 
 	private ClassSource $source;
 
+	/** @var ReflectionClass<object> */
+	private ReflectionClass $contextClass;
+
 	/**
+	 * @param ReflectionClass<object>               $contextClass
 	 * @param list<HierarchyClassStructure>         $interfaces
 	 * @param list<HierarchyClassStructure>         $traits
 	 * @param list<ClassConstantStructure>          $constants
@@ -34,6 +39,7 @@ final class HierarchyClassStructure
 	 * @param list<MethodStructure>                 $methods
 	 */
 	public function __construct(
+		ReflectionClass $contextClass,
 		?HierarchyClassStructure $parent,
 		array $interfaces,
 		array $traits,
@@ -43,6 +49,7 @@ final class HierarchyClassStructure
 		ClassSource $source
 	)
 	{
+		$this->contextClass = $contextClass;
 		$this->parent = $parent;
 		$this->interfaces = $interfaces;
 		$this->traits = $traits;
@@ -50,6 +57,14 @@ final class HierarchyClassStructure
 		$this->properties = $properties;
 		$this->methods = $methods;
 		$this->source = $source;
+	}
+
+	/**
+	 * @return ReflectionClass<object>
+	 */
+	public function getContextClass(): ReflectionClass
+	{
+		return $this->contextClass;
 	}
 
 	public function getParent(): ?HierarchyClassStructure

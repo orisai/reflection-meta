@@ -72,7 +72,7 @@ final class StructureFlattener
 	{
 		$reduced = [];
 		foreach ($classes as $class) {
-			$reduced[] = new ClassStructure($class->getSource());
+			$reduced[] = new ClassStructure($class->getContextClass(), $class->getSource());
 		}
 
 		return $reduced;

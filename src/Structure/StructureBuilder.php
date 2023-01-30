@@ -33,6 +33,7 @@ final class StructureBuilder
 	): HierarchyClassStructure
 	{
 		return new HierarchyClassStructure(
+			$contextClass,
 			$this->createParentStructure($declaringClass),
 			$this->createInterfacesStructure($declaringClass, $contextClass),
 			$this->createTraitsStructure($declaringClass, $contextClass),
