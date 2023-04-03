@@ -8,7 +8,7 @@ use ReflectionClass;
 final class HierarchyClassStructure
 {
 
-	private ?HierarchyClassStructure $parent;
+	private ?self $parent;
 
 	/** @var list<HierarchyClassStructure> */
 	private array $interfaces;
@@ -40,7 +40,7 @@ final class HierarchyClassStructure
 	 */
 	public function __construct(
 		ReflectionClass $contextClass,
-		?HierarchyClassStructure $parent,
+		?self $parent,
 		array $interfaces,
 		array $traits,
 		array $constants,
@@ -67,7 +67,7 @@ final class HierarchyClassStructure
 		return $this->contextClass;
 	}
 
-	public function getParent(): ?HierarchyClassStructure
+	public function getParent(): ?self
 	{
 		return $this->parent;
 	}
