@@ -109,12 +109,20 @@ final class StructureFlattenerTest extends TestCase
 
 		self::assertEquals(
 			[
-				new ClassConstantStructure(new ClassConstantSource(
-					new ReflectionClassConstant(FlattenerStructureParentInterface1::class, 'ParentInterface1'),
-				)),
-				new ClassConstantStructure(new ClassConstantSource(
-					new ReflectionClassConstant(FlattenerStructureParentInterface1::class, 'ParentInterface2'),
-				)),
+				new ClassConstantStructure(
+					new ReflectionClass(FlattenerStructureParent1::class),
+					new ClassConstantSource(
+						new ReflectionClassConstant(FlattenerStructureParentInterface1::class, 'ParentInterface1'),
+					),
+					[],
+				),
+				new ClassConstantStructure(
+					new ReflectionClass(FlattenerStructureParent1::class),
+					new ClassConstantSource(
+						new ReflectionClassConstant(FlattenerStructureParentInterface1::class, 'ParentInterface2'),
+					),
+					[],
+				),
 			],
 			$list->getConstants(),
 		);

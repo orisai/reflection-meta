@@ -2,6 +2,7 @@
 
 namespace Orisai\ReflectionMeta\Structure;
 
+use Orisai\ReflectionMeta\Finder\ConstantDeclaratorFinder;
 use Orisai\ReflectionMeta\Finder\MethodDeclaratorFinder;
 use Orisai\ReflectionMeta\Finder\PropertyDeclaratorFinder;
 use Orisai\SourceMap\ClassConstantSource;
@@ -37,7 +38,7 @@ final class StructureBuilder
 			$this->createParentStructure($declaringClass),
 			$this->createInterfacesStructure($declaringClass, $contextClass),
 			$this->createTraitsStructure($declaringClass, $contextClass),
-			$this->createClassConstantsStructure($declaringClass),
+			$this->createClassConstantsStructure($declaringClass, $contextClass),
 			$this->createPropertiesStructure($declaringClass, $contextClass),
 			$this->createMethodsStructure($declaringClass, $contextClass),
 			new ClassSource($declaringClass),
@@ -96,9 +97,13 @@ final class StructureBuilder
 
 	/**
 	 * @param ReflectionClass<object> $declaringClass
+	 * @param ReflectionClass<object> $contextClass
 	 * @return list<ClassConstantStructure>
 	 */
-	private function createClassConstantsStructure(ReflectionClass $declaringClass): array
+	private function createClassConstantsStructure(
+		ReflectionClass $declaringClass,
+		ReflectionClass $contextClass
+	): array
 	{
 		$constants = [];
 		foreach ($declaringClass->getReflectionConstants() as $constant) {
@@ -109,7 +114,9 @@ final class StructureBuilder
 			}
 
 			$constants[] = new ClassConstantStructure(
+				$contextClass,
 				new ClassConstantSource($constant),
+				ConstantDeclaratorFinder::getDeclaringTraits($constant),
 			);
 		}
 

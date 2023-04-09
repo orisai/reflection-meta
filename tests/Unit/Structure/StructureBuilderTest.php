@@ -26,6 +26,10 @@ use Tests\Orisai\ReflectionMeta\Doubles\Structure\Classes\BuilderParentDoublePar
 use Tests\Orisai\ReflectionMeta\Doubles\Structure\Constants\BuilderConstantDouble;
 use Tests\Orisai\ReflectionMeta\Doubles\Structure\Constants\BuilderConstantDoubleInterface1;
 use Tests\Orisai\ReflectionMeta\Doubles\Structure\Constants\BuilderConstantDoubleParent1;
+use Tests\Orisai\ReflectionMeta\Doubles\Structure\ConstantsPHP82\BuilderConstantPHP82Double;
+use Tests\Orisai\ReflectionMeta\Doubles\Structure\ConstantsPHP82\BuilderConstantPHP82DoubleInterface1;
+use Tests\Orisai\ReflectionMeta\Doubles\Structure\ConstantsPHP82\BuilderConstantPHP82DoubleParent1;
+use Tests\Orisai\ReflectionMeta\Doubles\Structure\ConstantsPHP82\BuilderConstantPHP82DoubleTrait1;
 use Tests\Orisai\ReflectionMeta\Doubles\Structure\Interfaces\BuilderInterfaceDouble;
 use Tests\Orisai\ReflectionMeta\Doubles\Structure\Interfaces\BuilderInterfaceDoubleInterface1;
 use Tests\Orisai\ReflectionMeta\Doubles\Structure\Interfaces\BuilderInterfaceDoubleInterface2;
@@ -48,6 +52,7 @@ use Tests\Orisai\ReflectionMeta\Doubles\Structure\Traits\BuilderTraitDouble;
 use Tests\Orisai\ReflectionMeta\Doubles\Structure\Traits\BuilderTraitDoubleTrait1;
 use Tests\Orisai\ReflectionMeta\Doubles\Structure\Traits\BuilderTraitDoubleTrait2;
 use Tests\Orisai\ReflectionMeta\Doubles\Structure\Traits\BuilderTraitDoubleTrait3;
+use const PHP_VERSION_ID;
 
 final class StructureBuilderTest extends TestCase
 {
@@ -409,9 +414,13 @@ final class StructureBuilderTest extends TestCase
 			[],
 			[],
 			[
-				new ClassConstantStructure(new ClassConstantSource(
-					new ReflectionClassConstant(BuilderConstantDoubleInterface1::class, 'A'),
-				)),
+				new ClassConstantStructure(
+					$class,
+					new ClassConstantSource(
+						new ReflectionClassConstant(BuilderConstantDoubleInterface1::class, 'A'),
+					),
+					[],
+				),
 			],
 			[],
 			[],
@@ -423,14 +432,18 @@ final class StructureBuilderTest extends TestCase
 		);
 
 		$parent1 = new HierarchyClassStructure(
-			new ReflectionClass(BuilderConstantDoubleParent1::class),
+			$parent1Class = new ReflectionClass(BuilderConstantDoubleParent1::class),
 			null,
 			[],
 			[],
 			[
-				new ClassConstantStructure(new ClassConstantSource(
-					new ReflectionClassConstant(BuilderConstantDoubleParent1::class, 'B'),
-				)),
+				new ClassConstantStructure(
+					$parent1Class,
+					new ClassConstantSource(
+						new ReflectionClassConstant(BuilderConstantDoubleParent1::class, 'B'),
+					),
+					[],
+				),
 			],
 			[],
 			[],
@@ -450,12 +463,161 @@ final class StructureBuilderTest extends TestCase
 				],
 				[],
 				[
-					new ClassConstantStructure(new ClassConstantSource(
-						new ReflectionClassConstant(BuilderConstantDouble::class, 'C1'),
-					)),
-					new ClassConstantStructure(new ClassConstantSource(
-						new ReflectionClassConstant(BuilderConstantDouble::class, 'C2'),
-					)),
+					new ClassConstantStructure(
+						$class,
+						new ClassConstantSource(
+							new ReflectionClassConstant(BuilderConstantDouble::class, 'C1'),
+						),
+						[],
+					),
+					new ClassConstantStructure(
+						$class,
+						new ClassConstantSource(
+							new ReflectionClassConstant(BuilderConstantDouble::class, 'C2'),
+						),
+						[],
+					),
+				],
+				[],
+				[],
+				new ClassSource($class),
+			),
+			$structure,
+		);
+	}
+
+	public function testConstantsPHP82(): void
+	{
+		if (PHP_VERSION_ID < 8_02_00) {
+			self::markTestSkipped('Attributes are supported on PHP 8.2+');
+		}
+
+		require_once __DIR__ . '/../../Doubles/Structure/builder-constant-structure-php8.2.php';
+
+		$builder = new StructureBuilder();
+		$class = new ReflectionClass(BuilderConstantPHP82Double::class);
+		$structure = $builder->build($class);
+
+		$interface1 = new HierarchyClassStructure(
+			$class,
+			null,
+			[],
+			[],
+			[
+				new ClassConstantStructure(
+					$class,
+					new ClassConstantSource(
+						new ReflectionClassConstant(BuilderConstantPHP82DoubleInterface1::class, 'A'),
+					),
+					[],
+				),
+			],
+			[],
+			[],
+			new ClassSource(new ReflectionClass(BuilderConstantPHP82DoubleInterface1::class)),
+		);
+		self::assertNotEquals(
+			$interface1,
+			$builder->build(new ReflectionClass(BuilderConstantPHP82DoubleInterface1::class)),
+		);
+
+		$parent1 = new HierarchyClassStructure(
+			$parent1Class = new ReflectionClass(BuilderConstantPHP82DoubleParent1::class),
+			null,
+			[],
+			[],
+			[
+				new ClassConstantStructure(
+					$parent1Class,
+					new ClassConstantSource(
+						new ReflectionClassConstant(BuilderConstantPHP82DoubleParent1::class, 'B'),
+					),
+					[],
+				),
+			],
+			[],
+			[],
+			new ClassSource(new ReflectionClass(BuilderConstantPHP82DoubleParent1::class)),
+		);
+		self::assertEquals(
+			$parent1,
+			$builder->build(new ReflectionClass(BuilderConstantPHP82DoubleParent1::class)),
+		);
+
+		$trait1 = new HierarchyClassStructure(
+			$trait1Class = new ReflectionClass(BuilderConstantPHP82DoubleTrait1::class),
+			null,
+			[],
+			[],
+			[
+				new ClassConstantStructure(
+					$trait1Class,
+					new ClassConstantSource(
+						new ReflectionClassConstant(BuilderConstantPHP82DoubleTrait1::class, 'C'),
+					),
+					[],
+				),
+			],
+			[],
+			[],
+			new ClassSource(new ReflectionClass(BuilderConstantPHP82DoubleTrait1::class)),
+		);
+		$trait1inContextOfClass = new HierarchyClassStructure(
+			new ReflectionClass(BuilderConstantPHP82Double::class),
+			null,
+			[],
+			[],
+			[
+				new ClassConstantStructure(
+					$class,
+					new ClassConstantSource(
+						new ReflectionClassConstant(BuilderConstantPHP82DoubleTrait1::class, 'C'),
+					),
+					[],
+				),
+			],
+			[],
+			[],
+			new ClassSource(new ReflectionClass(BuilderConstantPHP82DoubleTrait1::class)),
+		);
+		self::assertEquals(
+			$trait1,
+			$builder->build(new ReflectionClass(BuilderConstantPHP82DoubleTrait1::class)),
+		);
+		self::assertNotEquals($trait1inContextOfClass, $trait1);
+
+		self::assertEquals(
+			new HierarchyClassStructure(
+				$class,
+				$parent1,
+				[
+					$interface1,
+				],
+				[
+					$trait1inContextOfClass,
+				],
+				[
+					new ClassConstantStructure(
+						$class,
+						new ClassConstantSource(
+							new ReflectionClassConstant(BuilderConstantPHP82Double::class, 'D1'),
+						),
+						[],
+					),
+					new ClassConstantStructure(
+						$class,
+						new ClassConstantSource(
+							new ReflectionClassConstant(BuilderConstantPHP82Double::class, 'D2'),
+						),
+						[],
+					),
+					new ClassConstantStructure(
+						$class,
+						new ClassConstantSource(
+							new ReflectionClassConstant(BuilderConstantPHP82Double::class, 'C'),
+						),
+						[],
+					),
 				],
 				[],
 				[],

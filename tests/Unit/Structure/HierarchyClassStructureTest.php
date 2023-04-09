@@ -93,9 +93,13 @@ final class HierarchyClassStructureTest extends TestCase
 				),
 			],
 			$constants = [
-				new ClassConstantStructure(new ClassConstantSource(
-					new ReflectionClassConstant(ClassStructureDouble1::class, 'A'),
-				)),
+				new ClassConstantStructure(
+					$reflector,
+					new ClassConstantSource(
+						new ReflectionClassConstant(ClassStructureDouble1::class, 'A'),
+					),
+					[],
+				),
 			],
 			$properties = [
 				new PropertyWithDuplicatesStructure(

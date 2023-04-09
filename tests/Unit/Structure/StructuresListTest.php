@@ -42,7 +42,11 @@ final class StructuresListTest extends TestCase
 			new ClassStructure($reflector, new ClassSource($reflector)),
 		];
 		$constants = [
-			new ClassConstantStructure(new ClassConstantSource($reflector->getReflectionConstant('A'))),
+			new ClassConstantStructure(
+				$reflector,
+				new ClassConstantSource($reflector->getReflectionConstant('A')),
+				[],
+			),
 		];
 		$properties = [
 			new PropertyStructure(
