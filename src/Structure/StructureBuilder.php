@@ -177,8 +177,8 @@ final class StructureBuilder
 
 			$methods[] = new MethodStructure(
 				$contextClass,
-				$this->createParametersStructure($method),
 				new MethodSource($method),
+				$this->createParametersStructure($method),
 			);
 		}
 

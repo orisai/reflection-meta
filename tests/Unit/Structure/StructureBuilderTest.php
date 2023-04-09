@@ -812,10 +812,10 @@ final class StructureBuilderTest extends TestCase
 			[
 				new MethodStructure(
 					new ReflectionClass(BuilderMethodDoubleTrait1::class),
-					[],
 					new MethodSource(
 						new ReflectionMethod(BuilderMethodDoubleTrait1::class, 'a'),
 					),
+					[],
 				),
 			],
 			new ClassSource(new ReflectionClass(BuilderMethodDoubleTrait1::class)),
@@ -830,10 +830,10 @@ final class StructureBuilderTest extends TestCase
 			[
 				new MethodStructure(
 					new ReflectionClass(BuilderMethodDoubleParent1::class),
-					[],
 					new MethodSource(
 						new ReflectionMethod(BuilderMethodDoubleTrait1::class, 'a'),
 					),
+					[],
 				),
 			],
 			new ClassSource(new ReflectionClass(BuilderMethodDoubleTrait1::class)),
@@ -856,10 +856,10 @@ final class StructureBuilderTest extends TestCase
 			[
 				new MethodStructure(
 					new ReflectionClass(BuilderMethodDoubleParent1::class),
-					[],
 					new MethodSource(
 						new ReflectionMethod(BuilderMethodDoubleParent1::class, 'b'),
 					),
+					[],
 				),
 			],
 			new ClassSource(new ReflectionClass(BuilderMethodDoubleParent1::class)),
@@ -879,10 +879,10 @@ final class StructureBuilderTest extends TestCase
 			[
 				new MethodStructure(
 					new ReflectionClass(BuilderMethodDoubleTrait2::class),
-					[],
 					new MethodSource(
 						new ReflectionMethod(BuilderMethodDoubleTrait2::class, 'c'),
 					),
+					[],
 				),
 			],
 			new ClassSource(new ReflectionClass(BuilderMethodDoubleTrait2::class)),
@@ -897,10 +897,10 @@ final class StructureBuilderTest extends TestCase
 			[
 				new MethodStructure(
 					$class,
-					[],
 					new MethodSource(
 						new ReflectionMethod(BuilderMethodDoubleTrait2::class, 'c'),
 					),
+					[],
 				),
 			],
 			new ClassSource(new ReflectionClass(BuilderMethodDoubleTrait2::class)),
@@ -924,13 +924,16 @@ final class StructureBuilderTest extends TestCase
 				[
 					new MethodStructure(
 						$class,
-						[],
 						new MethodSource(
 							new ReflectionMethod(BuilderMethodDouble::class, 'd1'),
 						),
+						[],
 					),
 					new MethodStructure(
 						$class,
+						new MethodSource(
+							new ReflectionMethod(BuilderMethodDouble::class, 'd2'),
+						),
 						[
 							new ParameterStructure(new ParameterSource(new ReflectionParameter(
 								[BuilderMethodDouble::class, 'd2'],
@@ -941,9 +944,6 @@ final class StructureBuilderTest extends TestCase
 								'b',
 							))),
 						],
-						new MethodSource(
-							new ReflectionMethod(BuilderMethodDouble::class, 'd2'),
-						),
 					),
 				],
 				new ClassSource($class),

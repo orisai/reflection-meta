@@ -58,8 +58,8 @@ final class StructuresListTest extends TestCase
 		$methods = [
 			new MethodStructure(
 				$reflector,
-				[],
 				new MethodSource($reflector->getMethod('c')),
+				[],
 			),
 		];
 

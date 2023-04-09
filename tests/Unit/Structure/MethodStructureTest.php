@@ -24,11 +24,11 @@ final class MethodStructureTest extends TestCase
 		$parameters = [];
 		$source = new MethodSource($reflector);
 
-		$method = new MethodStructure($contextClass, $parameters, $source);
+		$method = new MethodStructure($contextClass, $source, $parameters);
 
 		self::assertSame($contextClass, $method->getContextClass());
-		self::assertSame($parameters, $method->getParameters());
 		self::assertSame($source, $method->getSource());
+		self::assertSame($parameters, $method->getParameters());
 	}
 
 	public function testExtra(): void
@@ -48,11 +48,11 @@ final class MethodStructureTest extends TestCase
 		];
 		$source = new MethodSource($reflector);
 
-		$method = new MethodStructure($contextClass, $parameters, $source);
+		$method = new MethodStructure($contextClass, $source, $parameters);
 
 		self::assertSame($contextClass, $method->getContextClass());
-		self::assertSame($parameters, $method->getParameters());
 		self::assertSame($source, $method->getSource());
+		self::assertSame($parameters, $method->getParameters());
 	}
 
 }

@@ -113,10 +113,10 @@ final class HierarchyClassStructureTest extends TestCase
 			$methods = [
 				new MethodStructure(
 					$reflector,
-					[],
 					new MethodSource(
 						new ReflectionMethod(ClassStructureDouble1::class, 'c'),
 					),
+					[],
 				),
 			],
 			$source,

@@ -11,26 +11,26 @@ final class MethodStructure implements Structure
 	/** @var ReflectionClass<object> */
 	private ReflectionClass $contextClass;
 
+	private MethodSource $source;
+
 	/** @var list<ParameterStructure> */
 	private array $parameters;
 
-	private MethodSource $source;
-
 	/**
-	 * @param ReflectionClass<object>      $contextClass
-	 * @param list<ParameterStructure>     $parameters
+	 * @param ReflectionClass<object>  $contextClass
+	 * @param list<ParameterStructure> $parameters
 	 *
 	 * @internal
 	 */
 	public function __construct(
 		ReflectionClass $contextClass,
-		array $parameters,
-		MethodSource $source
+		MethodSource $source,
+		array $parameters
 	)
 	{
 		$this->contextClass = $contextClass;
-		$this->parameters = $parameters;
 		$this->source = $source;
+		$this->parameters = $parameters;
 	}
 
 	/**
@@ -41,17 +41,17 @@ final class MethodStructure implements Structure
 		return $this->contextClass;
 	}
 
+	public function getSource(): MethodSource
+	{
+		return $this->source;
+	}
+
 	/**
 	 * @return list<ParameterStructure>
 	 */
 	public function getParameters(): array
 	{
 		return $this->parameters;
-	}
-
-	public function getSource(): MethodSource
-	{
-		return $this->source;
 	}
 
 }

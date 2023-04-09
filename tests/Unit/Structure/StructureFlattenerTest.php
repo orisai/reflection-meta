@@ -151,61 +151,61 @@ final class StructureFlattenerTest extends TestCase
 			[
 				new MethodStructure(
 					new ReflectionClass(FlattenerStructureParent1::class),
-					[],
 					new MethodSource(
 						new ReflectionMethod(FlattenerStructureParentInterface1::class, 'parentInterface1'),
 					),
+					[],
 				),
 				new MethodStructure(
 					new ReflectionClass(FlattenerStructureParent1::class),
-					[],
 					new MethodSource(
 						new ReflectionMethod(FlattenerStructureParentTrait1::class, 'parentTrait1'),
 					),
+					[],
 				),
 				new MethodStructure(
 					new ReflectionClass(FlattenerStructureParent1::class),
-					[],
 					new MethodSource(
 						new ReflectionMethod(FlattenerStructureParentTrait1::class, 'parentTrait2'),
 					),
+					[],
 				),
 				// Override of interface in class
 				new MethodStructure(
 					new ReflectionClass(FlattenerStructureParent1::class),
-					[],
 					new MethodSource(
 						new ReflectionMethod(FlattenerStructureParent1::class, 'parentInterface1'),
 					),
+					[],
 				),
 				new MethodStructure(
 					new ReflectionClass(FlattenerStructureDouble::class),
-					[],
 					new MethodSource(
 						new ReflectionMethod(FlattenerStructureInterface1::class, 'childInterface1'),
 					),
+					[],
 				),
 				new MethodStructure(
 					new ReflectionClass(FlattenerStructureDouble::class),
-					[],
 					new MethodSource(
 						new ReflectionMethod(FlattenerStructureTrait1::class, 'childTrait1'),
 					),
+					[],
 				),
 				new MethodStructure(
 					new ReflectionClass(FlattenerStructureDouble::class),
-					[],
 					new MethodSource(
 						new ReflectionMethod(FlattenerStructureTrait1::class, 'childTrait2'),
 					),
+					[],
 				),
 				// Override of interface in class
 				new MethodStructure(
 					new ReflectionClass(FlattenerStructureDouble::class),
-					[],
 					new MethodSource(
 						new ReflectionMethod(FlattenerStructureDouble::class, 'childInterface1'),
 					),
+					[],
 				),
 			],
 			$list->getMethods(),
