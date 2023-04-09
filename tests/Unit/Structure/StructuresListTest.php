@@ -52,6 +52,7 @@ final class StructuresListTest extends TestCase
 			new PropertyStructure(
 				$reflector,
 				new PropertySource($reflector->getProperty('b')),
+				[],
 			),
 		];
 		$methods = [

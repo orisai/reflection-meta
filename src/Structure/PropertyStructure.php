@@ -13,17 +13,23 @@ final class PropertyStructure implements Structure
 
 	private PropertySource $source;
 
+	/** @var array<ReflectionClass<object>> */
+	private array $duplicators;
+
 	/**
-	 * @param ReflectionClass<object> $contextClass
+	 * @param ReflectionClass<object>        $contextClass
+	 * @param array<ReflectionClass<object>> $duplicators
 	 *
 	 * @internal
 	 */
 	public function __construct(
 		ReflectionClass $contextClass,
-		PropertySource $source
+		PropertySource $source,
+		array $duplicators
 	)
 	{
 		$this->contextClass = $contextClass;
+		$this->duplicators = $duplicators;
 		$this->source = $source;
 	}
 
@@ -38,6 +44,14 @@ final class PropertyStructure implements Structure
 	public function getSource(): PropertySource
 	{
 		return $this->source;
+	}
+
+	/**
+	 * @return array<ReflectionClass<object>>
+	 */
+	public function getDuplicators(): array
+	{
+		return $this->duplicators;
 	}
 
 }

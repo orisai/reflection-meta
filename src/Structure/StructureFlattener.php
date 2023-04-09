@@ -94,7 +94,7 @@ final class StructureFlattener
 
 	/**
 	 * @param list<HierarchyClassStructure> $classes
-	 * @return list<PropertyWithDuplicatesStructure>
+	 * @return list<PropertyStructure>
 	 */
 	private function flattenProperties(array $classes): array
 	{
@@ -107,7 +107,7 @@ final class StructureFlattener
 	}
 
 	/**
-	 * @param list<PropertyWithDuplicatesStructure> $properties
+	 * @param list<PropertyStructure> $properties
 	 * @return list<PropertyStructure>
 	 */
 	private function reduceProperties(array $properties): array
@@ -118,10 +118,7 @@ final class StructureFlattener
 				continue;
 			}
 
-			$reduced[] = new PropertyStructure(
-				$property->getContextClass(),
-				$property->getSource(),
-			);
+			$reduced[] = $property;
 		}
 
 		return $reduced;

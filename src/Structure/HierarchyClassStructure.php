@@ -19,7 +19,7 @@ final class HierarchyClassStructure
 	/** @var list<ClassConstantStructure> */
 	private array $constants;
 
-	/** @var list<PropertyWithDuplicatesStructure> */
+	/** @var list<PropertyStructure> */
 	private array $properties;
 
 	/** @var list<MethodStructure> */
@@ -31,12 +31,12 @@ final class HierarchyClassStructure
 	private ReflectionClass $contextClass;
 
 	/**
-	 * @param ReflectionClass<object>               $contextClass
-	 * @param list<HierarchyClassStructure>         $interfaces
-	 * @param list<HierarchyClassStructure>         $traits
-	 * @param list<ClassConstantStructure>          $constants
-	 * @param list<PropertyWithDuplicatesStructure> $properties
-	 * @param list<MethodStructure>                 $methods
+	 * @param ReflectionClass<object>       $contextClass
+	 * @param list<HierarchyClassStructure> $interfaces
+	 * @param list<HierarchyClassStructure> $traits
+	 * @param list<ClassConstantStructure>  $constants
+	 * @param list<PropertyStructure>       $properties
+	 * @param list<MethodStructure>         $methods
 	 *
 	 * @internal
 	 * @see StructureBuilder::build()
@@ -100,7 +100,7 @@ final class HierarchyClassStructure
 	}
 
 	/**
-	 * @return list<PropertyWithDuplicatesStructure>
+	 * @return list<PropertyStructure>
 	 */
 	public function getProperties(): array
 	{

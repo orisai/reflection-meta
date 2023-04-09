@@ -134,12 +134,14 @@ final class StructureFlattenerTest extends TestCase
 					new PropertySource(
 						new ReflectionProperty(FlattenerStructureParentTrait1::class, 'parentTrait1'),
 					),
+					[],
 				),
 				new PropertyStructure(
 					new ReflectionClass(FlattenerStructureParent1::class),
 					new PropertySource(
 						new ReflectionProperty(FlattenerStructureParentTrait1::class, 'parentTrait2'),
 					),
+					[],
 				),
 			],
 			$list->getProperties(),

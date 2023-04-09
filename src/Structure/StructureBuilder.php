@@ -126,7 +126,7 @@ final class StructureBuilder
 	/**
 	 * @param ReflectionClass<object> $declaringClass
 	 * @param ReflectionClass<object> $contextClass
-	 * @return list<PropertyWithDuplicatesStructure>
+	 * @return list<PropertyStructure>
 	 */
 	private function createPropertiesStructure(
 		ReflectionClass $declaringClass,
@@ -140,7 +140,7 @@ final class StructureBuilder
 				continue;
 			}
 
-			$properties[] = new PropertyWithDuplicatesStructure(
+			$properties[] = new PropertyStructure(
 				$contextClass,
 				new PropertySource($property),
 				// We have to keep duplicates because they can be sourced in different code paths

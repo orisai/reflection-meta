@@ -6,7 +6,7 @@ use Orisai\ReflectionMeta\Structure\ClassConstantStructure;
 use Orisai\ReflectionMeta\Structure\HierarchyClassStructure;
 use Orisai\ReflectionMeta\Structure\MethodStructure;
 use Orisai\ReflectionMeta\Structure\ParameterStructure;
-use Orisai\ReflectionMeta\Structure\PropertyWithDuplicatesStructure;
+use Orisai\ReflectionMeta\Structure\PropertyStructure;
 use Orisai\ReflectionMeta\Structure\StructureBuilder;
 use Orisai\SourceMap\ClassConstantSource;
 use Orisai\SourceMap\ClassSource;
@@ -642,7 +642,7 @@ final class StructureBuilderTest extends TestCase
 			[],
 			[],
 			[
-				new PropertyWithDuplicatesStructure(
+				new PropertyStructure(
 					new ReflectionClass(BuilderPropertyDoubleTrait1::class),
 					new PropertySource(
 						new ReflectionProperty(BuilderPropertyDoubleTrait1::class, 'a'),
@@ -660,7 +660,7 @@ final class StructureBuilderTest extends TestCase
 			[],
 			[],
 			[
-				new PropertyWithDuplicatesStructure(
+				new PropertyStructure(
 					new ReflectionClass(BuilderPropertyDoubleParent1::class),
 					new PropertySource(
 						new ReflectionProperty(BuilderPropertyDoubleTrait1::class, 'a'),
@@ -686,14 +686,14 @@ final class StructureBuilderTest extends TestCase
 			],
 			[],
 			[
-				new PropertyWithDuplicatesStructure(
+				new PropertyStructure(
 					new ReflectionClass(BuilderPropertyDoubleParent1::class),
 					new PropertySource(
 						new ReflectionProperty(BuilderPropertyDoubleParent1::class, 'b'),
 					),
 					[],
 				),
-				new PropertyWithDuplicatesStructure(
+				new PropertyStructure(
 					new ReflectionClass(BuilderPropertyDoubleParent1::class),
 					new PropertySource(
 						new ReflectionProperty(BuilderPropertyDoubleParent1::class, 'a'),
@@ -718,7 +718,7 @@ final class StructureBuilderTest extends TestCase
 			[],
 			[],
 			[
-				new PropertyWithDuplicatesStructure(
+				new PropertyStructure(
 					new ReflectionClass(BuilderPropertyDoubleTrait2::class),
 					new PropertySource(
 						new ReflectionProperty(BuilderPropertyDoubleTrait2::class, 'c'),
@@ -736,7 +736,7 @@ final class StructureBuilderTest extends TestCase
 			[],
 			[],
 			[
-				new PropertyWithDuplicatesStructure(
+				new PropertyStructure(
 					$class,
 					new PropertySource(
 						new ReflectionProperty(BuilderPropertyDoubleTrait2::class, 'c'),
@@ -763,21 +763,21 @@ final class StructureBuilderTest extends TestCase
 				],
 				[],
 				[
-					new PropertyWithDuplicatesStructure(
+					new PropertyStructure(
 						$class,
 						new PropertySource(
 							new ReflectionProperty(BuilderPropertyDouble::class, 'd1'),
 						),
 						[],
 					),
-					new PropertyWithDuplicatesStructure(
+					new PropertyStructure(
 						$class,
 						new PropertySource(
 							new ReflectionProperty(BuilderPropertyDouble::class, 'd2'),
 						),
 						[],
 					),
-					new PropertyWithDuplicatesStructure(
+					new PropertyStructure(
 						$class,
 						new PropertySource(
 							new ReflectionProperty(BuilderPropertyDouble::class, 'c'),

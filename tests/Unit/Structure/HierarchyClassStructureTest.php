@@ -5,7 +5,7 @@ namespace Tests\Orisai\ReflectionMeta\Unit\Structure;
 use Orisai\ReflectionMeta\Structure\ClassConstantStructure;
 use Orisai\ReflectionMeta\Structure\HierarchyClassStructure;
 use Orisai\ReflectionMeta\Structure\MethodStructure;
-use Orisai\ReflectionMeta\Structure\PropertyWithDuplicatesStructure;
+use Orisai\ReflectionMeta\Structure\PropertyStructure;
 use Orisai\SourceMap\ClassConstantSource;
 use Orisai\SourceMap\ClassSource;
 use Orisai\SourceMap\MethodSource;
@@ -102,7 +102,7 @@ final class HierarchyClassStructureTest extends TestCase
 				),
 			],
 			$properties = [
-				new PropertyWithDuplicatesStructure(
+				new PropertyStructure(
 					$reflector,
 					new PropertySource(
 						new ReflectionProperty(ClassStructureDouble1::class, 'b'),
