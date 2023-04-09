@@ -104,10 +104,10 @@ final class HierarchyClassStructureTest extends TestCase
 			$properties = [
 				new PropertyWithDuplicatesStructure(
 					$reflector,
-					[],
 					new PropertySource(
 						new ReflectionProperty(ClassStructureDouble1::class, 'b'),
 					),
+					[],
 				),
 			],
 			$methods = [

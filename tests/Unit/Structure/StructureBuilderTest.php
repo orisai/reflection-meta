@@ -644,10 +644,10 @@ final class StructureBuilderTest extends TestCase
 			[
 				new PropertyWithDuplicatesStructure(
 					new ReflectionClass(BuilderPropertyDoubleTrait1::class),
-					[],
 					new PropertySource(
 						new ReflectionProperty(BuilderPropertyDoubleTrait1::class, 'a'),
 					),
+					[],
 				),
 			],
 			[],
@@ -662,10 +662,10 @@ final class StructureBuilderTest extends TestCase
 			[
 				new PropertyWithDuplicatesStructure(
 					new ReflectionClass(BuilderPropertyDoubleParent1::class),
-					[],
 					new PropertySource(
 						new ReflectionProperty(BuilderPropertyDoubleTrait1::class, 'a'),
 					),
+					[],
 				),
 			],
 			[],
@@ -688,19 +688,19 @@ final class StructureBuilderTest extends TestCase
 			[
 				new PropertyWithDuplicatesStructure(
 					new ReflectionClass(BuilderPropertyDoubleParent1::class),
-					[],
 					new PropertySource(
 						new ReflectionProperty(BuilderPropertyDoubleParent1::class, 'b'),
 					),
+					[],
 				),
 				new PropertyWithDuplicatesStructure(
 					new ReflectionClass(BuilderPropertyDoubleParent1::class),
-					[
-						new ReflectionClass(BuilderPropertyDoubleTrait1::class),
-					],
 					new PropertySource(
 						new ReflectionProperty(BuilderPropertyDoubleParent1::class, 'a'),
 					),
+					[
+						new ReflectionClass(BuilderPropertyDoubleTrait1::class),
+					],
 				),
 			],
 			[],
@@ -720,10 +720,10 @@ final class StructureBuilderTest extends TestCase
 			[
 				new PropertyWithDuplicatesStructure(
 					new ReflectionClass(BuilderPropertyDoubleTrait2::class),
-					[],
 					new PropertySource(
 						new ReflectionProperty(BuilderPropertyDoubleTrait2::class, 'c'),
 					),
+					[],
 				),
 			],
 			[],
@@ -738,10 +738,10 @@ final class StructureBuilderTest extends TestCase
 			[
 				new PropertyWithDuplicatesStructure(
 					$class,
-					[],
 					new PropertySource(
 						new ReflectionProperty(BuilderPropertyDoubleTrait2::class, 'c'),
 					),
+					[],
 				),
 			],
 			[],
@@ -765,26 +765,26 @@ final class StructureBuilderTest extends TestCase
 				[
 					new PropertyWithDuplicatesStructure(
 						$class,
-						[],
 						new PropertySource(
 							new ReflectionProperty(BuilderPropertyDouble::class, 'd1'),
 						),
+						[],
 					),
 					new PropertyWithDuplicatesStructure(
 						$class,
-						[],
 						new PropertySource(
 							new ReflectionProperty(BuilderPropertyDouble::class, 'd2'),
 						),
+						[],
 					),
 					new PropertyWithDuplicatesStructure(
 						$class,
-						[
-							new ReflectionClass(BuilderPropertyDoubleTrait2::class),
-						],
 						new PropertySource(
 							new ReflectionProperty(BuilderPropertyDouble::class, 'c'),
 						),
+						[
+							new ReflectionClass(BuilderPropertyDoubleTrait2::class),
+						],
 					),
 				],
 				[],

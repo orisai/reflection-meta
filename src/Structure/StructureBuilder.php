@@ -142,9 +142,9 @@ final class StructureBuilder
 
 			$properties[] = new PropertyWithDuplicatesStructure(
 				$contextClass,
+				new PropertySource($property),
 				// We have to keep duplicates because they can be sourced in different code paths
 				PropertyDeclaratorFinder::getDeclaringTraits($property),
-				new PropertySource($property),
 			);
 		}
 

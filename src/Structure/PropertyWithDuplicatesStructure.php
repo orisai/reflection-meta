@@ -11,25 +11,25 @@ final class PropertyWithDuplicatesStructure implements Structure
 	/** @var ReflectionClass<object> */
 	private ReflectionClass $contextClass;
 
-	/** @var array<ReflectionClass<object>> */
-	private array $duplicateDeclarations;
-
 	private PropertySource $source;
 
+	/** @var array<ReflectionClass<object>> */
+	private array $duplicators;
+
 	/**
-	 * @param ReflectionClass<object> $contextClass
-	 * @param array<ReflectionClass<object>> $duplicateDeclarations
+	 * @param ReflectionClass<object>        $contextClass
+	 * @param array<ReflectionClass<object>> $duplicators
 	 *
 	 * @internal
 	 */
 	public function __construct(
 		ReflectionClass $contextClass,
-		array $duplicateDeclarations,
-		PropertySource $source
+		PropertySource $source,
+		array $duplicators
 	)
 	{
 		$this->contextClass = $contextClass;
-		$this->duplicateDeclarations = $duplicateDeclarations;
+		$this->duplicators = $duplicators;
 		$this->source = $source;
 	}
 
@@ -41,17 +41,17 @@ final class PropertyWithDuplicatesStructure implements Structure
 		return $this->contextClass;
 	}
 
-	/**
-	 * @return array<ReflectionClass<object>>
-	 */
-	public function getDuplicateDeclarations(): array
-	{
-		return $this->duplicateDeclarations;
-	}
-
 	public function getSource(): PropertySource
 	{
 		return $this->source;
+	}
+
+	/**
+	 * @return array<ReflectionClass<object>>
+	 */
+	public function getDuplicators(): array
+	{
+		return $this->duplicators;
 	}
 
 }

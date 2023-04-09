@@ -114,7 +114,7 @@ final class StructureFlattener
 	{
 		$reduced = [];
 		foreach ($properties as $property) {
-			if ($property->getDuplicateDeclarations() !== []) {
+			if ($property->getDuplicators() !== []) {
 				continue;
 			}
 

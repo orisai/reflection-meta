@@ -24,13 +24,13 @@ final class PropertyWithDuplicatesStructureTest extends TestCase
 		);
 
 		$contextClass = $reflector->getDeclaringClass();
-		$duplicates = [];
+		$duplicators = [];
 		$source = new PropertySource($reflector);
 
-		$property = new PropertyWithDuplicatesStructure($contextClass, $duplicates, $source);
+		$property = new PropertyWithDuplicatesStructure($contextClass, $source, $duplicators);
 
 		self::assertSame($contextClass, $property->getContextClass());
-		self::assertSame($duplicates, $property->getDuplicateDeclarations());
+		self::assertSame($duplicators, $property->getDuplicators());
 		self::assertSame($source, $property->getSource());
 	}
 
@@ -44,16 +44,16 @@ final class PropertyWithDuplicatesStructureTest extends TestCase
 		);
 
 		$contextClass = $reflector->getDeclaringClass();
-		$duplicates = [
+		$duplicators = [
 			new ReflectionClass(PropertyStructureDoubleTrait1::class),
 			new ReflectionClass(PropertyStructureDoubleTrait2::class),
 		];
 		$source = new PropertySource($reflector);
 
-		$property = new PropertyWithDuplicatesStructure($contextClass, $duplicates, $source);
+		$property = new PropertyWithDuplicatesStructure($contextClass, $source, $duplicators);
 
 		self::assertSame($contextClass, $property->getContextClass());
-		self::assertSame($duplicates, $property->getDuplicateDeclarations());
+		self::assertSame($duplicators, $property->getDuplicators());
 		self::assertSame($source, $property->getSource());
 	}
 
