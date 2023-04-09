@@ -15,6 +15,8 @@ final class PropertyStructure implements Structure
 
 	/**
 	 * @param ReflectionClass<object> $contextClass
+	 *
+	 * @internal
 	 */
 	public function __construct(
 		ReflectionClass $contextClass,

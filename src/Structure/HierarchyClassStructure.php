@@ -37,6 +37,9 @@ final class HierarchyClassStructure
 	 * @param list<ClassConstantStructure>          $constants
 	 * @param list<PropertyWithDuplicatesStructure> $properties
 	 * @param list<MethodStructure>                 $methods
+	 *
+	 * @internal
+	 * @see StructureBuilder::build()
 	 */
 	public function __construct(
 		ReflectionClass $contextClass,

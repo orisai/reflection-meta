@@ -19,6 +19,8 @@ final class MethodStructure implements Structure
 	/**
 	 * @param ReflectionClass<object>      $contextClass
 	 * @param list<ParameterStructure>     $parameters
+	 *
+	 * @internal
 	 */
 	public function __construct(
 		ReflectionClass $contextClass,

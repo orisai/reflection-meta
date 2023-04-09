@@ -19,6 +19,8 @@ final class PropertyWithDuplicatesStructure implements Structure
 	/**
 	 * @param ReflectionClass<object> $contextClass
 	 * @param array<ReflectionClass<object>> $duplicateDeclarations
+	 *
+	 * @internal
 	 */
 	public function __construct(
 		ReflectionClass $contextClass,

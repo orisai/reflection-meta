@@ -9,6 +9,9 @@ final class ParameterStructure implements Structure
 
 	private ParameterSource $source;
 
+	/**
+	 * @internal
+	 */
 	public function __construct(ParameterSource $source)
 	{
 		$this->source = $source;

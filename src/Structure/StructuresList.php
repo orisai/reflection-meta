@@ -22,6 +22,9 @@ final class StructuresList
 	 * @param list<ClassConstantStructure> $constants
 	 * @param list<PropertyStructure>      $properties
 	 * @param list<MethodStructure>        $methods
+	 *
+	 * @internal
+	 * @see StructureFlattener::flatten()
 	 */
 	public function __construct(array $classes, array $constants, array $properties, array $methods)
 	{
