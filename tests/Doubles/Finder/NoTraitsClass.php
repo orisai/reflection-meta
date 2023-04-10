@@ -5,6 +5,8 @@ namespace Tests\Orisai\ReflectionMeta\Doubles\Finder;
 final class NoTraitsClass
 {
 
+	public const a = 'a';
+
 	public string $a;
 
 	public function a(): void
