@@ -31,18 +31,23 @@ trait A2
 
 	use A1;
 
+	/**
+	 * Differs from A1
+	 */
+	public string $a = 'a';
+
 }
 
 trait B1
 {
 
 	/**
-	 * Just an annotation to trigger compatibility check
+	 * Differs from A1 and A2
 	 */
 	public string $a = 'a';
 
 	/**
-	 * Both annotated, but differently
+	 * Differs from A1
 	 */
 	public string $b;
 

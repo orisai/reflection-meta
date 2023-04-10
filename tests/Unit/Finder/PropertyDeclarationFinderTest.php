@@ -3,14 +3,16 @@
 namespace Tests\Orisai\ReflectionMeta\Unit\Finder;
 
 use Generator;
-use Orisai\Exceptions\Logic\InvalidState;
 use Orisai\ReflectionMeta\Finder\PropertyDeclaratorFinder;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 use ReflectionProperty;
-use Tests\Orisai\ReflectionMeta\Doubles\Finder\CompatiblePropertiesTraits\A1;
-use Tests\Orisai\ReflectionMeta\Doubles\Finder\CompatiblePropertiesTraits\B1;
+use Tests\Orisai\ReflectionMeta\Doubles\Finder\CompatiblePropertiesTraits\A1 as CompatA1;
+use Tests\Orisai\ReflectionMeta\Doubles\Finder\CompatiblePropertiesTraits\B1 as CompatB1;
 use Tests\Orisai\ReflectionMeta\Doubles\Finder\CompatiblePropertiesTraits\CompatiblePropertiesTraitsClass;
+use Tests\Orisai\ReflectionMeta\Doubles\Finder\IncompatiblePropertiesTraits\A1 as IncompatA1;
+use Tests\Orisai\ReflectionMeta\Doubles\Finder\IncompatiblePropertiesTraits\A2 as IncompatA2;
+use Tests\Orisai\ReflectionMeta\Doubles\Finder\IncompatiblePropertiesTraits\B1 as IncompatB1;
 use Tests\Orisai\ReflectionMeta\Doubles\Finder\IncompatiblePropertiesTraits\IncompatiblePropertiesTraitsClass;
 use Tests\Orisai\ReflectionMeta\Doubles\Finder\NoTraitsClass;
 use const PHP_VERSION_ID;
@@ -40,8 +42,8 @@ final class PropertyDeclarationFinderTest extends TestCase
 
 		self::assertEquals(
 			[
-				new ReflectionClass(A1::class),
-				new ReflectionClass(B1::class),
+				new ReflectionClass(CompatA1::class),
+				new ReflectionClass(CompatB1::class),
 			],
 			$traits,
 		);
@@ -79,16 +81,26 @@ final class PropertyDeclarationFinderTest extends TestCase
 
 		$property = new ReflectionProperty(IncompatiblePropertiesTraitsClass::class, $propertyName);
 
-		$this->expectException(InvalidState::class);
-		$this->expectExceptionMessage(
-			'Tests\Orisai\ReflectionMeta\Doubles\Finder\IncompatiblePropertiesTraits\A1'
-			. ' and Tests\Orisai\ReflectionMeta\Doubles\Finder\IncompatiblePropertiesTraits\B1'
-			. " define the same property (\$$propertyName) in the composition of"
-			. ' Tests\Orisai\ReflectionMeta\Doubles\Finder\IncompatiblePropertiesTraits\IncompatiblePropertiesTraitsClass.'
-			. ' However, the definition differs and is considered incompatible.',
-		);
+		if ($propertyName === 'a') {
+			self::assertEquals(
+				[
+					new ReflectionClass(IncompatA1::class),
+					new ReflectionClass(IncompatA2::class),
+					new ReflectionClass(IncompatB1::class),
+				],
+				PropertyDeclaratorFinder::getDeclaringTraits($property),
+			);
 
-		PropertyDeclaratorFinder::getDeclaringTraits($property);
+		} else {
+			self::assertEquals(
+				[
+					new ReflectionClass(IncompatA1::class),
+					new ReflectionClass(IncompatB1::class),
+				],
+				PropertyDeclaratorFinder::getDeclaringTraits($property),
+			);
+
+		}
 	}
 
 	public function provideIncompatibleProperties(): Generator

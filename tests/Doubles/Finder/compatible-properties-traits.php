@@ -8,7 +8,7 @@ trait A1
 	public string $a = 'a';
 
 	/**
-	 * Both annotated
+	 * All annotated
 	 */
 	public string $b;
 
@@ -22,6 +22,13 @@ trait A2
 
 	use A1;
 
+	public string $a = 'a';
+
+	/**
+	 * All annotated
+	 */
+	public string $b;
+
 }
 
 trait B1
@@ -30,7 +37,7 @@ trait B1
 	public string $a = 'a';
 
 	/**
-	 * Both annotated
+	 * All annotated
 	 */
 	public string $b;
 
