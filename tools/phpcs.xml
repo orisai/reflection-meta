@@ -22,11 +22,8 @@
 	</rule>
 
 	<!-- Test-specific formatting -->
-	<exclude-pattern>tests/Doubles/Finder/compatible-properties-traits.php</exclude-pattern>
-	<exclude-pattern>tests/Doubles/Finder/incompatible-properties-traits.php</exclude-pattern>
 	<exclude-pattern>tests/Doubles/Finder/same-line-traits.php</exclude-pattern>
 	<exclude-pattern>tests/Doubles/Finder/same-line-traits-static.php</exclude-pattern>
-	<exclude-pattern>tests/Doubles/Finder/traits.php</exclude-pattern>
 
 	<rule ref="PSR1.Classes.ClassDeclaration.MultipleClasses">
 		<exclude-pattern>tests/Doubles</exclude-pattern>

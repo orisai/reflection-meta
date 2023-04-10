@@ -2,6 +2,9 @@
 
 namespace Tests\Orisai\ReflectionMeta\Doubles\Finder\IncompatiblePropertiesTraits;
 
+use Bar;
+use Foo;
+
 trait A1
 {
 
@@ -14,14 +17,14 @@ trait A1
 
 	public string $c;
 
-	#[\Foo]
-	#[\Bar]
+	#[Foo]
+	#[Bar]
 	public string $d;
 
-	#[\Foo]
+	#[Foo]
 	public string $e;
 
-	#[\Foo]
+	#[Foo]
 	public string $f;
 
 }
@@ -51,18 +54,18 @@ trait B1
 	 */
 	public string $b;
 
-	#[\Foo]
+	#[Foo]
 	public string $c;
 
-	#[\Bar]
-	#[\Foo]
+	#[Bar]
+	#[Foo]
 	public string $d;
 
-	#[\Foo('a')]
+	#[Foo('a')]
 	public string $e;
 
-	#[\Foo]
-	#[\Bar]
+	#[Foo]
+	#[Bar]
 	public string $f;
 
 }
@@ -70,5 +73,7 @@ trait B1
 class IncompatiblePropertiesTraitsClass
 {
 
-	use A2, B1;
+	use A2;
+	use B1;
+
 }

@@ -2,10 +2,13 @@
 
 namespace Tests\Orisai\ReflectionMeta\Doubles\Finder\CompatiblePropertiesTraitsPHP81;
 
+use Foo;
+use stdClass;
+
 trait A1
 {
 
-	#[\Foo(bar: new \stdClass())]
+	#[Foo(bar: new stdClass())]
 	public string $a;
 
 }
@@ -20,7 +23,7 @@ trait A2
 trait B1
 {
 
-	#[\Foo(bar: new \stdClass())]
+	#[Foo(bar: new stdClass())]
 	public string $a;
 
 }
@@ -28,6 +31,7 @@ trait B1
 class CompatiblePropertiesTraitsPHP81Class
 {
 
-	use A2, B1;
+	use A2;
+	use B1;
 
 }

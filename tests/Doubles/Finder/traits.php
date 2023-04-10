@@ -7,6 +7,7 @@ trait A1
 
 	public function a(): void
 	{
+		// Noop
 	}
 
 }
@@ -30,6 +31,7 @@ trait B1
 
 	public function a(): void
 	{
+		// Noop
 	}
 
 }
@@ -37,7 +39,8 @@ trait B1
 class TraitsClass
 {
 
-	use A3, B1 {
+	use A3;
+	use B1 {
 		A3::a insteadof B1;
 	}
 

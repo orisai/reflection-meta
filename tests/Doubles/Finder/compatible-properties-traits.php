@@ -2,6 +2,8 @@
 
 namespace Tests\Orisai\ReflectionMeta\Doubles\Finder\CompatiblePropertiesTraits;
 
+use Foo;
+
 trait A1
 {
 
@@ -12,7 +14,7 @@ trait A1
 	 */
 	public string $b;
 
-	#[\Foo('bar')]
+	#[Foo('bar')]
 	public string $c;
 
 }
@@ -41,7 +43,7 @@ trait B1
 	 */
 	public string $b;
 
-	#[\Foo('bar')]
+	#[Foo('bar')]
 	public string $c;
 
 }
@@ -49,7 +51,8 @@ trait B1
 class CompatiblePropertiesTraitsClass
 {
 
-	use A2, B1;
+	use A2;
+	use B1;
 
 	public string $d;
 
