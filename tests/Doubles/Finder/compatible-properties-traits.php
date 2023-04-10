@@ -12,7 +12,7 @@ trait A1
 	 */
 	public string $b;
 
-	#[\Foo]
+	#[\Foo('bar')]
 	public string $c;
 
 }
@@ -41,7 +41,7 @@ trait B1
 	 */
 	public string $b;
 
-	#[\Foo]
+	#[\Foo('bar')]
 	public string $c;
 
 }

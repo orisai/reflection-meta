@@ -10,6 +10,9 @@ use ReflectionProperty;
 use Tests\Orisai\ReflectionMeta\Doubles\Finder\CompatiblePropertiesTraits\A1 as CompatA1;
 use Tests\Orisai\ReflectionMeta\Doubles\Finder\CompatiblePropertiesTraits\B1 as CompatB1;
 use Tests\Orisai\ReflectionMeta\Doubles\Finder\CompatiblePropertiesTraits\CompatiblePropertiesTraitsClass;
+use Tests\Orisai\ReflectionMeta\Doubles\Finder\CompatiblePropertiesTraitsPHP81\A1 as Compat81A;
+use Tests\Orisai\ReflectionMeta\Doubles\Finder\CompatiblePropertiesTraitsPHP81\B1 as Compat81B;
+use Tests\Orisai\ReflectionMeta\Doubles\Finder\CompatiblePropertiesTraitsPHP81\CompatiblePropertiesTraitsPHP81Class;
 use Tests\Orisai\ReflectionMeta\Doubles\Finder\IncompatiblePropertiesTraits\A1 as IncompatA1;
 use Tests\Orisai\ReflectionMeta\Doubles\Finder\IncompatiblePropertiesTraits\A2 as IncompatA2;
 use Tests\Orisai\ReflectionMeta\Doubles\Finder\IncompatiblePropertiesTraits\B1 as IncompatB1;
@@ -57,6 +60,26 @@ final class PropertyDeclarationFinderTest extends TestCase
 		if (PHP_VERSION_ID >= 8_00_00) {
 			yield ['c'];
 		}
+	}
+
+	public function testTraitsFoundPHP81(): void
+	{
+		if (PHP_VERSION_ID < 8_01_00) {
+			self::markTestSkipped('Nested attributes are valid since PHP 8.1');
+		}
+
+		require_once __DIR__ . '/../../Doubles/Finder/compatible-properties-traits-php8.1.php';
+
+		$property = new ReflectionProperty(CompatiblePropertiesTraitsPHP81Class::class, 'a');
+		$traits = PropertyDeclaratorFinder::getDeclaringTraits($property);
+
+		self::assertEquals(
+			[
+				new ReflectionClass(Compat81A::class),
+				new ReflectionClass(Compat81B::class),
+			],
+			$traits,
+		);
 	}
 
 	public function testNoTraitsFound(): void

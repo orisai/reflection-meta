@@ -6,6 +6,11 @@ parameters:
 			path: ../src/Finder/ConstantDeclaratorFinder.php
 
 		-
+			message: "#^Loose comparison via \"\\!\\=\" is not allowed\\.$#"
+			count: 1
+			path: ../src/Finder/PropertyDeclaratorFinder.php
+
+		-
 			message: "#^Parameter \\#1 \\$constant of method Orisai\\\\ReflectionMeta\\\\Reader\\\\AnnotationsMetaReader\\:\\:readClassConstant\\(\\) expects ReflectionClassConstant, ReflectionClassConstant\\|false given\\.$#"
 			count: 3
 			path: ../tests/Unit/Reader/AnnotationsMetaReaderTest.php
