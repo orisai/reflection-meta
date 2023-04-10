@@ -2,7 +2,6 @@
 
 namespace Orisai\ReflectionMeta\Finder;
 
-use Orisai\Exceptions\Logic\InvalidState;
 use ReflectionClass;
 use ReflectionClassConstant;
 use function array_merge;
@@ -13,22 +12,19 @@ final class ConstantDeclaratorFinder
 {
 
 	/**
-	 * @return array<ReflectionClass<object>>
+	 * @return list<ReflectionClass<object>>
 	 */
 	public static function getDeclaringTraits(ReflectionClassConstant $constantReflector): array
 	{
-		$traits = self::getDeclaringTraitFromTraits(
+		return self::getDeclaringTraitFromTraits(
 			$constantReflector->getDeclaringClass()->getTraits(),
 			$constantReflector,
 		);
-		self::checkTraitsCompatibility($constantReflector, $traits);
-
-		return $traits;
 	}
 
 	/**
 	 * @param array<ReflectionClass<object>> $traits
-	 * @return array<ReflectionClass<object>>
+	 * @return list<ReflectionClass<object>>
 	 */
 	private static function getDeclaringTraitFromTraits(
 		array $traits,
@@ -37,82 +33,54 @@ final class ConstantDeclaratorFinder
 	{
 		$possibleByTrait = [];
 		foreach ($traits as $trait) {
-			$possibleByTrait[] = $parentTraits = self::getDeclaringTraitFromTraits(
+			$possibleByTrait[] = $usedTraits = self::getDeclaringTraitFromTraits(
 				$trait->getTraits(),
 				$constantReflector,
 			);
 
 			$name = $constantReflector->getName();
-			$hasProperty = $trait->hasProperty($name);
 
-			// Parent traits don't have constant, current trait is declaring one for current branch
-			if ($hasProperty && $parentTraits === []) {
-				$possibleByTrait[][] = $trait;
+			if (!$trait->hasConstant($name)) {
+				continue;
 			}
+
+			foreach ($usedTraits as $usedTrait) {
+				if (self::areDefinitionsIdentical($constantReflector, $usedTrait->getReflectionConstant($name))) {
+					continue 2;
+				}
+			}
+
+			$possibleByTrait[][] = $trait;
 		}
 
 		return array_merge(...$possibleByTrait);
 	}
 
-	/**
-	 * @param array<ReflectionClass<object>> $traits
-	 */
-	private static function checkTraitsCompatibility(ReflectionClassConstant $constantReflector, array $traits): void
-	{
-		$name = $constantReflector->getName();
-		foreach ($traits as $traitA) {
-			foreach ($traits as $traitB) {
-				if (!self::areConstantsCompatible(
-					$traitA->getConstant($name),
-					$traitB->getConstant($name),
-				)) {
-					throw InvalidState::create()
-						->withMessage(
-							"{$traitA->getName()} and {$traitB->getName()} define the same constant"
-							. " (\${$constantReflector->getName()}) in the composition of"
-							. " {$constantReflector->getDeclaringClass()->getName()}."
-							. ' However, the definition differs and is considered incompatible.',
-						);
-				}
-			}
-		}
-	}
-
-	/**
-	 * DO NOT BLINDLY COPY-PASTE This method expects constants that are from parent and child constants from traits
-	 * and will not work in other cases.
-	 *
-	 * If true is returned, constant is probably declared by parent
-	 * We don't really have a way how to check if exact same property is declared by both parent and
-	 * child, but who cares about such case
-	 *
-	 * Other incompatibility checks are done by PHP (same modifiers, types)
-	 */
-	private static function areConstantsCompatible(
-		ReflectionClassConstant $parentConstantReflector,
-		ReflectionClassConstant $constantReflector
+	private static function areDefinitionsIdentical(
+		ReflectionClassConstant $constant1,
+		ReflectionClassConstant $constant2
 	): bool
 	{
-		if ($parentConstantReflector->getDocComment() !== $constantReflector->getDocComment()) {
+		if ($constant1->getDocComment() !== $constant2->getDocComment()) {
 			return false;
 		}
 
 		if (PHP_VERSION_ID >= 8_00_00) {
-			$parentAttributes = $parentConstantReflector->getAttributes();
-			$attributes = $constantReflector->getAttributes();
+			$attributes1 = $constant1->getAttributes();
+			$attributes2 = $constant2->getAttributes();
 
-			if (count($parentAttributes) !== count($attributes)) {
+			if (count($attributes1) !== count($attributes2)) {
 				return false;
 			}
 
-			foreach ($parentAttributes as $key => $parentAttribute) {
-				$attribute = $attributes[$key];
+			foreach ($attributes1 as $key => $attribute1) {
+				$attribute2 = $attributes2[$key];
 
-				if ($parentAttribute->getName() !== $attribute->getName()) {
+				if ($attribute1->getName() !== $attribute2->getName()) {
 					return false;
 				}
 
-				if ($parentAttribute->getArguments() !== $attribute->getArguments()) {
+				if ($attribute1->getArguments() !== $attribute2->getArguments()) {
 					return false;
 				}
 			}

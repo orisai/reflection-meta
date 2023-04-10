@@ -616,7 +616,9 @@ final class StructureBuilderTest extends TestCase
 						new ClassConstantSource(
 							new ReflectionClassConstant(BuilderConstantPHP82Double::class, 'C'),
 						),
-						[],
+						[
+							new ReflectionClass(BuilderConstantPHP82DoubleTrait1::class),
+						],
 					),
 				],
 				[],
