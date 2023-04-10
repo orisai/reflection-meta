@@ -8,6 +8,11 @@ parameters:
 		-
 			message: "#^Loose comparison via \"\\!\\=\" is not allowed\\.$#"
 			count: 1
+			path: ../src/Finder/ConstantDeclaratorFinder.php
+
+		-
+			message: "#^Loose comparison via \"\\!\\=\" is not allowed\\.$#"
+			count: 1
 			path: ../src/Finder/PropertyDeclaratorFinder.php
 
 		-
