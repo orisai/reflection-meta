@@ -20,7 +20,7 @@ use Tests\Orisai\ReflectionMeta\Doubles\Finder\IncompatiblePropertiesTraits\Inco
 use Tests\Orisai\ReflectionMeta\Doubles\Finder\NoTraitsClass;
 use const PHP_VERSION_ID;
 
-final class PropertyDeclarationFinderTest extends TestCase
+final class PropertyDeclaratorFinderTest extends TestCase
 {
 
 	public function testNoTraits(): void

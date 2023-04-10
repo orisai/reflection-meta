@@ -12,7 +12,7 @@ use Tests\Orisai\ReflectionMeta\Doubles\Finder\SameLineTraitsStatic\SameLineTrai
 use Tests\Orisai\ReflectionMeta\Doubles\Finder\Traits\A1 as TraitsA1;
 use Tests\Orisai\ReflectionMeta\Doubles\Finder\Traits\TraitsClass;
 
-final class MethodDeclarationFinderTest extends TestCase
+final class MethodDeclaratorFinderTest extends TestCase
 {
 
 	public function testNoTraits(): void
