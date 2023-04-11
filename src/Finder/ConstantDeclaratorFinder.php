@@ -16,32 +16,31 @@ final class ConstantDeclaratorFinder
 	public static function getDeclaringTraits(ReflectionClassConstant $constantReflector): array
 	{
 		return self::getDeclaringTraitFromTraits(
-			$constantReflector->getDeclaringClass()->getTraits(),
+			$constantReflector->getDeclaringClass(),
 			$constantReflector,
 		);
 	}
 
 	/**
-	 * @param array<ReflectionClass<object>> $traits
+	 * @param ReflectionClass<object> $declaringClass
 	 * @return list<ReflectionClass<object>>
 	 */
 	private static function getDeclaringTraitFromTraits(
-		array $traits,
+		ReflectionClass $declaringClass,
 		ReflectionClassConstant $constantReflector
 	): array
 	{
 		$possibleByTrait = [];
-		foreach ($traits as $trait) {
-			$possibleByTrait[] = $usedTraits = self::getDeclaringTraitFromTraits(
-				$trait->getTraits(),
-				$constantReflector,
-			);
-
+		foreach ($declaringClass->getTraits() as $trait) {
 			$name = $constantReflector->getName();
-
 			if (!$trait->hasConstant($name)) {
 				continue;
 			}
+
+			$possibleByTrait[] = $usedTraits = self::getDeclaringTraitFromTraits(
+				$trait,
+				$constantReflector,
+			);
 
 			foreach ($usedTraits as $usedTrait) {
 				if (self::areDefinitionsIdentical($constantReflector, $usedTrait->getReflectionConstant($name))) {

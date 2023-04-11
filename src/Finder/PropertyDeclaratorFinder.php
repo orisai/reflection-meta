@@ -16,32 +16,31 @@ final class PropertyDeclaratorFinder
 	public static function getDeclaringTraits(ReflectionProperty $propertyReflector): array
 	{
 		return self::getDeclaringTraitFromTraits(
-			$propertyReflector->getDeclaringClass()->getTraits(),
+			$propertyReflector->getDeclaringClass(),
 			$propertyReflector,
 		);
 	}
 
 	/**
-	 * @param array<ReflectionClass<object>> $traits
+	 * @param ReflectionClass<object> $declaringClass
 	 * @return list<ReflectionClass<object>>
 	 */
 	private static function getDeclaringTraitFromTraits(
-		array $traits,
+		ReflectionClass $declaringClass,
 		ReflectionProperty $propertyReflector
 	): array
 	{
 		$possibleByTrait = [];
-		foreach ($traits as $trait) {
-			$possibleByTrait[] = $usedTraits = self::getDeclaringTraitFromTraits(
-				$trait->getTraits(),
-				$propertyReflector,
-			);
-
+		foreach ($declaringClass->getTraits() as $trait) {
 			$name = $propertyReflector->getName();
-
 			if (!$trait->hasProperty($name)) {
 				continue;
 			}
+
+			$possibleByTrait[] = $usedTraits = self::getDeclaringTraitFromTraits(
+				$trait,
+				$propertyReflector,
+			);
 
 			foreach ($usedTraits as $usedTrait) {
 				if (self::areDefinitionsIdentical($propertyReflector, $usedTrait->getProperty($name))) {
