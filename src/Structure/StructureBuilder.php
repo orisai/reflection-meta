@@ -19,28 +19,28 @@ final class StructureBuilder
 	/**
 	 * @param ReflectionClass<object> $class
 	 */
-	public function build(ReflectionClass $class): HierarchyClassStructure
+	public static function build(ReflectionClass $class): HierarchyClassStructure
 	{
-		return $this->createClassStructure($class, $class);
+		return self::createClassStructure($class, $class);
 	}
 
 	/**
 	 * @param ReflectionClass<object> $declaringClass
 	 * @param ReflectionClass<object> $contextClass
 	 */
-	private function createClassStructure(
+	private static function createClassStructure(
 		ReflectionClass $declaringClass,
 		ReflectionClass $contextClass
 	): HierarchyClassStructure
 	{
 		return new HierarchyClassStructure(
 			$contextClass,
-			$this->createParentStructure($declaringClass),
-			$this->createInterfacesStructure($declaringClass, $contextClass),
-			$this->createTraitsStructure($declaringClass, $contextClass),
-			$this->createClassConstantsStructure($declaringClass, $contextClass),
-			$this->createPropertiesStructure($declaringClass, $contextClass),
-			$this->createMethodsStructure($declaringClass, $contextClass),
+			self::createParentStructure($declaringClass),
+			self::createInterfacesStructure($declaringClass, $contextClass),
+			self::createTraitsStructure($declaringClass, $contextClass),
+			self::createClassConstantsStructure($declaringClass, $contextClass),
+			self::createPropertiesStructure($declaringClass, $contextClass),
+			self::createMethodsStructure($declaringClass, $contextClass),
 			new ClassSource($declaringClass),
 		);
 	}
@@ -48,7 +48,7 @@ final class StructureBuilder
 	/**
 	 * @param ReflectionClass<object> $class
 	 */
-	private function createParentStructure(ReflectionClass $class): ?HierarchyClassStructure
+	private static function createParentStructure(ReflectionClass $class): ?HierarchyClassStructure
 	{
 		$parentClass = $class->getParentClass();
 
@@ -56,7 +56,7 @@ final class StructureBuilder
 			return null;
 		}
 
-		return $this->createClassStructure($parentClass, $parentClass);
+		return self::createClassStructure($parentClass, $parentClass);
 	}
 
 	/**
@@ -64,14 +64,14 @@ final class StructureBuilder
 	 * @param ReflectionClass<object> $contextClass
 	 * @return list<HierarchyClassStructure>
 	 */
-	private function createInterfacesStructure(
+	private static function createInterfacesStructure(
 		ReflectionClass $declaringClass,
 		ReflectionClass $contextClass
 	): array
 	{
 		$interfaces = [];
 		foreach ($declaringClass->getInterfaces() as $interface) {
-			$interfaces[] = $this->createClassStructure($interface, $contextClass);
+			$interfaces[] = self::createClassStructure($interface, $contextClass);
 		}
 
 		return $interfaces;
@@ -82,14 +82,14 @@ final class StructureBuilder
 	 * @param ReflectionClass<object> $contextClass
 	 * @return list<HierarchyClassStructure>
 	 */
-	private function createTraitsStructure(
+	private static function createTraitsStructure(
 		ReflectionClass $declaringClass,
 		ReflectionClass $contextClass
 	): array
 	{
 		$traits = [];
 		foreach ($declaringClass->getTraits() as $trait) {
-			$traits[] = $this->createClassStructure($trait, $contextClass);
+			$traits[] = self::createClassStructure($trait, $contextClass);
 		}
 
 		return $traits;
@@ -100,7 +100,7 @@ final class StructureBuilder
 	 * @param ReflectionClass<object> $contextClass
 	 * @return list<ClassConstantStructure>
 	 */
-	private function createClassConstantsStructure(
+	private static function createClassConstantsStructure(
 		ReflectionClass $declaringClass,
 		ReflectionClass $contextClass
 	): array
@@ -128,7 +128,7 @@ final class StructureBuilder
 	 * @param ReflectionClass<object> $contextClass
 	 * @return list<PropertyStructure>
 	 */
-	private function createPropertiesStructure(
+	private static function createPropertiesStructure(
 		ReflectionClass $declaringClass,
 		ReflectionClass $contextClass
 	): array
@@ -156,7 +156,7 @@ final class StructureBuilder
 	 * @param ReflectionClass<object> $contextClass
 	 * @return list<MethodStructure>
 	 */
-	private function createMethodsStructure(
+	private static function createMethodsStructure(
 		ReflectionClass $declaringClass,
 		ReflectionClass $contextClass
 	): array
@@ -178,7 +178,7 @@ final class StructureBuilder
 			$methods[] = new MethodStructure(
 				$contextClass,
 				new MethodSource($method),
-				$this->createParametersStructure($method),
+				self::createParametersStructure($method),
 			);
 		}
 
@@ -188,7 +188,7 @@ final class StructureBuilder
 	/**
 	 * @return list<ParameterStructure>
 	 */
-	private function createParametersStructure(ReflectionMethod $method): array
+	private static function createParametersStructure(ReflectionMethod $method): array
 	{
 		$parameters = [];
 		foreach ($method->getParameters() as $parameter) {
