@@ -11,12 +11,13 @@ final class StructureFlattener
 	public function flatten(HierarchyClassStructure $classStructure): StructuresList
 	{
 		$classes = $this->removeDuplicateClasses($this->flattenClasses($classStructure));
-		$constants = $this->flattenConstants($classes);
-		$properties = $this->reduceProperties($this->flattenProperties($classes));
-		$methods = $this->flattenMethods($classes);
-		$bareClasses = $this->reduceClasses($classes);
 
-		return new StructuresList($bareClasses, $constants, $properties, $methods);
+		return new StructuresList(
+			$this->unpackClasses($classes),
+			$this->unpackConstants($classes),
+			$this->removeDuplicateProperties($this->unpackProperties($classes)),
+			$this->unpackMethods($classes),
+		);
 	}
 
 	/**
@@ -68,7 +69,7 @@ final class StructureFlattener
 	 * @param list<HierarchyClassStructure> $classes
 	 * @return list<ClassStructure>
 	 */
-	private function reduceClasses(array $classes): array
+	private function unpackClasses(array $classes): array
 	{
 		$reduced = [];
 		foreach ($classes as $class) {
@@ -82,7 +83,7 @@ final class StructureFlattener
 	 * @param list<HierarchyClassStructure> $classes
 	 * @return list<ClassConstantStructure>
 	 */
-	private function flattenConstants(array $classes): array
+	private function unpackConstants(array $classes): array
 	{
 		$groups = [];
 		foreach ($classes as $class) {
@@ -96,7 +97,7 @@ final class StructureFlattener
 	 * @param list<HierarchyClassStructure> $classes
 	 * @return list<PropertyStructure>
 	 */
-	private function flattenProperties(array $classes): array
+	private function unpackProperties(array $classes): array
 	{
 		$groups = [];
 		foreach ($classes as $class) {
@@ -110,7 +111,7 @@ final class StructureFlattener
 	 * @param list<PropertyStructure> $properties
 	 * @return list<PropertyStructure>
 	 */
-	private function reduceProperties(array $properties): array
+	private function removeDuplicateProperties(array $properties): array
 	{
 		$reduced = [];
 		foreach ($properties as $property) {
@@ -128,7 +129,7 @@ final class StructureFlattener
 	 * @param list<HierarchyClassStructure> $classes
 	 * @return list<MethodStructure>
 	 */
-	private function flattenMethods(array $classes): array
+	private function unpackMethods(array $classes): array
 	{
 		$groups = [];
 		foreach ($classes as $class) {
