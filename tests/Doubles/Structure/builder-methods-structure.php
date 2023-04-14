@@ -24,6 +24,13 @@ class BuilderMethodDoubleParent1
 
 }
 
+interface BuilderMethodDoubleInterface2
+{
+
+	public function c(): void;
+
+}
+
 trait BuilderMethodDoubleTrait2
 {
 
@@ -34,7 +41,7 @@ trait BuilderMethodDoubleTrait2
 
 }
 
-final class BuilderMethodDouble extends BuilderMethodDoubleParent1
+final class BuilderMethodDouble extends BuilderMethodDoubleParent1 implements BuilderMethodDoubleInterface2
 {
 
 	use BuilderMethodDoubleTrait2;

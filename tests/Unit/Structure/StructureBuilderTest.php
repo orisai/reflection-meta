@@ -35,6 +35,7 @@ use Tests\Orisai\ReflectionMeta\Doubles\Structure\Interfaces\BuilderInterfaceDou
 use Tests\Orisai\ReflectionMeta\Doubles\Structure\Interfaces\BuilderInterfaceDoubleInterface2;
 use Tests\Orisai\ReflectionMeta\Doubles\Structure\Interfaces\BuilderInterfaceDoubleInterface3;
 use Tests\Orisai\ReflectionMeta\Doubles\Structure\Methods\BuilderMethodDouble;
+use Tests\Orisai\ReflectionMeta\Doubles\Structure\Methods\BuilderMethodDoubleInterface2;
 use Tests\Orisai\ReflectionMeta\Doubles\Structure\Methods\BuilderMethodDoubleParent1;
 use Tests\Orisai\ReflectionMeta\Doubles\Structure\Methods\BuilderMethodDoubleTrait1;
 use Tests\Orisai\ReflectionMeta\Doubles\Structure\Methods\BuilderMethodDoubleTrait2;
@@ -917,7 +918,26 @@ final class StructureBuilderTest extends TestCase
 			new HierarchyClassStructure(
 				$class,
 				$parent1,
-				[],
+				[
+					new HierarchyClassStructure(
+						$class,
+						null,
+						[],
+						[],
+						[],
+						[],
+						[
+							new MethodStructure(
+								$class,
+								new MethodSource(
+									new ReflectionMethod(BuilderMethodDoubleInterface2::class, 'c'),
+								),
+								[],
+							),
+						],
+						new ClassSource(new ReflectionClass(BuilderMethodDoubleInterface2::class)),
+					),
+				],
 				[
 					$trait2InContextOfClass,
 				],
