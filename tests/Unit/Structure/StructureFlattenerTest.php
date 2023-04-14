@@ -36,10 +36,9 @@ final class StructureFlattenerTest extends TestCase
 		require_once __DIR__ . '/../../Doubles/Structure/flattener-structure.php';
 
 		$builder = new StructureBuilder();
-		$flattener = new StructureFlattener();
 
 		$structure = $builder->build(new ReflectionClass(FlattenerStructureDouble::class));
-		$list = $flattener->flatten($structure);
+		$list = StructureFlattener::flatten($structure);
 
 		self::assertEquals(
 			[

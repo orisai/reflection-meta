@@ -8,36 +8,36 @@ use function array_values;
 final class StructureFlattener
 {
 
-	public function flatten(HierarchyClassStructure $classStructure): StructuresList
+	public static function flatten(HierarchyClassStructure $classStructure): StructuresList
 	{
-		$classes = $this->removeDuplicateClasses($this->flattenClasses($classStructure));
+		$classes = self::removeDuplicateClasses(self::flattenClasses($classStructure));
 
 		return new StructuresList(
-			$this->unpackClasses($classes),
-			$this->unpackConstants($classes),
-			$this->removeDuplicateProperties($this->unpackProperties($classes)),
-			$this->unpackMethods($classes),
+			self::unpackClasses($classes),
+			self::unpackConstants($classes),
+			self::removeDuplicateProperties(self::unpackProperties($classes)),
+			self::unpackMethods($classes),
 		);
 	}
 
 	/**
 	 * @return list<HierarchyClassStructure>
 	 */
-	private function flattenClasses(HierarchyClassStructure $structure): array
+	private static function flattenClasses(HierarchyClassStructure $structure): array
 	{
 		$groups = [];
 
 		$parent = $structure->getParent();
 		if ($parent !== null) {
-			$groups[] = $this->flattenClasses($parent);
+			$groups[] = self::flattenClasses($parent);
 		}
 
 		foreach ($structure->getInterfaces() as $interface) {
-			$groups[] = $this->flattenClasses($interface);
+			$groups[] = self::flattenClasses($interface);
 		}
 
 		foreach ($structure->getTraits() as $trait) {
-			$groups[] = $this->flattenClasses($trait);
+			$groups[] = self::flattenClasses($trait);
 		}
 
 		$groups[][] = $structure;
@@ -49,7 +49,7 @@ final class StructureFlattener
 	 * @param list<HierarchyClassStructure> $classes
 	 * @return list<HierarchyClassStructure>
 	 */
-	private function removeDuplicateClasses(array $classes): array
+	private static function removeDuplicateClasses(array $classes): array
 	{
 		$deduplicated = [];
 		foreach ($classes as $class) {
@@ -69,7 +69,7 @@ final class StructureFlattener
 	 * @param list<HierarchyClassStructure> $classes
 	 * @return list<ClassStructure>
 	 */
-	private function unpackClasses(array $classes): array
+	private static function unpackClasses(array $classes): array
 	{
 		$reduced = [];
 		foreach ($classes as $class) {
@@ -83,7 +83,7 @@ final class StructureFlattener
 	 * @param list<HierarchyClassStructure> $classes
 	 * @return list<ClassConstantStructure>
 	 */
-	private function unpackConstants(array $classes): array
+	private static function unpackConstants(array $classes): array
 	{
 		$groups = [];
 		foreach ($classes as $class) {
@@ -97,7 +97,7 @@ final class StructureFlattener
 	 * @param list<HierarchyClassStructure> $classes
 	 * @return list<PropertyStructure>
 	 */
-	private function unpackProperties(array $classes): array
+	private static function unpackProperties(array $classes): array
 	{
 		$groups = [];
 		foreach ($classes as $class) {
@@ -111,7 +111,7 @@ final class StructureFlattener
 	 * @param list<PropertyStructure> $properties
 	 * @return list<PropertyStructure>
 	 */
-	private function removeDuplicateProperties(array $properties): array
+	private static function removeDuplicateProperties(array $properties): array
 	{
 		$reduced = [];
 		foreach ($properties as $property) {
@@ -129,7 +129,7 @@ final class StructureFlattener
 	 * @param list<HierarchyClassStructure> $classes
 	 * @return list<MethodStructure>
 	 */
-	private function unpackMethods(array $classes): array
+	private static function unpackMethods(array $classes): array
 	{
 		$groups = [];
 		foreach ($classes as $class) {
