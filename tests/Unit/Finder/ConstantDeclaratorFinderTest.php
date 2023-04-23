@@ -81,11 +81,9 @@ final class ConstantDeclaratorFinderTest extends TestCase
 	 */
 	public function testIncompatibleConstants(string $constantName): void
 	{
-		require_once __DIR__ . '/../../Doubles/Finder/incompatible-constants-traits.php';
-
 		$constant = new ReflectionClassConstant(IncompatibleConstantsTraitsClass::class, $constantName);
 
-		if ($constantName === 'a') {
+		if ($constantName !== 'b') {
 			self::assertEquals(
 				[
 					new ReflectionClass(IncompatA1::class),
@@ -109,12 +107,18 @@ final class ConstantDeclaratorFinderTest extends TestCase
 
 	public function provideIncompatibleConstants(): Generator
 	{
-		yield ['a'];
-		yield ['b'];
-		yield ['c'];
-		yield ['d'];
-		yield ['e'];
-		yield ['f'];
+		// Must be here, otherwise provider is still executed, even with skip in setup
+		if (PHP_VERSION_ID < 8_02_00) {
+			self::markTestSkipped('Constants on traits are valid since PHP 8.2');
+		}
+
+		require_once __DIR__ . '/../../Doubles/Finder/incompatible-constants-traits.php';
+
+		$reflector = new ReflectionClass(IncompatibleConstantsTraitsClass::class);
+
+		foreach ($reflector->getConstants() as $constant) {
+			yield [$constant];
+		}
 	}
 
 }

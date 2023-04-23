@@ -4,6 +4,7 @@ namespace Tests\Orisai\ReflectionMeta\Doubles\Finder\IncompatibleConstantsTraits
 
 use Bar;
 use Foo;
+use Tests\Orisai\ReflectionMeta\Doubles\DataCrate;
 
 trait A1
 {
@@ -27,6 +28,9 @@ trait A1
 	#[Foo]
 	public const f = 'f';
 
+	#[Foo(bar: new DataCrate('a1'))]
+	public const g = 'g';
+
 }
 
 trait A2
@@ -38,6 +42,23 @@ trait A2
 	 * Differs from A1
 	 */
 	public const a = 'a';
+
+	#[Foo]
+	public const c = 'c';
+
+	#[Bar]
+	#[Foo]
+	public const d = 'd';
+
+	#[Foo('a')]
+	public const e = 'e';
+
+	#[Foo]
+	#[Bar]
+	public const f = 'f';
+
+	#[Foo(bar: new DataCrate('a2'))]
+	public const g = 'g';
 
 }
 
@@ -67,6 +88,9 @@ trait B1
 	#[Foo]
 	#[Bar]
 	public const f = 'f';
+
+	#[Foo(bar: new DataCrate('b1'))]
+	public const g = 'g';
 
 }
 

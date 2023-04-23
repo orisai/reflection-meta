@@ -32,6 +32,9 @@ trait A2
 	 */
 	public const b = 'b';
 
+	#[Foo(bar: new stdClass())]
+	public const c = 'c';
+
 }
 
 trait B1
