@@ -24,7 +24,7 @@ interface MetaReader
 	 * @param class-string<T> $attributeClass
 	 * @return list<T>
 	 */
-	public function readClassConstant(ReflectionClassConstant $constant, string $attributeClass): array;
+	public function readConstant(ReflectionClassConstant $constant, string $attributeClass): array;
 
 	/**
 	 * @template T of object

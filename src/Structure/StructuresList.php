@@ -8,7 +8,7 @@ final class StructuresList
 	/** @var list<ClassStructure> */
 	private array $classes;
 
-	/** @var list<ClassConstantStructure> */
+	/** @var list<ConstantStructure> */
 	private array $constants;
 
 	/** @var list<PropertyStructure> */
@@ -18,10 +18,10 @@ final class StructuresList
 	private array $methods;
 
 	/**
-	 * @param list<ClassStructure>         $classes
-	 * @param list<ClassConstantStructure> $constants
-	 * @param list<PropertyStructure>      $properties
-	 * @param list<MethodStructure>        $methods
+	 * @param list<ClassStructure>    $classes
+	 * @param list<ConstantStructure> $constants
+	 * @param list<PropertyStructure> $properties
+	 * @param list<MethodStructure>   $methods
 	 *
 	 * @internal
 	 * @see StructureFlattener::flatten()
@@ -43,7 +43,7 @@ final class StructuresList
 	}
 
 	/**
-	 * @return list<ClassConstantStructure>
+	 * @return list<ConstantStructure>
 	 */
 	public function getConstants(): array
 	{

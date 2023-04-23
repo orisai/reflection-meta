@@ -38,7 +38,7 @@ final class StructureBuilder
 			self::createParentStructure($declaringClass),
 			self::createInterfacesStructure($declaringClass, $contextClass),
 			self::createTraitsStructure($declaringClass, $contextClass),
-			self::createClassConstantsStructure($declaringClass, $contextClass),
+			self::createConstantsStructure($declaringClass, $contextClass),
 			self::createPropertiesStructure($declaringClass, $contextClass),
 			self::createMethodsStructure($declaringClass, $contextClass),
 			new ClassSource($declaringClass),
@@ -98,9 +98,9 @@ final class StructureBuilder
 	/**
 	 * @param ReflectionClass<object> $declaringClass
 	 * @param ReflectionClass<object> $contextClass
-	 * @return list<ClassConstantStructure>
+	 * @return list<ConstantStructure>
 	 */
-	private static function createClassConstantsStructure(
+	private static function createConstantsStructure(
 		ReflectionClass $declaringClass,
 		ReflectionClass $contextClass
 	): array
@@ -113,7 +113,7 @@ final class StructureBuilder
 				continue;
 			}
 
-			$constants[] = new ClassConstantStructure(
+			$constants[] = new ConstantStructure(
 				$contextClass,
 				new ClassConstantSource($constant),
 				ConstantDeclaratorFinder::getDeclaringTraits($constant),

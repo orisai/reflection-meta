@@ -5,7 +5,7 @@ namespace Orisai\ReflectionMeta\Structure;
 use Orisai\SourceMap\ClassConstantSource;
 use ReflectionClass;
 
-final class ClassConstantStructure implements Structure
+final class ConstantStructure implements Structure
 {
 
 	/** @var ReflectionClass<object> */

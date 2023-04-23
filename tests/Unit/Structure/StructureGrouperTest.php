@@ -2,8 +2,8 @@
 
 namespace Tests\Orisai\ReflectionMeta\Unit\Structure;
 
-use Orisai\ReflectionMeta\Structure\ClassConstantStructure;
 use Orisai\ReflectionMeta\Structure\ClassStructure;
+use Orisai\ReflectionMeta\Structure\ConstantStructure;
 use Orisai\ReflectionMeta\Structure\MethodStructure;
 use Orisai\ReflectionMeta\Structure\PropertyStructure;
 use Orisai\ReflectionMeta\Structure\StructureBuilder;
@@ -63,40 +63,40 @@ final class StructureGrouperTest extends TestCase
 			$group->getConstants(),
 			[
 				'::A' => [
-					new ClassConstantStructure(
+					new ConstantStructure(
 						new ReflectionClass(GrouperStructureParent1::class),
 						new ClassConstantSource(new ReflectionClassConstant(GrouperStructureParent1::class, 'A')),
 						[],
 					),
-					new ClassConstantStructure(
+					new ConstantStructure(
 						new ReflectionClass(GrouperStructureDouble::class),
 						new ClassConstantSource(new ReflectionClassConstant(GrouperStructureDouble::class, 'A')),
 						[],
 					),
 				],
 				GrouperStructureParent1::class . '::D' => [
-					new ClassConstantStructure(
+					new ConstantStructure(
 						new ReflectionClass(GrouperStructureParent1::class),
 						new ClassConstantSource(new ReflectionClassConstant(GrouperStructureParent1::class, 'D')),
 						[],
 					),
 				],
 				'::B' => [
-					new ClassConstantStructure(
+					new ConstantStructure(
 						new ReflectionClass(GrouperStructureDouble::class),
 						new ClassConstantSource(new ReflectionClassConstant(GrouperStructureInterface1::class, 'B')),
 						[],
 					),
 				],
 				'::C' => [
-					new ClassConstantStructure(
+					new ConstantStructure(
 						new ReflectionClass(GrouperStructureDouble::class),
 						new ClassConstantSource(new ReflectionClassConstant(GrouperStructureDouble::class, 'C')),
 						[],
 					),
 				],
 				GrouperStructureDouble::class . '::D' => [
-					new ClassConstantStructure(
+					new ConstantStructure(
 						new ReflectionClass(GrouperStructureDouble::class),
 						new ClassConstantSource(new ReflectionClassConstant(GrouperStructureDouble::class, 'D')),
 						[],
@@ -224,14 +224,14 @@ final class StructureGrouperTest extends TestCase
 			$group->getConstants(),
 			[
 				'::B' => [
-					new ClassConstantStructure(
+					new ConstantStructure(
 						new ReflectionClass(GrouperStructureDoublePHP81::class),
 						new ClassConstantSource(
 							new ReflectionClassConstant(GrouperStructureInterface1PHP81::class, 'B'),
 						),
 						[],
 					),
-					new ClassConstantStructure(
+					new ConstantStructure(
 						new ReflectionClass(GrouperStructureDoublePHP81::class),
 						new ClassConstantSource(new ReflectionClassConstant(GrouperStructureDoublePHP81::class, 'B')),
 						[],

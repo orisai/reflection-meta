@@ -36,7 +36,7 @@ final class AttributesMetaReader implements MetaReader
 		return $this->attributesToInstances($class->getAttributes(), $attributeClass);
 	}
 
-	public function readClassConstant(ReflectionClassConstant $constant, string $attributeClass): array
+	public function readConstant(ReflectionClassConstant $constant, string $attributeClass): array
 	{
 		return $this->attributesToInstances($constant->getAttributes(), $attributeClass);
 	}

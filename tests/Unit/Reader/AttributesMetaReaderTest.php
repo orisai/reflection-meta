@@ -43,15 +43,15 @@ final class AttributesMetaReaderTest extends TestCase
 
 		$constant = $class->getReflectionConstant('A');
 		self::assertEquals(
-			$reader->readClassConstant($constant, BaseTestAttribute::class),
+			$reader->readConstant($constant, BaseTestAttribute::class),
 			$expected,
 		);
 		self::assertEquals(
-			$reader->readClassConstant($constant, TestAttribute2::class),
+			$reader->readConstant($constant, TestAttribute2::class),
 			$expected2,
 		);
 		self::assertEquals(
-			$reader->readClassConstant($constant, UnusedAttribute::class),
+			$reader->readConstant($constant, UnusedAttribute::class),
 			[],
 		);
 

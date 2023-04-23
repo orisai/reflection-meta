@@ -8,7 +8,7 @@ final class StructuresGroup
 	/** @var list<ClassStructure> */
 	private array $classes;
 
-	/** @var array<string, list<ClassConstantStructure>> */
+	/** @var array<string, list<ConstantStructure>> */
 	private array $constants;
 
 	/** @var array<string, list<PropertyStructure>> */
@@ -18,10 +18,10 @@ final class StructuresGroup
 	private array $methods;
 
 	/**
-	 * @param list<ClassStructure>                        $classes
-	 * @param array<string, list<ClassConstantStructure>> $constants
-	 * @param array<string, list<PropertyStructure>>      $properties
-	 * @param array<string, list<MethodStructure>>        $methods
+	 * @param list<ClassStructure>                   $classes
+	 * @param array<string, list<ConstantStructure>> $constants
+	 * @param array<string, list<PropertyStructure>> $properties
+	 * @param array<string, list<MethodStructure>>   $methods
 	 *
 	 * @internal
 	 * @see StructureGrouper::group()
@@ -43,7 +43,7 @@ final class StructuresGroup
 	}
 
 	/**
-	 * @return array<string, list<ClassConstantStructure>>
+	 * @return array<string, list<ConstantStructure>>
 	 */
 	public function getConstants(): array
 	{

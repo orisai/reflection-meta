@@ -2,8 +2,8 @@
 
 namespace Tests\Orisai\ReflectionMeta\Unit\Structure;
 
-use Orisai\ReflectionMeta\Structure\ClassConstantStructure;
 use Orisai\ReflectionMeta\Structure\ClassStructure;
+use Orisai\ReflectionMeta\Structure\ConstantStructure;
 use Orisai\ReflectionMeta\Structure\MethodStructure;
 use Orisai\ReflectionMeta\Structure\PropertyStructure;
 use Orisai\ReflectionMeta\Structure\StructuresList;
@@ -42,7 +42,7 @@ final class StructuresListTest extends TestCase
 			new ClassStructure($reflector, new ClassSource($reflector)),
 		];
 		$constants = [
-			new ClassConstantStructure(
+			new ConstantStructure(
 				$reflector,
 				new ClassConstantSource($reflector->getReflectionConstant('A')),
 				[],

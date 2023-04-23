@@ -2,7 +2,7 @@
 
 namespace Tests\Orisai\ReflectionMeta\Unit\Structure;
 
-use Orisai\ReflectionMeta\Structure\ClassConstantStructure;
+use Orisai\ReflectionMeta\Structure\ConstantStructure;
 use Orisai\ReflectionMeta\Structure\HierarchyClassStructure;
 use Orisai\ReflectionMeta\Structure\MethodStructure;
 use Orisai\ReflectionMeta\Structure\ParameterStructure;
@@ -409,7 +409,7 @@ final class StructureBuilderTest extends TestCase
 			[],
 			[],
 			[
-				new ClassConstantStructure(
+				new ConstantStructure(
 					$class,
 					new ClassConstantSource(
 						new ReflectionClassConstant(BuilderConstantDoubleInterface1::class, 'A'),
@@ -432,7 +432,7 @@ final class StructureBuilderTest extends TestCase
 			[],
 			[],
 			[
-				new ClassConstantStructure(
+				new ConstantStructure(
 					$parent1Class,
 					new ClassConstantSource(
 						new ReflectionClassConstant(BuilderConstantDoubleParent1::class, 'B'),
@@ -458,14 +458,14 @@ final class StructureBuilderTest extends TestCase
 				],
 				[],
 				[
-					new ClassConstantStructure(
+					new ConstantStructure(
 						$class,
 						new ClassConstantSource(
 							new ReflectionClassConstant(BuilderConstantDouble::class, 'C1'),
 						),
 						[],
 					),
-					new ClassConstantStructure(
+					new ConstantStructure(
 						$class,
 						new ClassConstantSource(
 							new ReflectionClassConstant(BuilderConstantDouble::class, 'C2'),
@@ -498,7 +498,7 @@ final class StructureBuilderTest extends TestCase
 			[],
 			[],
 			[
-				new ClassConstantStructure(
+				new ConstantStructure(
 					$class,
 					new ClassConstantSource(
 						new ReflectionClassConstant(BuilderConstantPHP82DoubleInterface1::class, 'A'),
@@ -521,7 +521,7 @@ final class StructureBuilderTest extends TestCase
 			[],
 			[],
 			[
-				new ClassConstantStructure(
+				new ConstantStructure(
 					$parent1Class,
 					new ClassConstantSource(
 						new ReflectionClassConstant(BuilderConstantPHP82DoubleParent1::class, 'B'),
@@ -544,7 +544,7 @@ final class StructureBuilderTest extends TestCase
 			[],
 			[],
 			[
-				new ClassConstantStructure(
+				new ConstantStructure(
 					$trait1Class,
 					new ClassConstantSource(
 						new ReflectionClassConstant(BuilderConstantPHP82DoubleTrait1::class, 'C'),
@@ -562,7 +562,7 @@ final class StructureBuilderTest extends TestCase
 			[],
 			[],
 			[
-				new ClassConstantStructure(
+				new ConstantStructure(
 					$class,
 					new ClassConstantSource(
 						new ReflectionClassConstant(BuilderConstantPHP82DoubleTrait1::class, 'C'),
@@ -591,21 +591,21 @@ final class StructureBuilderTest extends TestCase
 					$trait1inContextOfClass,
 				],
 				[
-					new ClassConstantStructure(
+					new ConstantStructure(
 						$class,
 						new ClassConstantSource(
 							new ReflectionClassConstant(BuilderConstantPHP82Double::class, 'D1'),
 						),
 						[],
 					),
-					new ClassConstantStructure(
+					new ConstantStructure(
 						$class,
 						new ClassConstantSource(
 							new ReflectionClassConstant(BuilderConstantPHP82Double::class, 'D2'),
 						),
 						[],
 					),
-					new ClassConstantStructure(
+					new ConstantStructure(
 						$class,
 						new ClassConstantSource(
 							new ReflectionClassConstant(BuilderConstantPHP82Double::class, 'C'),

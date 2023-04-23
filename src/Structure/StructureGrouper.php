@@ -16,9 +16,9 @@ final class StructureGrouper
 	}
 
 	/**
-	 * @template T of ClassConstantStructure|PropertyStructure|MethodStructure
-	 * @param list<ClassConstantStructure|PropertyStructure|MethodStructure> $structures
-	 * @phpstan-param list<T>                                                $structures
+	 * @template T of ConstantStructure|PropertyStructure|MethodStructure
+	 * @param list<ConstantStructure|PropertyStructure|MethodStructure> $structures
+	 * @phpstan-param list<T>                                           $structures
 	 * @return array<string, list<T>>
 	 */
 	private static function groupStructures(array $structures): array

@@ -80,7 +80,7 @@ final class StructureFlattener
 
 	/**
 	 * @param array<string, HierarchyClassStructure> $classes
-	 * @return list<ClassConstantStructure>
+	 * @return list<ConstantStructure>
 	 */
 	private static function unpackConstants(array $classes): array
 	{

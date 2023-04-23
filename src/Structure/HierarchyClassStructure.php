@@ -16,7 +16,7 @@ final class HierarchyClassStructure
 	/** @var list<HierarchyClassStructure> */
 	private array $traits;
 
-	/** @var list<ClassConstantStructure> */
+	/** @var list<ConstantStructure> */
 	private array $constants;
 
 	/** @var list<PropertyStructure> */
@@ -34,7 +34,7 @@ final class HierarchyClassStructure
 	 * @param ReflectionClass<object>       $contextClass
 	 * @param list<HierarchyClassStructure> $interfaces
 	 * @param list<HierarchyClassStructure> $traits
-	 * @param list<ClassConstantStructure>  $constants
+	 * @param list<ConstantStructure>       $constants
 	 * @param list<PropertyStructure>       $properties
 	 * @param list<MethodStructure>         $methods
 	 *
@@ -92,7 +92,7 @@ final class HierarchyClassStructure
 	}
 
 	/**
-	 * @return list<ClassConstantStructure>
+	 * @return list<ConstantStructure>
 	 */
 	public function getConstants(): array
 	{

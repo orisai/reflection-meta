@@ -46,15 +46,15 @@ final class AnnotationsMetaReaderTest extends TestCase
 
 		$constant = $class->getReflectionConstant('A');
 		self::assertEquals(
-			$reader->readClassConstant($constant, BaseTestAttribute::class),
+			$reader->readConstant($constant, BaseTestAttribute::class),
 			[],
 		);
 		self::assertEquals(
-			$reader->readClassConstant($constant, TestAttribute2::class),
+			$reader->readConstant($constant, TestAttribute2::class),
 			[],
 		);
 		self::assertEquals(
-			$reader->readClassConstant($constant, UnusedAttribute::class),
+			$reader->readConstant($constant, UnusedAttribute::class),
 			[],
 		);
 

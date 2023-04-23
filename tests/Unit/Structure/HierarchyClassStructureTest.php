@@ -2,7 +2,7 @@
 
 namespace Tests\Orisai\ReflectionMeta\Unit\Structure;
 
-use Orisai\ReflectionMeta\Structure\ClassConstantStructure;
+use Orisai\ReflectionMeta\Structure\ConstantStructure;
 use Orisai\ReflectionMeta\Structure\HierarchyClassStructure;
 use Orisai\ReflectionMeta\Structure\MethodStructure;
 use Orisai\ReflectionMeta\Structure\PropertyStructure;
@@ -93,7 +93,7 @@ final class HierarchyClassStructureTest extends TestCase
 				),
 			],
 			$constants = [
-				new ClassConstantStructure(
+				new ConstantStructure(
 					$reflector,
 					new ClassConstantSource(
 						new ReflectionClassConstant(ClassStructureDouble1::class, 'A'),

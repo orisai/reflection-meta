@@ -2,8 +2,8 @@
 
 namespace Tests\Orisai\ReflectionMeta\Unit\Structure;
 
-use Orisai\ReflectionMeta\Structure\ClassConstantStructure;
 use Orisai\ReflectionMeta\Structure\ClassStructure;
+use Orisai\ReflectionMeta\Structure\ConstantStructure;
 use Orisai\ReflectionMeta\Structure\MethodStructure;
 use Orisai\ReflectionMeta\Structure\PropertyStructure;
 use Orisai\ReflectionMeta\Structure\StructureBuilder;
@@ -106,14 +106,14 @@ final class StructureFlattenerTest extends TestCase
 
 		self::assertEquals(
 			[
-				new ClassConstantStructure(
+				new ConstantStructure(
 					new ReflectionClass(FlattenerStructureParent1::class),
 					new ClassConstantSource(
 						new ReflectionClassConstant(FlattenerStructureParentInterface1::class, 'ParentInterface1'),
 					),
 					[],
 				),
-				new ClassConstantStructure(
+				new ConstantStructure(
 					new ReflectionClass(FlattenerStructureParent1::class),
 					new ClassConstantSource(
 						new ReflectionClassConstant(FlattenerStructureParentInterface1::class, 'ParentInterface2'),

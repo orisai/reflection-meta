@@ -2,7 +2,7 @@
 
 namespace Tests\Orisai\ReflectionMeta\Unit\Structure;
 
-use Orisai\ReflectionMeta\Structure\ClassConstantStructure;
+use Orisai\ReflectionMeta\Structure\ConstantStructure;
 use Orisai\SourceMap\ClassConstantSource;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
@@ -13,7 +13,7 @@ use Tests\Orisai\ReflectionMeta\Doubles\Structure\ClassConstantPHP82\PropertyStr
 use Tests\Orisai\ReflectionMeta\Doubles\Structure\ClassConstantPHP82\PropertyStructurePHP82DoubleTrait2;
 use const PHP_VERSION_ID;
 
-final class ClassConstantStructureTest extends TestCase
+final class ConstantStructureTest extends TestCase
 {
 
 	public function testBase(): void
@@ -26,7 +26,7 @@ final class ClassConstantStructureTest extends TestCase
 		$source = new ClassConstantSource($reflector);
 		$duplicators = [];
 
-		$constant = new ClassConstantStructure($contextClass, $source, $duplicators);
+		$constant = new ConstantStructure($contextClass, $source, $duplicators);
 		self::assertSame($contextClass, $constant->getContextClass());
 		self::assertSame($source, $constant->getSource());
 		self::assertSame($duplicators, $constant->getDuplicators());
@@ -49,7 +49,7 @@ final class ClassConstantStructureTest extends TestCase
 			new ReflectionClass(PropertyStructurePHP82DoubleTrait2::class),
 		];
 
-		$constant = new ClassConstantStructure($contextClass, $source, $duplicators);
+		$constant = new ConstantStructure($contextClass, $source, $duplicators);
 		self::assertSame($duplicators, $constant->getDuplicators());
 	}
 
