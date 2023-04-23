@@ -1,6 +1,11 @@
 parameters:
 	ignoreErrors:
 		-
+			message: "#^Loose comparison via \"\\!\\=\" is not allowed\\.$#"
+			count: 1
+			path: ../src/Finder/ConstantDeclaratorFinder.php
+
+		-
 			message: "#^Parameter \\#2 \\$constant2 of static method Orisai\\\\ReflectionMeta\\\\Finder\\\\ConstantDeclaratorFinder\\:\\:areDefinitionsIdentical\\(\\) expects ReflectionClassConstant, ReflectionClassConstant\\|false given\\.$#"
 			count: 1
 			path: ../src/Finder/ConstantDeclaratorFinder.php
@@ -8,12 +13,37 @@ parameters:
 		-
 			message: "#^Loose comparison via \"\\!\\=\" is not allowed\\.$#"
 			count: 1
-			path: ../src/Finder/ConstantDeclaratorFinder.php
+			path: ../src/Finder/PropertyDeclaratorFinder.php
 
 		-
-			message: "#^Loose comparison via \"\\!\\=\" is not allowed\\.$#"
+			message: "#^Constant Tests\\\\Orisai\\\\ReflectionMeta\\\\Doubles\\\\Structure\\\\Grouper\\\\GrouperStructureDouble\\:\\:D is unused\\.$#"
 			count: 1
-			path: ../src/Finder/PropertyDeclaratorFinder.php
+			path: ../tests/Doubles/Structure/grouper-structure.php
+
+		-
+			message: "#^Constant Tests\\\\Orisai\\\\ReflectionMeta\\\\Doubles\\\\Structure\\\\Grouper\\\\GrouperStructureParent1\\:\\:D is unused\\.$#"
+			count: 1
+			path: ../tests/Doubles/Structure/grouper-structure.php
+
+		-
+			message: "#^Method Tests\\\\Orisai\\\\ReflectionMeta\\\\Doubles\\\\Structure\\\\Grouper\\\\GrouperStructureDouble\\:\\:d\\(\\) is unused\\.$#"
+			count: 1
+			path: ../tests/Doubles/Structure/grouper-structure.php
+
+		-
+			message: "#^Method Tests\\\\Orisai\\\\ReflectionMeta\\\\Doubles\\\\Structure\\\\Grouper\\\\GrouperStructureParent1\\:\\:d\\(\\) is unused\\.$#"
+			count: 1
+			path: ../tests/Doubles/Structure/grouper-structure.php
+
+		-
+			message: "#^Property Tests\\\\Orisai\\\\ReflectionMeta\\\\Doubles\\\\Structure\\\\Grouper\\\\GrouperStructureDouble\\:\\:\\$d is unused\\.$#"
+			count: 1
+			path: ../tests/Doubles/Structure/grouper-structure.php
+
+		-
+			message: "#^Property Tests\\\\Orisai\\\\ReflectionMeta\\\\Doubles\\\\Structure\\\\Grouper\\\\GrouperStructureParent1\\:\\:\\$d is unused\\.$#"
+			count: 1
+			path: ../tests/Doubles/Structure/grouper-structure.php
 
 		-
 			message: "#^Parameter \\#1 \\$constant of method Orisai\\\\ReflectionMeta\\\\Reader\\\\AnnotationsMetaReader\\:\\:readClassConstant\\(\\) expects ReflectionClassConstant, ReflectionClassConstant\\|false given\\.$#"
@@ -24,6 +54,11 @@ parameters:
 			message: "#^Parameter \\#1 \\$constant of method Orisai\\\\ReflectionMeta\\\\Reader\\\\AttributesMetaReader\\:\\:readClassConstant\\(\\) expects ReflectionClassConstant, ReflectionClassConstant\\|false given\\.$#"
 			count: 3
 			path: ../tests/Unit/Reader/AttributesMetaReaderTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$reflector of class Orisai\\\\SourceMap\\\\ClassConstantSource constructor expects ReflectionClassConstant, ReflectionClassConstant\\|false given\\.$#"
+			count: 1
+			path: ../tests/Unit/Structure/StructuresGroupTest.php
 
 		-
 			message: "#^Parameter \\#1 \\$reflector of class Orisai\\\\SourceMap\\\\ClassConstantSource constructor expects ReflectionClassConstant, ReflectionClassConstant\\|false given\\.$#"
