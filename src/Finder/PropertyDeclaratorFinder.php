@@ -5,6 +5,7 @@ namespace Orisai\ReflectionMeta\Finder;
 use ReflectionClass;
 use ReflectionProperty;
 use function array_merge;
+use function count;
 use const PHP_VERSION_ID;
 
 final class PropertyDeclaratorFinder
@@ -63,10 +64,26 @@ final class PropertyDeclaratorFinder
 			return false;
 		}
 
-		// Intentionally loose !=
-		// phpcs:ignore SlevomatCodingStandard.ControlStructures.UselessIfConditionWithReturn
-		if (PHP_VERSION_ID >= 8_00_00 && $property1->getAttributes() != $property2->getAttributes()) {
-			return false;
+		if (PHP_VERSION_ID >= 8_00_00) {
+			$attributes1 = $property1->getAttributes();
+			$attributes2 = $property2->getAttributes();
+
+			if (count($attributes1) !== count($attributes2)) {
+				return false;
+			}
+
+			foreach ($attributes1 as $key => $attribute1) {
+				$attribute2 = $attributes2[$key];
+
+				if ($attribute1->getName() !== $attribute2->getName()) {
+					return false;
+				}
+
+				// Intentionally loose !=
+				if ($attribute1->getArguments() != $attribute2->getArguments()) {
+					return false;
+				}
+			}
 		}
 
 		return true;

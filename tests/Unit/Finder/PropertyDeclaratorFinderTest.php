@@ -17,6 +17,10 @@ use Tests\Orisai\ReflectionMeta\Doubles\Finder\IncompatiblePropertiesTraits\A1 a
 use Tests\Orisai\ReflectionMeta\Doubles\Finder\IncompatiblePropertiesTraits\A2 as IncompatA2;
 use Tests\Orisai\ReflectionMeta\Doubles\Finder\IncompatiblePropertiesTraits\B1 as IncompatB1;
 use Tests\Orisai\ReflectionMeta\Doubles\Finder\IncompatiblePropertiesTraits\IncompatiblePropertiesTraitsClass;
+use Tests\Orisai\ReflectionMeta\Doubles\Finder\IncompatiblePropertiesTraitsPHP81\A1 as Incompat81A1;
+use Tests\Orisai\ReflectionMeta\Doubles\Finder\IncompatiblePropertiesTraitsPHP81\A2 as Incompat81A2;
+use Tests\Orisai\ReflectionMeta\Doubles\Finder\IncompatiblePropertiesTraitsPHP81\B1 as Incompat81B1;
+use Tests\Orisai\ReflectionMeta\Doubles\Finder\IncompatiblePropertiesTraitsPHP81\IncompatiblePropertiesTraitsPHP81Class;
 use Tests\Orisai\ReflectionMeta\Doubles\Finder\NoTraitsClass;
 use const PHP_VERSION_ID;
 
@@ -104,7 +108,7 @@ final class PropertyDeclaratorFinderTest extends TestCase
 
 		$property = new ReflectionProperty(IncompatiblePropertiesTraitsClass::class, $propertyName);
 
-		if ($propertyName === 'a') {
+		if ($propertyName !== 'b') {
 			self::assertEquals(
 				[
 					new ReflectionClass(IncompatA1::class),
@@ -137,6 +141,26 @@ final class PropertyDeclaratorFinderTest extends TestCase
 			yield ['e'];
 			yield ['f'];
 		}
+	}
+
+	public function testIncompatiblePropertiesPHP81(): void
+	{
+		if (PHP_VERSION_ID < 8_01_00) {
+			self::markTestSkipped('Nested attributes are valid since PHP 8.1');
+		}
+
+		require_once __DIR__ . '/../../Doubles/Finder/incompatible-properties-traits-php8.1.php';
+
+		$property = new ReflectionProperty(IncompatiblePropertiesTraitsPHP81Class::class, 'a');
+
+		self::assertEquals(
+			[
+				new ReflectionClass(Incompat81A1::class),
+				new ReflectionClass(Incompat81A2::class),
+				new ReflectionClass(Incompat81B1::class),
+			],
+			PropertyDeclaratorFinder::getDeclaringTraits($property),
+		);
 	}
 
 }

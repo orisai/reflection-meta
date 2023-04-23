@@ -18,6 +18,9 @@ trait A2
 
 	use A1;
 
+	#[Foo(bar: new stdClass())]
+	public string $a;
+
 }
 
 trait B1

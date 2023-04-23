@@ -39,6 +39,20 @@ trait A2
 	 */
 	public string $a = 'a';
 
+	#[Foo]
+	public string $c;
+
+	#[Bar]
+	#[Foo]
+	public string $d;
+
+	#[Foo('a')]
+	public string $e;
+
+	#[Foo]
+	#[Bar]
+	public string $f;
+
 }
 
 trait B1
