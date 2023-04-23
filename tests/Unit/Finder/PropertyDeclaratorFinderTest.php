@@ -22,6 +22,9 @@ use Tests\Orisai\ReflectionMeta\Doubles\Finder\IncompatiblePropertiesTraitsPHP81
 use Tests\Orisai\ReflectionMeta\Doubles\Finder\IncompatiblePropertiesTraitsPHP81\B1 as Incompat81B1;
 use Tests\Orisai\ReflectionMeta\Doubles\Finder\IncompatiblePropertiesTraitsPHP81\IncompatiblePropertiesTraitsPHP81Class;
 use Tests\Orisai\ReflectionMeta\Doubles\Finder\NoTraitsClass;
+use Tests\Orisai\ReflectionMeta\Doubles\Finder\UniquePropertiesTraits\A1 as UniqueA1;
+use Tests\Orisai\ReflectionMeta\Doubles\Finder\UniquePropertiesTraits\B1 as UniqueB1;
+use Tests\Orisai\ReflectionMeta\Doubles\Finder\UniquePropertiesTraits\UniquePropertiesTraitsClass;
 use const PHP_VERSION_ID;
 
 final class PropertyDeclaratorFinderTest extends TestCase
@@ -161,6 +164,32 @@ final class PropertyDeclaratorFinderTest extends TestCase
 			],
 			PropertyDeclaratorFinder::getDeclaringTraits($property),
 		);
+	}
+
+	/**
+	 * @param ReflectionClass<object> $declarator
+	 *
+	 * @dataProvider provideUniqueConstants
+	 */
+	public function testUniqueConstants(string $propertyName, ReflectionClass $declarator): void
+	{
+		$constant = new ReflectionProperty(UniquePropertiesTraitsClass::class, $propertyName);
+		$traits = PropertyDeclaratorFinder::getDeclaringTraits($constant);
+
+		self::assertEquals(
+			[
+				$declarator,
+			],
+			$traits,
+		);
+	}
+
+	public function provideUniqueConstants(): Generator
+	{
+		require_once __DIR__ . '/../../Doubles/Finder/unique-properties-traits.php';
+
+		yield ['a', new ReflectionClass(UniqueA1::class)];
+		yield ['b', new ReflectionClass(UniqueB1::class)];
 	}
 
 }

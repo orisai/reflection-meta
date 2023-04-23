@@ -19,6 +19,7 @@ final class AttributesMetaReader implements MetaReader
 	public function __construct()
 	{
 		if (!self::canBeConstructed()) {
+			/** @infection-ignore-all */
 			throw InvalidState::create()
 				->withMessage('Attributes are supported since PHP 8.0');
 		}
@@ -26,6 +27,7 @@ final class AttributesMetaReader implements MetaReader
 
 	public static function canBeConstructed(): bool
 	{
+		/** @infection-ignore-all */
 		return PHP_VERSION_ID >= 8_00_00;
 	}
 

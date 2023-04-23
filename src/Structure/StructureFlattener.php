@@ -3,7 +3,6 @@
 namespace Orisai\ReflectionMeta\Structure;
 
 use function array_merge;
-use function array_values;
 
 final class StructureFlattener
 {
@@ -47,7 +46,7 @@ final class StructureFlattener
 
 	/**
 	 * @param list<HierarchyClassStructure> $classes
-	 * @return list<HierarchyClassStructure>
+	 * @return array<string, HierarchyClassStructure>
 	 */
 	private static function removeDuplicateClasses(array $classes): array
 	{
@@ -62,11 +61,11 @@ final class StructureFlattener
 			$deduplicated[$name] = $class;
 		}
 
-		return array_values($deduplicated);
+		return $deduplicated;
 	}
 
 	/**
-	 * @param list<HierarchyClassStructure> $classes
+	 * @param array<string, HierarchyClassStructure> $classes
 	 * @return list<ClassStructure>
 	 */
 	private static function unpackClasses(array $classes): array
@@ -80,7 +79,7 @@ final class StructureFlattener
 	}
 
 	/**
-	 * @param list<HierarchyClassStructure> $classes
+	 * @param array<string, HierarchyClassStructure> $classes
 	 * @return list<ClassConstantStructure>
 	 */
 	private static function unpackConstants(array $classes): array
@@ -94,7 +93,7 @@ final class StructureFlattener
 	}
 
 	/**
-	 * @param list<HierarchyClassStructure> $classes
+	 * @param array<string, HierarchyClassStructure> $classes
 	 * @return list<PropertyStructure>
 	 */
 	private static function unpackProperties(array $classes): array
@@ -126,7 +125,7 @@ final class StructureFlattener
 	}
 
 	/**
-	 * @param list<HierarchyClassStructure> $classes
+	 * @param array<string, HierarchyClassStructure> $classes
 	 * @return list<MethodStructure>
 	 */
 	private static function unpackMethods(array $classes): array

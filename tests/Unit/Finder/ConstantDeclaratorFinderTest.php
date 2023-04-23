@@ -15,6 +15,9 @@ use Tests\Orisai\ReflectionMeta\Doubles\Finder\IncompatibleConstantsTraits\A2 as
 use Tests\Orisai\ReflectionMeta\Doubles\Finder\IncompatibleConstantsTraits\B1 as IncompatB1;
 use Tests\Orisai\ReflectionMeta\Doubles\Finder\IncompatibleConstantsTraits\IncompatibleConstantsTraitsClass;
 use Tests\Orisai\ReflectionMeta\Doubles\Finder\NoTraitsClass;
+use Tests\Orisai\ReflectionMeta\Doubles\Finder\UniqueConstantsTraits\A1 as UniqueA1;
+use Tests\Orisai\ReflectionMeta\Doubles\Finder\UniqueConstantsTraits\B1 as UniqueB1;
+use Tests\Orisai\ReflectionMeta\Doubles\Finder\UniqueConstantsTraits\UniqueConstantsTraitsClass;
 use const PHP_VERSION_ID;
 
 final class ConstantDeclaratorFinderTest extends TestCase
@@ -119,6 +122,37 @@ final class ConstantDeclaratorFinderTest extends TestCase
 		foreach ($reflector->getConstants() as $constant) {
 			yield [$constant];
 		}
+	}
+
+	/**
+	 * @param ReflectionClass<object> $declarator
+	 *
+	 * @dataProvider provideUniqueConstants
+	 */
+	public function testUniqueConstants(string $constantName, ReflectionClass $declarator): void
+	{
+		$constant = new ReflectionClassConstant(UniqueConstantsTraitsClass::class, $constantName);
+		$traits = ConstantDeclaratorFinder::getDeclaringTraits($constant);
+
+		self::assertEquals(
+			[
+				$declarator,
+			],
+			$traits,
+		);
+	}
+
+	public function provideUniqueConstants(): Generator
+	{
+		// Must be here, otherwise provider is still executed, even with skip in setup
+		if (PHP_VERSION_ID < 8_02_00) {
+			self::markTestSkipped('Constants on traits are valid since PHP 8.2');
+		}
+
+		require_once __DIR__ . '/../../Doubles/Finder/unique-constants-traits.php';
+
+		yield ['a', new ReflectionClass(UniqueA1::class)];
+		yield ['b', new ReflectionClass(UniqueB1::class)];
 	}
 
 }

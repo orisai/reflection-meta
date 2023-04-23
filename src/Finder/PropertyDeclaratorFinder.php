@@ -64,6 +64,7 @@ final class PropertyDeclaratorFinder
 			return false;
 		}
 
+		/** @infection-ignore-all */
 		if (PHP_VERSION_ID >= 8_00_00) {
 			$attributes1 = $property1->getAttributes();
 			$attributes2 = $property2->getAttributes();

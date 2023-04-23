@@ -2,6 +2,16 @@
 
 namespace Tests\Orisai\ReflectionMeta\Doubles\Structure\Methods;
 
+class BuilderMethodDoubleParent2
+{
+
+	public function e(): void
+	{
+		// Noop
+	}
+
+}
+
 trait BuilderMethodDoubleTrait1
 {
 
@@ -12,7 +22,7 @@ trait BuilderMethodDoubleTrait1
 
 }
 
-class BuilderMethodDoubleParent1
+class BuilderMethodDoubleParent1 extends BuilderMethodDoubleParent2
 {
 
 	use BuilderMethodDoubleTrait1;

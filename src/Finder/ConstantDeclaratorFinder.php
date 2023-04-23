@@ -64,6 +64,7 @@ final class ConstantDeclaratorFinder
 			return false;
 		}
 
+		/** @infection-ignore-all */
 		if (PHP_VERSION_ID >= 8_00_00) {
 			$attributes1 = $constant1->getAttributes();
 			$attributes2 = $constant2->getAttributes();

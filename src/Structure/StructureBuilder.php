@@ -165,6 +165,7 @@ final class StructureBuilder
 		foreach ($declaringClass->getMethods() as $method) {
 			// We don't want parent public and protected methods, they are collected individually
 			if ($method->getDeclaringClass()->getName() !== $declaringClass->getName()) {
+				/** @infection-ignore-all break would work too, because methods are sorted by PHP from class through parent to trait */
 				continue;
 			}
 
@@ -172,6 +173,7 @@ final class StructureBuilder
 
 			// Only one trait can define method, skipping current one is safe
 			if ($declaringTrait !== null) {
+				/** @infection-ignore-all break would work too, because methods are sorted by PHP from class through parent to trait */
 				continue;
 			}
 

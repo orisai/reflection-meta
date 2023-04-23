@@ -85,6 +85,8 @@ trait FlattenerStructureTrait1
 trait FlattenerStructureTrait2
 {
 
+	public string $trait2;
+
 }
 
 final class FlattenerStructureDouble
