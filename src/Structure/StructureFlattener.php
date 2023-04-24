@@ -7,11 +7,11 @@ use function array_merge;
 final class StructureFlattener
 {
 
-	public static function flatten(HierarchyClassStructure $classStructure): StructuresList
+	public static function flatten(HierarchyClassStructure $classStructure): StructureList
 	{
 		$classes = self::removeDuplicateClasses(self::flattenClasses($classStructure));
 
-		return new StructuresList(
+		return new StructureList(
 			self::unpackClasses($classes),
 			self::unpackConstants($classes),
 			self::removeDuplicateProperties(self::unpackProperties($classes)),

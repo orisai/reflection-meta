@@ -6,7 +6,7 @@ use Orisai\ReflectionMeta\Structure\ClassStructure;
 use Orisai\ReflectionMeta\Structure\ConstantStructure;
 use Orisai\ReflectionMeta\Structure\MethodStructure;
 use Orisai\ReflectionMeta\Structure\PropertyStructure;
-use Orisai\ReflectionMeta\Structure\StructuresGroup;
+use Orisai\ReflectionMeta\Structure\StructureList;
 use Orisai\SourceMap\ClassConstantSource;
 use Orisai\SourceMap\ClassSource;
 use Orisai\SourceMap\MethodSource;
@@ -16,12 +16,12 @@ use ReflectionClass;
 use stdClass;
 use Tests\Orisai\ReflectionMeta\Doubles\Structure\Classes\ClassStructureDouble1;
 
-final class StructuresGroupTest extends TestCase
+final class StructureListTest extends TestCase
 {
 
 	public function testEmpty(): void
 	{
-		$list = new StructuresGroup([], [], [], []);
+		$list = new StructureList([], [], [], []);
 		self::assertSame([], $list->getClasses());
 		self::assertSame([], $list->getConstants());
 		self::assertSame([], $list->getProperties());
@@ -42,34 +42,28 @@ final class StructuresGroupTest extends TestCase
 			new ClassStructure($reflector, new ClassSource($reflector)),
 		];
 		$constants = [
-			'::A' => [
-				new ConstantStructure(
-					$reflector,
-					new ClassConstantSource($reflector->getReflectionConstant('A')),
-					[],
-				),
-			],
+			new ConstantStructure(
+				$reflector,
+				new ClassConstantSource($reflector->getReflectionConstant('A')),
+				[],
+			),
 		];
 		$properties = [
-			'::b' => [
-				new PropertyStructure(
-					$reflector,
-					new PropertySource($reflector->getProperty('b')),
-					[],
-				),
-			],
+			new PropertyStructure(
+				$reflector,
+				new PropertySource($reflector->getProperty('b')),
+				[],
+			),
 		];
 		$methods = [
-			'::c' => [
-				new MethodStructure(
-					$reflector,
-					new MethodSource($reflector->getMethod('c')),
-					[],
-				),
-			],
+			new MethodStructure(
+				$reflector,
+				new MethodSource($reflector->getMethod('c')),
+				[],
+			),
 		];
 
-		$list = new StructuresGroup($classes, $constants, $properties, $methods);
+		$list = new StructureList($classes, $constants, $properties, $methods);
 		self::assertSame($classes, $list->getClasses());
 		self::assertSame($constants, $list->getConstants());
 		self::assertSame($properties, $list->getProperties());

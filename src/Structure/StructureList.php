@@ -2,7 +2,7 @@
 
 namespace Orisai\ReflectionMeta\Structure;
 
-final class StructuresList
+final class StructureList
 {
 
 	/** @var list<ClassStructure> */

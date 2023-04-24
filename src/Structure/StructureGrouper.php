@@ -5,9 +5,9 @@ namespace Orisai\ReflectionMeta\Structure;
 final class StructureGrouper
 {
 
-	public static function group(StructuresList $list): StructuresGroup
+	public static function group(StructureList $list): StructureGroup
 	{
-		return new StructuresGroup(
+		return new StructureGroup(
 			$list->getClasses(),
 			self::groupStructures($list->getConstants()),
 			self::groupStructures($list->getProperties()),

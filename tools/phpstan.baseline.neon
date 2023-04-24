@@ -46,21 +46,21 @@ parameters:
 			path: ../tests/Doubles/Structure/grouper-structure.php
 
 		-
-			message: "#^Parameter \\#1 \\$constant of method Orisai\\\\ReflectionMeta\\\\Reader\\\\AnnotationsMetaReader\\:\\:readClassConstant\\(\\) expects ReflectionClassConstant, ReflectionClassConstant\\|false given\\.$#"
+			message: "#^Parameter \\#1 \\$constant of method Orisai\\\\ReflectionMeta\\\\Reader\\\\AnnotationsMetaReader\\:\\:readConstant\\(\\) expects ReflectionClassConstant, ReflectionClassConstant\\|false given\\.$#"
 			count: 3
 			path: ../tests/Unit/Reader/AnnotationsMetaReaderTest.php
 
 		-
-			message: "#^Parameter \\#1 \\$constant of method Orisai\\\\ReflectionMeta\\\\Reader\\\\AttributesMetaReader\\:\\:readClassConstant\\(\\) expects ReflectionClassConstant, ReflectionClassConstant\\|false given\\.$#"
+			message: "#^Parameter \\#1 \\$constant of method Orisai\\\\ReflectionMeta\\\\Reader\\\\AttributesMetaReader\\:\\:readConstant\\(\\) expects ReflectionClassConstant, ReflectionClassConstant\\|false given\\.$#"
 			count: 3
 			path: ../tests/Unit/Reader/AttributesMetaReaderTest.php
 
 		-
 			message: "#^Parameter \\#1 \\$reflector of class Orisai\\\\SourceMap\\\\ClassConstantSource constructor expects ReflectionClassConstant, ReflectionClassConstant\\|false given\\.$#"
 			count: 1
-			path: ../tests/Unit/Structure/StructuresGroupTest.php
+			path: ../tests/Unit/Structure/StructureGroupTest.php
 
 		-
 			message: "#^Parameter \\#1 \\$reflector of class Orisai\\\\SourceMap\\\\ClassConstantSource constructor expects ReflectionClassConstant, ReflectionClassConstant\\|false given\\.$#"
 			count: 1
-			path: ../tests/Unit/Structure/StructuresListTest.php
+			path: ../tests/Unit/Structure/StructureListTest.php
