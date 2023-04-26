@@ -5,7 +5,7 @@
 </h1>
 
 <p align="center">
-    PHP reflection in more reliable and deterministic way
+    PHP reflection in more reliable and deterministic way - for declarative engines
 </p>
 
 <p align="center">

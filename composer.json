@@ -1,6 +1,6 @@
 {
 	"name": "orisai/reflection-meta",
-	"description": "PHP reflection in more reliable and deterministic way",
+	"description": "PHP reflection in more reliable and deterministic way - for declarative engines",
 	"keywords": [
 		"annotations",
 		"attributes",

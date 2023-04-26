@@ -1,6 +1,6 @@
 # Reflection Meta
 
-PHP reflection in more reliable and deterministic way
+PHP reflection in more reliable and deterministic way - for declarative engines
 
 ## Content
 
