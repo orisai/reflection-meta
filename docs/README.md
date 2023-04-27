@@ -4,8 +4,8 @@ PHP reflection in more reliable and deterministic way - for declarative engines
 
 ## Content
 
-- [Setup](#setup)
 - [What is it good for?](#what-is-it-good-for)
+- [Setup](#setup)
 - [Building reflectors structure](#building-reflectors-structure)
 	- [Hierarchy](#hierarchy)
 	- [List](#list)
@@ -16,14 +16,6 @@ PHP reflection in more reliable and deterministic way - for declarative engines
 - [Callable definition and source definition](#callable-definition-and-source-definition)
 - [What you should consider](#what-you-should-consider)
 
-## Setup
-
-Install with [Composer](https://getcomposer.org)
-
-```sh
-composer require orisai/reflection-meta
-```
-
 ## What is it good for?
 
 For declarative engines like [orisai/object-mapper](https://github.com/orisai/object-mapper), defining what they do in
@@ -32,6 +24,14 @@ distinguish between callable context definition (class using trait or implementi
 definition (trait or interface).
 
 This is an internal tool, and you likely do not need to use it directly.
+
+## Setup
+
+Install with [Composer](https://getcomposer.org)
+
+```sh
+composer require orisai/reflection-meta
+```
 
 ## Building reflectors structure
 
@@ -51,6 +51,41 @@ $reflector = new ReflectionClass(ExampleClass::class);
 $hierarchy = StructureBuilder::build($reflector);
 $list = StructureFlattener::flatten($hierarchy);
 $group = StructureGrouper::group($list);
+
+var_dump($group);
+/*
+StructureGroup(
+	classes: [
+		ClassStructure(ParentInterface),
+		ClassStructure(ParentTrait),
+		ClassStructure(ParentClass),
+		ClassStructure(ExampleInterface),
+		ClassStructure(ExampleTrait),
+		ClassStructure(ExampleClass),
+	],
+	constants: [
+		'::publicConstName' => [
+			ConstantStructure(ExampleInterface, 'publicConstName'),
+		],
+		'::protectedConstName' => [
+			ConstantStructure(ParentClass, 'protectedConstName'),
+			ConstantStructure(ExampleClass, 'protectedConstName'),
+		],
+		'ParentClass::privateConstName' => [
+			ConstantStructure(ParentClass, 'privateConstName'),
+		],
+	],
+	properties: [
+		'::publicPropertyName' => [
+			PropertyStructure(ExampleClass, 'publicPropertyName'),
+		],
+		// ...
+	],
+	methods: [
+		// ...
+	],
+)
+*/
 ```
 
 ### Hierarchy

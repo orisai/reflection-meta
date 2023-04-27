@@ -38,3 +38,50 @@
 <p>
 
 ##
+
+```php
+use Orisai\ReflectionMeta\Structure\StructureBuilder;
+use Orisai\ReflectionMeta\Structure\StructureFlattener;
+use Orisai\ReflectionMeta\Structure\StructureGrouper;
+use ReflectionClass;
+
+$reflector = new ReflectionClass(ExampleClass::class);
+$hierarchy = StructureBuilder::build($reflector);
+$list = StructureFlattener::flatten($hierarchy);
+$group = StructureGrouper::group($list);
+
+var_dump($group);
+/*
+StructureGroup(
+	classes: [
+		ClassStructure(ParentInterface),
+		ClassStructure(ParentTrait),
+		ClassStructure(ParentClass),
+		ClassStructure(ExampleInterface),
+		ClassStructure(ExampleTrait),
+		ClassStructure(ExampleClass),
+	],
+	constants: [
+		'::publicConstName' => [
+			ConstantStructure(ExampleInterface, 'publicConstName'),
+		],
+		'::protectedConstName' => [
+			ConstantStructure(ParentClass, 'protectedConstName'),
+			ConstantStructure(ExampleClass, 'protectedConstName'),
+		],
+		'ParentClass::privateConstName' => [
+			ConstantStructure(ParentClass, 'privateConstName'),
+		],
+	],
+	properties: [
+		'::publicPropertyName' => [
+			PropertyStructure(ExampleClass, 'publicPropertyName'),
+		],
+		// ...
+	],
+	methods: [
+		// ...
+	],
+)
+*/
+```
