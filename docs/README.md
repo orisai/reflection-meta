@@ -157,9 +157,9 @@ use Orisai\ReflectionMeta\Structure\StructureGrouper;
 $group = StructureGrouper::group($list); // StructureGroup
 
 $group->getClasses(); // list<ClassStructure>
-$group->getConstants(); // array<string, list<ConstantStructure>>
-$group->getProperties(); // array<string, list<PropertyStructure>>
-$group->getMethods(); // array<string, list<MethodStructure>>
+$group->getGroupedConstants(); // array<string, list<ConstantStructure>>
+$group->getGroupedProperties(); // array<string, list<PropertyStructure>>
+$group->getGroupedMethods(); // array<string, list<MethodStructure>>
 ```
 
 ## Reading metadata

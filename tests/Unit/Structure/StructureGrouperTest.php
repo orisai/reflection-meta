@@ -60,7 +60,7 @@ final class StructureGrouperTest extends TestCase
 		);
 
 		self::assertEquals(
-			$group->getConstants(),
+			$group->getGroupedConstants(),
 			[
 				'::A' => [
 					new ConstantStructure(
@@ -106,7 +106,7 @@ final class StructureGrouperTest extends TestCase
 		);
 
 		self::assertEquals(
-			$group->getProperties(),
+			$group->getGroupedProperties(),
 			[
 				'::a' => [
 					new PropertyStructure(
@@ -157,7 +157,7 @@ final class StructureGrouperTest extends TestCase
 		);
 
 		self::assertEquals(
-			$group->getMethods(),
+			$group->getGroupedMethods(),
 			[
 				'::a' => [
 					new MethodStructure(
@@ -221,7 +221,7 @@ final class StructureGrouperTest extends TestCase
 		$group = StructureGrouper::group($list);
 
 		self::assertEquals(
-			$group->getConstants(),
+			$group->getGroupedConstants(),
 			[
 				'::B' => [
 					new ConstantStructure(

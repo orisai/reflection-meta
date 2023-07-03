@@ -23,9 +23,9 @@ final class StructureGroupTest extends TestCase
 	{
 		$list = new StructureGroup([], [], [], []);
 		self::assertSame([], $list->getClasses());
-		self::assertSame([], $list->getConstants());
-		self::assertSame([], $list->getProperties());
-		self::assertSame([], $list->getMethods());
+		self::assertSame([], $list->getGroupedConstants());
+		self::assertSame([], $list->getGroupedProperties());
+		self::assertSame([], $list->getGroupedMethods());
 	}
 
 	public function testBase(): void
@@ -71,9 +71,9 @@ final class StructureGroupTest extends TestCase
 
 		$list = new StructureGroup($classes, $constants, $properties, $methods);
 		self::assertSame($classes, $list->getClasses());
-		self::assertSame($constants, $list->getConstants());
-		self::assertSame($properties, $list->getProperties());
-		self::assertSame($methods, $list->getMethods());
+		self::assertSame($constants, $list->getGroupedConstants());
+		self::assertSame($properties, $list->getGroupedProperties());
+		self::assertSame($methods, $list->getGroupedMethods());
 	}
 
 }

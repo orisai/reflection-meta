@@ -45,7 +45,7 @@ final class StructureGroup
 	/**
 	 * @return array<string, list<ConstantStructure>>
 	 */
-	public function getConstants(): array
+	public function getGroupedConstants(): array
 	{
 		return $this->constants;
 	}
@@ -53,7 +53,7 @@ final class StructureGroup
 	/**
 	 * @return array<string, list<PropertyStructure>>
 	 */
-	public function getProperties(): array
+	public function getGroupedProperties(): array
 	{
 		return $this->properties;
 	}
@@ -61,7 +61,7 @@ final class StructureGroup
 	/**
 	 * @return array<string, list<MethodStructure>>
 	 */
-	public function getMethods(): array
+	public function getGroupedMethods(): array
 	{
 		return $this->methods;
 	}
