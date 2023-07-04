@@ -12,6 +12,7 @@ PHP reflection in more reliable and deterministic way - for declarative engines
 	- [Group](#group)
 - [Reading metadata](#reading-metadata)
 	- [Annotations](#annotations)
+		- [Filtering annotations](#filtering-annotations)
 	- [Attributes](#attributes)
 - [Callable definition and source definition](#callable-definition-and-source-definition)
 - [What you should consider](#what-you-should-consider)
@@ -217,6 +218,46 @@ class ExampleAnnotation {}
  */
 class ExampleClass {}
 ```
+
+#### Filtering annotations
+
+Sometimes you may want to write a multi-line text in an annotation, e.g. documentation. Doctrine annotations do not
+handle this case and the string contains asterisks (`*`) from phpdoc. To normalize multi-line string,
+use `AnnotationFilter`
+
+```php
+use Orisai\ReflectionMeta\Filter\AnnotationFilter;
+
+$docblock = AnnotationFilter::filterMultilineDocblock($docblock);
+```
+
+It will normalize the string in following way:
+
+- remove first line, if empty
+- remove last line, if empty
+- remove single asterisk and also following single space from each line, if they exist
+
+All of the above is shown in this example:
+
+```php
+/**
+ * @Description("
+ * Multi
+ *  line
+ *
+ *   docblock
+ * ")
+ */
+class ExampleClass{}
+```
+
+```txt
+Multi
+ line
+
+  docblock
+```
+
 
 ### Attributes
 

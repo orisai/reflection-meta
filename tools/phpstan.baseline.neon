@@ -1,6 +1,16 @@
 parameters:
 	ignoreErrors:
 		-
+			message: "#^Method Orisai\\\\ReflectionMeta\\\\Filter\\\\AnnotationFilter\\:\\:filterMultilineDocblock\\(\\) should return string but returns string\\|null\\.$#"
+			count: 1
+			path: ../src/Filter/AnnotationFilter.php
+
+		-
+			message: "#^Parameter \\#2 \\$string of function explode expects string, string\\|null given\\.$#"
+			count: 1
+			path: ../src/Filter/AnnotationFilter.php
+
+		-
 			message: "#^Loose comparison via \"\\!\\=\" is not allowed\\.$#"
 			count: 1
 			path: ../src/Finder/ConstantDeclaratorFinder.php
