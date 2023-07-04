@@ -35,37 +35,37 @@ final class AnnotationsMetaReader implements MetaReader
 		return Dependencies::getNotLoadedPackages(['doctrine/annotations']) === [];
 	}
 
-	public function readClass(ReflectionClass $class, string $attributeClass): array
+	public function readClass(ReflectionClass $class, string $definitionClass): array
 	{
 		return $this->filterInstances(
 			$this->reader->getClassAnnotations($class),
-			$attributeClass,
+			$definitionClass,
 		);
 	}
 
-	public function readConstant(ReflectionClassConstant $constant, string $attributeClass): array
+	public function readConstant(ReflectionClassConstant $constant, string $definitionClass): array
 	{
 		// Not supported
 		return [];
 	}
 
-	public function readProperty(ReflectionProperty $property, string $attributeClass): array
+	public function readProperty(ReflectionProperty $property, string $definitionClass): array
 	{
 		return $this->filterInstances(
 			$this->reader->getPropertyAnnotations($property),
-			$attributeClass,
+			$definitionClass,
 		);
 	}
 
-	public function readMethod(ReflectionMethod $method, string $attributeClass): array
+	public function readMethod(ReflectionMethod $method, string $definitionClass): array
 	{
 		return $this->filterInstances(
 			$this->reader->getMethodAnnotations($method),
-			$attributeClass,
+			$definitionClass,
 		);
 	}
 
-	public function readParameter(ReflectionParameter $parameter, string $attributeClass): array
+	public function readParameter(ReflectionParameter $parameter, string $definitionClass): array
 	{
 		// Not supported
 		return [];
@@ -74,14 +74,14 @@ final class AnnotationsMetaReader implements MetaReader
 	/**
 	 * @template T of object
 	 * @param array<object>   $attributes
-	 * @param class-string<T> $attributeClass
+	 * @param class-string<T> $definitionClass
 	 * @return list<T>
 	 */
-	private function filterInstances(array $attributes, string $attributeClass): array
+	private function filterInstances(array $attributes, string $definitionClass): array
 	{
 		$instances = [];
 		foreach ($attributes as $attribute) {
-			if (!$attribute instanceof $attributeClass) {
+			if (!$attribute instanceof $definitionClass) {
 				continue;
 			}
 

@@ -172,14 +172,14 @@ To read metadata from a reflector (received in [building phase](#building-reflec
 ```php
 use Orisai\ReflectionMeta\Reader\AttributesMetaReader;
 
-$attributeClass = ExampleAttribute::class;
+$definitionClass = ExampleAttribute::class;
 
 $reader = new AttributesMetaReader(); // Or any other MetaReader
-$reader->readClass($reflectionClass, $attributeClass); // list<$attributeClass>
-$reader->readConstant($reflectionConstant, $attributeClass); // list<$attributeClass>
-$reader->readProperty($reflectionProperty, $attributeClass); // list<$attributeClass>
-$reader->readMethod($reflectionMethod, $attributeClass); // list<$attributeClass>
-$reader->readParameter($reflectionParameter, $attributeClass); // list<$attributeClass>
+$reader->readClass($reflectionClass, $definitionClass); // list<$definitionClass>
+$reader->readConstant($reflectionConstant, $definitionClass); // list<$definitionClass>
+$reader->readProperty($reflectionProperty, $definitionClass); // list<$definitionClass>
+$reader->readMethod($reflectionMethod, $definitionClass); // list<$definitionClass>
+$reader->readParameter($reflectionParameter, $definitionClass); // list<$definitionClass>
 ```
 
 e.g. loading metadata from [structure group](#group) classes would look like this:
@@ -187,7 +187,7 @@ e.g. loading metadata from [structure group](#group) classes would look like thi
 ```php
 $metaByClass = [];
 foreach ($group->getClasses() as $class) {
-	$metaByClass[] = $reader->readClass($class, $attributeClass);
+	$metaByClass[] = $reader->readClass($class, $definitionClass);
 }
 
 $meta = array_merge(...$metaByClass);
