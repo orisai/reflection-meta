@@ -9,25 +9,25 @@ final class ClassStructure implements Structure
 {
 
 	/** @var ReflectionClass<object> */
-	private ReflectionClass $contextClass;
+	private ReflectionClass $contextReflector;
 
 	private ClassSource $source;
 
 	/**
-	 * @param ReflectionClass<object> $contextClass
+	 * @param ReflectionClass<object> $contextReflector
 	 */
-	public function __construct(ReflectionClass $contextClass, ClassSource $source)
+	public function __construct(ReflectionClass $contextReflector, ClassSource $source)
 	{
-		$this->contextClass = $contextClass;
+		$this->contextReflector = $contextReflector;
 		$this->source = $source;
 	}
 
 	/**
 	 * @return ReflectionClass<object>
 	 */
-	public function getContextClass(): ReflectionClass
+	public function getContextReflector(): ReflectionClass
 	{
-		return $this->contextClass;
+		return $this->contextReflector;
 	}
 
 	public function getSource(): ClassSource

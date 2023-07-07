@@ -17,7 +17,7 @@ final class ClassStructureTest extends TestCase
 		$source = new ClassSource($reflector);
 		$structure = new ClassStructure($reflector, $source);
 
-		self::assertSame($reflector, $structure->getContextClass());
+		self::assertSame($reflector, $structure->getContextReflector());
 		self::assertSame($source, $structure->getSource());
 	}
 
