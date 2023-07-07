@@ -15,8 +15,6 @@ final class ClassStructure implements Structure
 
 	/**
 	 * @param ReflectionClass<object> $contextClass
-	 *
-	 * @internal
 	 */
 	public function __construct(ReflectionClass $contextClass, ClassSource $source)
 	{

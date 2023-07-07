@@ -19,8 +19,6 @@ final class ConstantStructure implements Structure
 	/**
 	 * @param ReflectionClass<object>        $contextClass
 	 * @param array<ReflectionClass<object>> $duplicators
-	 *
-	 * @internal
 	 */
 	public function __construct(
 		ReflectionClass $contextClass,
