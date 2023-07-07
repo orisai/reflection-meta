@@ -4,12 +4,12 @@ namespace Orisai\ReflectionMeta\Structure;
 
 use Orisai\SourceMap\PropertySource;
 use ReflectionClass;
+use ReflectionProperty;
 
 final class PropertyStructure implements Structure
 {
 
-	/** @var ReflectionClass<object> */
-	private ReflectionClass $contextClass;
+	private ReflectionProperty $contextReflector;
 
 	private PropertySource $source;
 
@@ -17,26 +17,22 @@ final class PropertyStructure implements Structure
 	private array $duplicators;
 
 	/**
-	 * @param ReflectionClass<object>        $contextClass
 	 * @param array<ReflectionClass<object>> $duplicators
 	 */
 	public function __construct(
-		ReflectionClass $contextClass,
+		ReflectionProperty $contextReflector,
 		PropertySource $source,
 		array $duplicators
 	)
 	{
-		$this->contextClass = $contextClass;
+		$this->contextReflector = $contextReflector;
 		$this->duplicators = $duplicators;
 		$this->source = $source;
 	}
 
-	/**
-	 * @return ReflectionClass<object>
-	 */
-	public function getContextClass(): ReflectionClass
+	public function getContextReflector(): ReflectionProperty
 	{
-		return $this->contextClass;
+		return $this->contextReflector;
 	}
 
 	public function getSource(): PropertySource

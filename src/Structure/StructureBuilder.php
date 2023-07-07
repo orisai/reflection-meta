@@ -114,7 +114,7 @@ final class StructureBuilder
 			}
 
 			$constants[] = new ConstantStructure(
-				$contextClass,
+				$contextClass->getReflectionConstant($constant->getName()),
 				new ClassConstantSource($constant),
 				ConstantDeclaratorFinder::getDeclaringTraits($constant),
 			);
@@ -141,7 +141,7 @@ final class StructureBuilder
 			}
 
 			$properties[] = new PropertyStructure(
-				$contextClass,
+				$contextClass->getProperty($property->getName()),
 				new PropertySource($property),
 				// We have to keep duplicates because they can be sourced in different code paths
 				PropertyDeclaratorFinder::getDeclaringTraits($property),
@@ -178,7 +178,7 @@ final class StructureBuilder
 			}
 
 			$methods[] = new MethodStructure(
-				$contextClass,
+				$contextClass->getMethod($method->getName()),
 				new MethodSource($method),
 				self::createParametersStructure($method),
 			);

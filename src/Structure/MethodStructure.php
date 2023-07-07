@@ -3,13 +3,12 @@
 namespace Orisai\ReflectionMeta\Structure;
 
 use Orisai\SourceMap\MethodSource;
-use ReflectionClass;
+use ReflectionMethod;
 
 final class MethodStructure implements Structure
 {
 
-	/** @var ReflectionClass<object> */
-	private ReflectionClass $contextClass;
+	private ReflectionMethod $contextReflector;
 
 	private MethodSource $source;
 
@@ -17,26 +16,22 @@ final class MethodStructure implements Structure
 	private array $parameters;
 
 	/**
-	 * @param ReflectionClass<object>  $contextClass
 	 * @param list<ParameterStructure> $parameters
 	 */
 	public function __construct(
-		ReflectionClass $contextClass,
+		ReflectionMethod $contextReflector,
 		MethodSource $source,
 		array $parameters
 	)
 	{
-		$this->contextClass = $contextClass;
+		$this->contextReflector = $contextReflector;
 		$this->source = $source;
 		$this->parameters = $parameters;
 	}
 
-	/**
-	 * @return ReflectionClass<object>
-	 */
-	public function getContextClass(): ReflectionClass
+	public function getContextReflector(): ReflectionMethod
 	{
-		return $this->contextClass;
+		return $this->contextReflector;
 	}
 
 	public function getSource(): MethodSource

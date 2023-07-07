@@ -43,21 +43,21 @@ final class StructureListTest extends TestCase
 		];
 		$constants = [
 			new ConstantStructure(
-				$reflector,
+				$reflector->getReflectionConstant('A'),
 				new ClassConstantSource($reflector->getReflectionConstant('A')),
 				[],
 			),
 		];
 		$properties = [
 			new PropertyStructure(
-				$reflector,
+				$reflector->getProperty('b'),
 				new PropertySource($reflector->getProperty('b')),
 				[],
 			),
 		];
 		$methods = [
 			new MethodStructure(
-				$reflector,
+				$reflector->getMethod('c'),
 				new MethodSource($reflector->getMethod('c')),
 				[],
 			),

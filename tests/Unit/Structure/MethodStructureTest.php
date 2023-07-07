@@ -20,13 +20,12 @@ final class MethodStructureTest extends TestCase
 
 		$reflector = new ReflectionMethod(MethodStructureDouble::class, 'a');
 
-		$contextClass = $reflector->getDeclaringClass();
 		$parameters = [];
 		$source = new MethodSource($reflector);
 
-		$method = new MethodStructure($contextClass, $source, $parameters);
+		$method = new MethodStructure($reflector, $source, $parameters);
 
-		self::assertSame($contextClass, $method->getContextClass());
+		self::assertSame($reflector, $method->getContextReflector());
 		self::assertSame($source, $method->getSource());
 		self::assertSame($parameters, $method->getParameters());
 	}
@@ -37,7 +36,6 @@ final class MethodStructureTest extends TestCase
 
 		$reflector = new ReflectionMethod(MethodStructureDouble::class, 'a');
 
-		$contextClass = $reflector->getDeclaringClass();
 		$parameters = [
 			new ParameterStructure(new ParameterSource(
 				new ReflectionParameter([MethodStructureDouble::class, 'a'], 'b'),
@@ -48,9 +46,9 @@ final class MethodStructureTest extends TestCase
 		];
 		$source = new MethodSource($reflector);
 
-		$method = new MethodStructure($contextClass, $source, $parameters);
+		$method = new MethodStructure($reflector, $source, $parameters);
 
-		self::assertSame($contextClass, $method->getContextClass());
+		self::assertSame($reflector, $method->getContextReflector());
 		self::assertSame($source, $method->getSource());
 		self::assertSame($parameters, $method->getParameters());
 	}

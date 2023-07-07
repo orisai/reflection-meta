@@ -64,40 +64,40 @@ final class StructureGrouperTest extends TestCase
 			[
 				'::A' => [
 					new ConstantStructure(
-						new ReflectionClass(GrouperStructureParent1::class),
+						new ReflectionClassConstant(GrouperStructureParent1::class, 'A'),
 						new ClassConstantSource(new ReflectionClassConstant(GrouperStructureParent1::class, 'A')),
 						[],
 					),
 					new ConstantStructure(
-						new ReflectionClass(GrouperStructureDouble::class),
+						new ReflectionClassConstant(GrouperStructureDouble::class, 'A'),
 						new ClassConstantSource(new ReflectionClassConstant(GrouperStructureDouble::class, 'A')),
 						[],
 					),
 				],
 				GrouperStructureParent1::class . '::D' => [
 					new ConstantStructure(
-						new ReflectionClass(GrouperStructureParent1::class),
+						new ReflectionClassConstant(GrouperStructureParent1::class, 'D'),
 						new ClassConstantSource(new ReflectionClassConstant(GrouperStructureParent1::class, 'D')),
 						[],
 					),
 				],
 				'::B' => [
 					new ConstantStructure(
-						new ReflectionClass(GrouperStructureDouble::class),
+						new ReflectionClassConstant(GrouperStructureDouble::class, 'B'),
 						new ClassConstantSource(new ReflectionClassConstant(GrouperStructureInterface1::class, 'B')),
 						[],
 					),
 				],
 				'::C' => [
 					new ConstantStructure(
-						new ReflectionClass(GrouperStructureDouble::class),
+						new ReflectionClassConstant(GrouperStructureDouble::class, 'C'),
 						new ClassConstantSource(new ReflectionClassConstant(GrouperStructureDouble::class, 'C')),
 						[],
 					),
 				],
 				GrouperStructureDouble::class . '::D' => [
 					new ConstantStructure(
-						new ReflectionClass(GrouperStructureDouble::class),
+						new ReflectionClassConstant(GrouperStructureDouble::class, 'D'),
 						new ClassConstantSource(new ReflectionClassConstant(GrouperStructureDouble::class, 'D')),
 						[],
 					),
@@ -110,45 +110,45 @@ final class StructureGrouperTest extends TestCase
 			[
 				'::a' => [
 					new PropertyStructure(
-						new ReflectionClass(GrouperStructureParent1::class),
+						new ReflectionProperty(GrouperStructureParent1::class, 'a'),
 						new PropertySource(new ReflectionProperty(GrouperStructureParent1::class, 'a')),
 						[],
 					),
 					new PropertyStructure(
-						new ReflectionClass(GrouperStructureDouble::class),
+						new ReflectionProperty(GrouperStructureDouble::class, 'a'),
 						new PropertySource(new ReflectionProperty(GrouperStructureDouble::class, 'a')),
 						[],
 					),
 				],
 				GrouperStructureParent1::class . '::d' => [
 					new PropertyStructure(
-						new ReflectionClass(GrouperStructureParent1::class),
+						new ReflectionProperty(GrouperStructureParent1::class, 'd'),
 						new PropertySource(new ReflectionProperty(GrouperStructureParent1::class, 'd')),
 						[],
 					),
 				],
 				'::b' => [
 					new PropertyStructure(
-						new ReflectionClass(GrouperStructureParent1::class),
+						new ReflectionProperty(GrouperStructureParent1::class, 'b'),
 						new PropertySource(new ReflectionProperty(GrouperStructureParent1::class, 'b')),
 						[],
 					),
 					new PropertyStructure(
-						new ReflectionClass(GrouperStructureDouble::class),
+						new ReflectionProperty(GrouperStructureDouble::class, 'b'),
 						new PropertySource(new ReflectionProperty(GrouperStructureDouble::class, 'b')),
 						[],
 					),
 				],
 				'::c' => [
 					new PropertyStructure(
-						new ReflectionClass(GrouperStructureDouble::class),
+						new ReflectionProperty(GrouperStructureDouble::class, 'c'),
 						new PropertySource(new ReflectionProperty(GrouperStructureDouble::class, 'c')),
 						[],
 					),
 				],
 				GrouperStructureDouble::class . '::d' => [
 					new PropertyStructure(
-						new ReflectionClass(GrouperStructureDouble::class),
+						new ReflectionProperty(GrouperStructureDouble::class, 'd'),
 						new PropertySource(new ReflectionProperty(GrouperStructureDouble::class, 'd')),
 						[],
 					),
@@ -161,45 +161,45 @@ final class StructureGrouperTest extends TestCase
 			[
 				'::a' => [
 					new MethodStructure(
-						new ReflectionClass(GrouperStructureParent1::class),
+						new ReflectionMethod(GrouperStructureParent1::class, 'a'),
 						new MethodSource(new ReflectionMethod(GrouperStructureParent1::class, 'a')),
 						[],
 					),
 					new MethodStructure(
-						new ReflectionClass(GrouperStructureDouble::class),
+						new ReflectionMethod(GrouperStructureDouble::class, 'a'),
 						new MethodSource(new ReflectionMethod(GrouperStructureDouble::class, 'a')),
 						[],
 					),
 				],
 				GrouperStructureParent1::class . '::d' => [
 					new MethodStructure(
-						new ReflectionClass(GrouperStructureParent1::class),
+						new ReflectionMethod(GrouperStructureParent1::class, 'd'),
 						new MethodSource(new ReflectionMethod(GrouperStructureParent1::class, 'd')),
 						[],
 					),
 				],
 				'::b' => [
 					new MethodStructure(
-						new ReflectionClass(GrouperStructureDouble::class),
+						new ReflectionMethod(GrouperStructureDouble::class, 'b'),
 						new MethodSource(new ReflectionMethod(GrouperStructureInterface1::class, 'b')),
 						[],
 					),
 					new MethodStructure(
-						new ReflectionClass(GrouperStructureDouble::class),
+						new ReflectionMethod(GrouperStructureDouble::class, 'b'),
 						new MethodSource(new ReflectionMethod(GrouperStructureDouble::class, 'b')),
 						[],
 					),
 				],
 				'::c' => [
 					new MethodStructure(
-						new ReflectionClass(GrouperStructureDouble::class),
+						new ReflectionMethod(GrouperStructureDouble::class, 'c'),
 						new MethodSource(new ReflectionMethod(GrouperStructureDouble::class, 'c')),
 						[],
 					),
 				],
 				GrouperStructureDouble::class . '::d' => [
 					new MethodStructure(
-						new ReflectionClass(GrouperStructureDouble::class),
+						new ReflectionMethod(GrouperStructureDouble::class, 'd'),
 						new MethodSource(new ReflectionMethod(GrouperStructureDouble::class, 'd')),
 						[],
 					),
@@ -225,14 +225,14 @@ final class StructureGrouperTest extends TestCase
 			[
 				'::B' => [
 					new ConstantStructure(
-						new ReflectionClass(GrouperStructureDoublePHP81::class),
+						new ReflectionClassConstant(GrouperStructureDoublePHP81::class, 'B'),
 						new ClassConstantSource(
 							new ReflectionClassConstant(GrouperStructureInterface1PHP81::class, 'B'),
 						),
 						[],
 					),
 					new ConstantStructure(
-						new ReflectionClass(GrouperStructureDoublePHP81::class),
+						new ReflectionClassConstant(GrouperStructureDoublePHP81::class, 'B'),
 						new ClassConstantSource(new ReflectionClassConstant(GrouperStructureDoublePHP81::class, 'B')),
 						[],
 					),

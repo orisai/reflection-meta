@@ -22,12 +22,11 @@ final class ConstantStructureTest extends TestCase
 
 		$reflector = new ReflectionClassConstant(ClassConstantStructureDouble::class, 'A');
 
-		$contextClass = $reflector->getDeclaringClass();
 		$source = new ClassConstantSource($reflector);
 		$duplicators = [];
 
-		$constant = new ConstantStructure($contextClass, $source, $duplicators);
-		self::assertSame($contextClass, $constant->getContextClass());
+		$constant = new ConstantStructure($reflector, $source, $duplicators);
+		self::assertSame($reflector, $constant->getContextReflector());
 		self::assertSame($source, $constant->getSource());
 		self::assertSame($duplicators, $constant->getDuplicators());
 	}
@@ -42,14 +41,13 @@ final class ConstantStructureTest extends TestCase
 
 		$reflector = new ReflectionClassConstant(ClassConstantStructurePHP82Double::class, 'A');
 
-		$contextClass = $reflector->getDeclaringClass();
 		$source = new ClassConstantSource($reflector);
 		$duplicators = [
 			new ReflectionClass(PropertyStructurePHP82DoubleTrait1::class),
 			new ReflectionClass(PropertyStructurePHP82DoubleTrait2::class),
 		];
 
-		$constant = new ConstantStructure($contextClass, $source, $duplicators);
+		$constant = new ConstantStructure($reflector, $source, $duplicators);
 		self::assertSame($duplicators, $constant->getDuplicators());
 	}
 

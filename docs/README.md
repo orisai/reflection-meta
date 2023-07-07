@@ -283,8 +283,8 @@ class ExampleClass {}
 
 Each structure has two ways of accessing reflection.
 
-First is `$structure->getContextClass()`. It returns the class which can be used to access properties and methods by
-reflection or by closure binding and therefore excludes interfaces and traits.
+First is `$structure->getContextReflector()->getDeclaringClass()`. It returns the class which can be used to access
+properties and methods by reflection or by closure binding and therefore excludes interfaces and traits.
 
 To make it work, the reflector given to `StructureBuilder::build()` must be a non-abstract class. Otherwise, context
 will be based on whatever reflector was given to builder. In case of abstract classes, interfaces and traits, the object
@@ -295,12 +295,13 @@ For example assigning a property of any visibility to an instance would look lik
 ```php
 $object = /* create instance of a root class (the one given to StructureBuilder */;
 
-$contextClassName = $propertyStructure->getContextClass()->getName();
-$propertyName = $propertyStructure->getSource()->getReflector()->getName();
+$contextProperty = $propertyStructure->getContextReflector();
+$className = $contextProperty->getDeclaringClass()->getName();
+$propertyName = $contextProperty->getName();
 $value = 'anything';
 
 (fn () => $object->$propertyName = $value)
-			->bindTo($object, $contextClassName)();
+			->bindTo($object, $className)();
 ```
 
 Seconds way of accessing reflection is `$structure->getSource()->getReflector()`. It returns the actual source as
@@ -324,11 +325,11 @@ These are just tips what you should consider in your own code when using this li
 provided by us
 
 - Visibility - With [Closure::bindTo()](https://www.php.net/manual/en/closure.bindto.php)
-  and `$structure->getContextClass()` you can work with properties and methods with any visibility, but you may still
-  want to choose whether public, protected and private should be all supported.
+  and `$structure->getContextReflector()` you can work with properties and methods with any visibility, but you may
+  still want to choose whether public, protected and private should be all supported.
 - Static - With [Closure::bindTo()](https://www.php.net/manual/en/closure.bindto.php)
-  and `$structure->getContextClass()` you can work with properties and methods that are either static or non-static, but
-  you will likely want to support only non-static properties and may want to support only non-static methods.
+  and `$structure->getContextReflector()` you can work with properties and methods that are either static or non-static,
+  but you will likely want to support only non-static properties and may want to support only non-static methods.
 - Source - Metadata can be defined on class or its subtypes - interface, trait or enum.
 	- Check whether they are defined only by types that you want to support.
 	- You will probably want to require non-abstract class as a root source and forbid enums for most cases.

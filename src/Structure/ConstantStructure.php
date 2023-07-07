@@ -4,12 +4,12 @@ namespace Orisai\ReflectionMeta\Structure;
 
 use Orisai\SourceMap\ClassConstantSource;
 use ReflectionClass;
+use ReflectionClassConstant;
 
 final class ConstantStructure implements Structure
 {
 
-	/** @var ReflectionClass<object> */
-	private ReflectionClass $contextClass;
+	private ReflectionClassConstant $contextReflector;
 
 	private ClassConstantSource $source;
 
@@ -17,26 +17,22 @@ final class ConstantStructure implements Structure
 	private array $duplicators;
 
 	/**
-	 * @param ReflectionClass<object>        $contextClass
 	 * @param array<ReflectionClass<object>> $duplicators
 	 */
 	public function __construct(
-		ReflectionClass $contextClass,
+		ReflectionClassConstant $contextReflector,
 		ClassConstantSource $source,
 		array $duplicators
 	)
 	{
-		$this->contextClass = $contextClass;
+		$this->contextReflector = $contextReflector;
 		$this->source = $source;
 		$this->duplicators = $duplicators;
 	}
 
-	/**
-	 * @return ReflectionClass<object>
-	 */
-	public function getContextClass(): ReflectionClass
+	public function getContextReflector(): ReflectionClassConstant
 	{
-		return $this->contextClass;
+		return $this->contextReflector;
 	}
 
 	public function getSource(): ClassConstantSource

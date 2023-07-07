@@ -44,7 +44,7 @@ final class StructureGroupTest extends TestCase
 		$constants = [
 			'::A' => [
 				new ConstantStructure(
-					$reflector,
+					$reflector->getReflectionConstant('A'),
 					new ClassConstantSource($reflector->getReflectionConstant('A')),
 					[],
 				),
@@ -53,7 +53,7 @@ final class StructureGroupTest extends TestCase
 		$properties = [
 			'::b' => [
 				new PropertyStructure(
-					$reflector,
+					$reflector->getProperty('b'),
 					new PropertySource($reflector->getProperty('b')),
 					[],
 				),
@@ -62,7 +62,7 @@ final class StructureGroupTest extends TestCase
 		$methods = [
 			'::c' => [
 				new MethodStructure(
-					$reflector,
+					$reflector->getMethod('c'),
 					new MethodSource($reflector->getMethod('c')),
 					[],
 				),

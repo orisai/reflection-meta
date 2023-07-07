@@ -107,14 +107,14 @@ final class StructureFlattenerTest extends TestCase
 		self::assertEquals(
 			[
 				new ConstantStructure(
-					new ReflectionClass(FlattenerStructureParent1::class),
+					new ReflectionClassConstant(FlattenerStructureParent1::class, 'ParentInterface1'),
 					new ClassConstantSource(
 						new ReflectionClassConstant(FlattenerStructureParentInterface1::class, 'ParentInterface1'),
 					),
 					[],
 				),
 				new ConstantStructure(
-					new ReflectionClass(FlattenerStructureParent1::class),
+					new ReflectionClassConstant(FlattenerStructureParent1::class, 'ParentInterface2'),
 					new ClassConstantSource(
 						new ReflectionClassConstant(FlattenerStructureParentInterface1::class, 'ParentInterface2'),
 					),
@@ -127,21 +127,21 @@ final class StructureFlattenerTest extends TestCase
 		self::assertEquals(
 			[
 				new PropertyStructure(
-					new ReflectionClass(FlattenerStructureParent1::class),
+					new ReflectionProperty(FlattenerStructureParent1::class, 'parentTrait1'),
 					new PropertySource(
 						new ReflectionProperty(FlattenerStructureParentTrait1::class, 'parentTrait1'),
 					),
 					[],
 				),
 				new PropertyStructure(
-					new ReflectionClass(FlattenerStructureParent1::class),
+					new ReflectionProperty(FlattenerStructureParent1::class, 'parentTrait2'),
 					new PropertySource(
 						new ReflectionProperty(FlattenerStructureParentTrait1::class, 'parentTrait2'),
 					),
 					[],
 				),
 				new PropertyStructure(
-					new ReflectionClass(FlattenerStructureDouble::class),
+					new ReflectionProperty(FlattenerStructureDouble::class, 'trait2'),
 					new PropertySource(
 						new ReflectionProperty(FlattenerStructureTrait2::class, 'trait2'),
 					),
@@ -154,21 +154,21 @@ final class StructureFlattenerTest extends TestCase
 		self::assertEquals(
 			[
 				new MethodStructure(
-					new ReflectionClass(FlattenerStructureParent1::class),
+					new ReflectionMethod(FlattenerStructureParent1::class, 'parentInterface1'),
 					new MethodSource(
 						new ReflectionMethod(FlattenerStructureParentInterface1::class, 'parentInterface1'),
 					),
 					[],
 				),
 				new MethodStructure(
-					new ReflectionClass(FlattenerStructureParent1::class),
+					new ReflectionMethod(FlattenerStructureParent1::class, 'parentTrait1'),
 					new MethodSource(
 						new ReflectionMethod(FlattenerStructureParentTrait1::class, 'parentTrait1'),
 					),
 					[],
 				),
 				new MethodStructure(
-					new ReflectionClass(FlattenerStructureParent1::class),
+					new ReflectionMethod(FlattenerStructureParent1::class, 'parentTrait2'),
 					new MethodSource(
 						new ReflectionMethod(FlattenerStructureParentTrait1::class, 'parentTrait2'),
 					),
@@ -176,28 +176,28 @@ final class StructureFlattenerTest extends TestCase
 				),
 				// Override of interface in class
 				new MethodStructure(
-					new ReflectionClass(FlattenerStructureParent1::class),
+					new ReflectionMethod(FlattenerStructureParent1::class, 'parentInterface1'),
 					new MethodSource(
 						new ReflectionMethod(FlattenerStructureParent1::class, 'parentInterface1'),
 					),
 					[],
 				),
 				new MethodStructure(
-					new ReflectionClass(FlattenerStructureDouble::class),
+					new ReflectionMethod(FlattenerStructureDouble::class, 'childInterface1'),
 					new MethodSource(
 						new ReflectionMethod(FlattenerStructureInterface1::class, 'childInterface1'),
 					),
 					[],
 				),
 				new MethodStructure(
-					new ReflectionClass(FlattenerStructureDouble::class),
+					new ReflectionMethod(FlattenerStructureDouble::class, 'childTrait1'),
 					new MethodSource(
 						new ReflectionMethod(FlattenerStructureTrait1::class, 'childTrait1'),
 					),
 					[],
 				),
 				new MethodStructure(
-					new ReflectionClass(FlattenerStructureDouble::class),
+					new ReflectionMethod(FlattenerStructureDouble::class, 'childTrait2'),
 					new MethodSource(
 						new ReflectionMethod(FlattenerStructureTrait1::class, 'childTrait2'),
 					),
@@ -205,7 +205,7 @@ final class StructureFlattenerTest extends TestCase
 				),
 				// Override of interface in class
 				new MethodStructure(
-					new ReflectionClass(FlattenerStructureDouble::class),
+					new ReflectionMethod(FlattenerStructureDouble::class, 'childInterface1'),
 					new MethodSource(
 						new ReflectionMethod(FlattenerStructureDouble::class, 'childInterface1'),
 					),

@@ -410,7 +410,7 @@ final class StructureBuilderTest extends TestCase
 			[],
 			[
 				new ConstantStructure(
-					$class,
+					$class->getReflectionConstant('A'),
 					new ClassConstantSource(
 						new ReflectionClassConstant(BuilderConstantDoubleInterface1::class, 'A'),
 					),
@@ -433,7 +433,7 @@ final class StructureBuilderTest extends TestCase
 			[],
 			[
 				new ConstantStructure(
-					$parent1Class,
+					$parent1Class->getReflectionConstant('B'),
 					new ClassConstantSource(
 						new ReflectionClassConstant(BuilderConstantDoubleParent1::class, 'B'),
 					),
@@ -459,14 +459,14 @@ final class StructureBuilderTest extends TestCase
 				[],
 				[
 					new ConstantStructure(
-						$class,
+						$class->getReflectionConstant('C1'),
 						new ClassConstantSource(
 							new ReflectionClassConstant(BuilderConstantDouble::class, 'C1'),
 						),
 						[],
 					),
 					new ConstantStructure(
-						$class,
+						$class->getReflectionConstant('C2'),
 						new ClassConstantSource(
 							new ReflectionClassConstant(BuilderConstantDouble::class, 'C2'),
 						),
@@ -499,7 +499,7 @@ final class StructureBuilderTest extends TestCase
 			[],
 			[
 				new ConstantStructure(
-					$class,
+					$class->getReflectionConstant('A'),
 					new ClassConstantSource(
 						new ReflectionClassConstant(BuilderConstantPHP82DoubleInterface1::class, 'A'),
 					),
@@ -522,7 +522,7 @@ final class StructureBuilderTest extends TestCase
 			[],
 			[
 				new ConstantStructure(
-					$parent1Class,
+					$parent1Class->getReflectionConstant('B'),
 					new ClassConstantSource(
 						new ReflectionClassConstant(BuilderConstantPHP82DoubleParent1::class, 'B'),
 					),
@@ -545,7 +545,7 @@ final class StructureBuilderTest extends TestCase
 			[],
 			[
 				new ConstantStructure(
-					$trait1Class,
+					$trait1Class->getReflectionConstant('C'),
 					new ClassConstantSource(
 						new ReflectionClassConstant(BuilderConstantPHP82DoubleTrait1::class, 'C'),
 					),
@@ -563,7 +563,7 @@ final class StructureBuilderTest extends TestCase
 			[],
 			[
 				new ConstantStructure(
-					$class,
+					$class->getReflectionConstant('C'),
 					new ClassConstantSource(
 						new ReflectionClassConstant(BuilderConstantPHP82DoubleTrait1::class, 'C'),
 					),
@@ -592,21 +592,21 @@ final class StructureBuilderTest extends TestCase
 				],
 				[
 					new ConstantStructure(
-						$class,
+						$class->getReflectionConstant('D1'),
 						new ClassConstantSource(
 							new ReflectionClassConstant(BuilderConstantPHP82Double::class, 'D1'),
 						),
 						[],
 					),
 					new ConstantStructure(
-						$class,
+						$class->getReflectionConstant('D2'),
 						new ClassConstantSource(
 							new ReflectionClassConstant(BuilderConstantPHP82Double::class, 'D2'),
 						),
 						[],
 					),
 					new ConstantStructure(
-						$class,
+						$class->getReflectionConstant('C'),
 						new ClassConstantSource(
 							new ReflectionClassConstant(BuilderConstantPHP82Double::class, 'C'),
 						),
@@ -638,7 +638,7 @@ final class StructureBuilderTest extends TestCase
 			[],
 			[
 				new PropertyStructure(
-					new ReflectionClass(BuilderPropertyDoubleTrait1::class),
+					new ReflectionProperty(BuilderPropertyDoubleTrait1::class, 'a'),
 					new PropertySource(
 						new ReflectionProperty(BuilderPropertyDoubleTrait1::class, 'a'),
 					),
@@ -656,7 +656,7 @@ final class StructureBuilderTest extends TestCase
 			[],
 			[
 				new PropertyStructure(
-					new ReflectionClass(BuilderPropertyDoubleParent1::class),
+					new ReflectionProperty(BuilderPropertyDoubleParent1::class, 'a'),
 					new PropertySource(
 						new ReflectionProperty(BuilderPropertyDoubleTrait1::class, 'a'),
 					),
@@ -682,14 +682,14 @@ final class StructureBuilderTest extends TestCase
 			[],
 			[
 				new PropertyStructure(
-					new ReflectionClass(BuilderPropertyDoubleParent1::class),
+					new ReflectionProperty(BuilderPropertyDoubleParent1::class, 'b'),
 					new PropertySource(
 						new ReflectionProperty(BuilderPropertyDoubleParent1::class, 'b'),
 					),
 					[],
 				),
 				new PropertyStructure(
-					new ReflectionClass(BuilderPropertyDoubleParent1::class),
+					new ReflectionProperty(BuilderPropertyDoubleParent1::class, 'a'),
 					new PropertySource(
 						new ReflectionProperty(BuilderPropertyDoubleParent1::class, 'a'),
 					),
@@ -714,7 +714,7 @@ final class StructureBuilderTest extends TestCase
 			[],
 			[
 				new PropertyStructure(
-					new ReflectionClass(BuilderPropertyDoubleTrait2::class),
+					new ReflectionProperty(BuilderPropertyDoubleTrait2::class, 'c'),
 					new PropertySource(
 						new ReflectionProperty(BuilderPropertyDoubleTrait2::class, 'c'),
 					),
@@ -732,7 +732,7 @@ final class StructureBuilderTest extends TestCase
 			[],
 			[
 				new PropertyStructure(
-					$class,
+					$class->getProperty('c'),
 					new PropertySource(
 						new ReflectionProperty(BuilderPropertyDoubleTrait2::class, 'c'),
 					),
@@ -759,21 +759,21 @@ final class StructureBuilderTest extends TestCase
 				[],
 				[
 					new PropertyStructure(
-						$class,
+						$class->getProperty('d1'),
 						new PropertySource(
 							new ReflectionProperty(BuilderPropertyDouble::class, 'd1'),
 						),
 						[],
 					),
 					new PropertyStructure(
-						$class,
+						$class->getProperty('d2'),
 						new PropertySource(
 							new ReflectionProperty(BuilderPropertyDouble::class, 'd2'),
 						),
 						[],
 					),
 					new PropertyStructure(
-						$class,
+						$class->getProperty('c'),
 						new PropertySource(
 							new ReflectionProperty(BuilderPropertyDouble::class, 'c'),
 						),
@@ -805,7 +805,7 @@ final class StructureBuilderTest extends TestCase
 			[],
 			[
 				new MethodStructure(
-					new ReflectionClass(BuilderMethodDoubleTrait1::class),
+					new ReflectionMethod(BuilderMethodDoubleTrait1::class, 'a'),
 					new MethodSource(
 						new ReflectionMethod(BuilderMethodDoubleTrait1::class, 'a'),
 					),
@@ -823,7 +823,7 @@ final class StructureBuilderTest extends TestCase
 			[],
 			[
 				new MethodStructure(
-					new ReflectionClass(BuilderMethodDoubleParent1::class),
+					new ReflectionMethod(BuilderMethodDoubleParent1::class, 'a'),
 					new MethodSource(
 						new ReflectionMethod(BuilderMethodDoubleTrait1::class, 'a'),
 					),
@@ -849,7 +849,7 @@ final class StructureBuilderTest extends TestCase
 				[],
 				[
 					new MethodStructure(
-						new ReflectionClass(BuilderMethodDoubleParent2::class),
+						new ReflectionMethod(BuilderMethodDoubleParent2::class, 'e'),
 						new MethodSource(
 							new ReflectionMethod(BuilderMethodDoubleParent2::class, 'e'),
 						),
@@ -866,7 +866,7 @@ final class StructureBuilderTest extends TestCase
 			[],
 			[
 				new MethodStructure(
-					new ReflectionClass(BuilderMethodDoubleParent1::class),
+					new ReflectionMethod(BuilderMethodDoubleParent1::class, 'b'),
 					new MethodSource(
 						new ReflectionMethod(BuilderMethodDoubleParent1::class, 'b'),
 					),
@@ -889,7 +889,7 @@ final class StructureBuilderTest extends TestCase
 			[],
 			[
 				new MethodStructure(
-					new ReflectionClass(BuilderMethodDoubleTrait2::class),
+					new ReflectionMethod(BuilderMethodDoubleTrait2::class, 'c'),
 					new MethodSource(
 						new ReflectionMethod(BuilderMethodDoubleTrait2::class, 'c'),
 					),
@@ -907,7 +907,7 @@ final class StructureBuilderTest extends TestCase
 			[],
 			[
 				new MethodStructure(
-					$class,
+					$class->getMethod('c'),
 					new MethodSource(
 						new ReflectionMethod(BuilderMethodDoubleTrait2::class, 'c'),
 					),
@@ -936,7 +936,7 @@ final class StructureBuilderTest extends TestCase
 						[],
 						[
 							new MethodStructure(
-								$class,
+								$class->getMethod('c'),
 								new MethodSource(
 									new ReflectionMethod(BuilderMethodDoubleInterface2::class, 'c'),
 								),
@@ -953,14 +953,14 @@ final class StructureBuilderTest extends TestCase
 				[],
 				[
 					new MethodStructure(
-						$class,
+						$class->getMethod('d1'),
 						new MethodSource(
 							new ReflectionMethod(BuilderMethodDouble::class, 'd1'),
 						),
 						[],
 					),
 					new MethodStructure(
-						$class,
+						$class->getMethod('d2'),
 						new MethodSource(
 							new ReflectionMethod(BuilderMethodDouble::class, 'd2'),
 						),

@@ -94,7 +94,7 @@ final class HierarchyClassStructureTest extends TestCase
 			],
 			$constants = [
 				new ConstantStructure(
-					$reflector,
+					$reflector->getReflectionConstant('A'),
 					new ClassConstantSource(
 						new ReflectionClassConstant(ClassStructureDouble1::class, 'A'),
 					),
@@ -103,7 +103,7 @@ final class HierarchyClassStructureTest extends TestCase
 			],
 			$properties = [
 				new PropertyStructure(
-					$reflector,
+					$reflector->getProperty('b'),
 					new PropertySource(
 						new ReflectionProperty(ClassStructureDouble1::class, 'b'),
 					),
@@ -112,7 +112,7 @@ final class HierarchyClassStructureTest extends TestCase
 			],
 			$methods = [
 				new MethodStructure(
-					$reflector,
+					$reflector->getMethod('c'),
 					new MethodSource(
 						new ReflectionMethod(ClassStructureDouble1::class, 'c'),
 					),

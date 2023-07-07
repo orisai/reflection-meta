@@ -25,3 +25,5 @@ parameters:
 		-
 			message: '#^Attribute class (Foo|Bar) does not exist\.$#'
 			path: ../tests
+
+		- '#(.+)expects ReflectionClassConstant, ReflectionClassConstant\|false given\.$#'
