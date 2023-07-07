@@ -177,10 +177,11 @@ final class StructureBuilder
 				continue;
 			}
 
+			$contextMethod = $contextClass->getMethod($method->getName());
 			$methods[] = new MethodStructure(
-				$contextClass->getMethod($method->getName()),
+				$contextMethod,
 				new MethodSource($method),
-				self::createParametersStructure($method),
+				self::createParametersStructure($method, $contextMethod),
 			);
 		}
 
@@ -190,11 +191,15 @@ final class StructureBuilder
 	/**
 	 * @return list<ParameterStructure>
 	 */
-	private static function createParametersStructure(ReflectionMethod $method): array
+	private static function createParametersStructure(
+		ReflectionMethod $declaringMethod,
+		ReflectionMethod $contextMethod
+	): array
 	{
 		$parameters = [];
-		foreach ($method->getParameters() as $parameter) {
+		foreach ($declaringMethod->getParameters() as $i => $parameter) {
 			$parameters[] = new ParameterStructure(
+				$contextMethod->getParameters()[$i],
 				new ParameterSource($parameter),
 			);
 		}

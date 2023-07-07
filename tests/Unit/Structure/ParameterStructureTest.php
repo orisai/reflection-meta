@@ -21,7 +21,8 @@ final class ParameterStructureTest extends TestCase
 		);
 		$source = new ParameterSource($reflector);
 
-		$parameter = new ParameterStructure($source);
+		$parameter = new ParameterStructure($reflector, $source);
+		self::assertSame($reflector, $parameter->getContextReflector());
 		self::assertSame($source, $parameter->getSource());
 	}
 

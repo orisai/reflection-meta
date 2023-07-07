@@ -965,14 +965,26 @@ final class StructureBuilderTest extends TestCase
 							new ReflectionMethod(BuilderMethodDouble::class, 'd2'),
 						),
 						[
-							new ParameterStructure(new ParameterSource(new ReflectionParameter(
-								[BuilderMethodDouble::class, 'd2'],
-								'a',
-							))),
-							new ParameterStructure(new ParameterSource(new ReflectionParameter(
-								[BuilderMethodDouble::class, 'd2'],
-								'b',
-							))),
+							new ParameterStructure(
+								new ReflectionParameter(
+									[BuilderMethodDouble::class, 'd2'],
+									'a',
+								),
+								new ParameterSource(new ReflectionParameter(
+									[BuilderMethodDouble::class, 'd2'],
+									'a',
+								)),
+							),
+							new ParameterStructure(
+								new ReflectionParameter(
+									[BuilderMethodDouble::class, 'd2'],
+									'b',
+								),
+								new ParameterSource(new ReflectionParameter(
+									[BuilderMethodDouble::class, 'd2'],
+									'b',
+								)),
+							),
 						],
 					),
 				],

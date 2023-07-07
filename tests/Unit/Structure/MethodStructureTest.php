@@ -37,12 +37,18 @@ final class MethodStructureTest extends TestCase
 		$reflector = new ReflectionMethod(MethodStructureDouble::class, 'a');
 
 		$parameters = [
-			new ParameterStructure(new ParameterSource(
+			new ParameterStructure(
 				new ReflectionParameter([MethodStructureDouble::class, 'a'], 'b'),
-			)),
-			new ParameterStructure(new ParameterSource(
+				new ParameterSource(
+					new ReflectionParameter([MethodStructureDouble::class, 'a'], 'b'),
+				),
+			),
+			new ParameterStructure(
 				new ReflectionParameter([MethodStructureDouble::class, 'a'], 'c'),
-			)),
+				new ParameterSource(
+					new ReflectionParameter([MethodStructureDouble::class, 'a'], 'c'),
+				),
+			),
 		];
 		$source = new MethodSource($reflector);
 
