@@ -26,4 +26,17 @@ parameters:
 			message: '#^Attribute class (Foo|Bar) does not exist\.$#'
 			path: ../tests
 
+		# Should not happen
 		- '#(.+)expects ReflectionClassConstant, ReflectionClassConstant\|false given\.$#'
+
+		# Intentionally !=
+		-
+			message: '#^Loose comparison via "\!\=" is not allowed\.$#'
+			count: 1
+			path: ../src/Finder/ConstantDeclaratorFinder.php
+
+		# Intentionally !=
+		-
+			message: '#^Loose comparison via "\!\=" is not allowed\.$#'
+			count: 1
+			path: ../src/Finder/PropertyDeclaratorFinder.php

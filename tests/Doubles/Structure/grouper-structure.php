@@ -7,12 +7,16 @@ class GrouperStructureParent1
 
 	protected const A = 'a';
 
+	/**
+	 * @phpstan-ignore-next-line Used via reflection
+	 */
 	private const D = 'd';
 
 	protected string $a;
 
 	public string $b;
 
+	/** @phpstan-ignore-next-line Used via reflection */
 	private string $d;
 
 	protected function a(): void
@@ -20,6 +24,9 @@ class GrouperStructureParent1
 		// Noop
 	}
 
+	/**
+	 * @phpstan-ignore-next-line Used via reflection
+	 */
 	private function d(): void
 	{
 		// Noop
@@ -50,6 +57,9 @@ final class GrouperStructureDouble extends GrouperStructureParent1 implements Gr
 
 	public const C = 'c';
 
+	/**
+	 * @phpstan-ignore-next-line Used via reflection
+	 */
 	private const D = 'd';
 
 	protected string $a;
@@ -58,6 +68,7 @@ final class GrouperStructureDouble extends GrouperStructureParent1 implements Gr
 
 	public string $c;
 
+	/** @phpstan-ignore-next-line Used via reflection */
 	private string $d;
 
 	protected function a(): void
@@ -75,6 +86,9 @@ final class GrouperStructureDouble extends GrouperStructureParent1 implements Gr
 		// Noop
 	}
 
+	/**
+	 * @phpstan-ignore-next-line Used via reflection
+	 */
 	private function d(): void
 	{
 		// Noop
