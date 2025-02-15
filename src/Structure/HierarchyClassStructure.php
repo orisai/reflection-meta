@@ -27,11 +27,11 @@ final class HierarchyClassStructure
 
 	private ClassSource $source;
 
-	/** @var ReflectionClass<object> */
+	/** @var ReflectionClass<covariant object> */
 	private ReflectionClass $contextClass;
 
 	/**
-	 * @param ReflectionClass<object>       $contextClass
+	 * @param ReflectionClass<covariant object>       $contextClass
 	 * @param list<HierarchyClassStructure> $interfaces
 	 * @param list<HierarchyClassStructure> $traits
 	 * @param list<ConstantStructure>       $constants
@@ -63,7 +63,7 @@ final class HierarchyClassStructure
 	}
 
 	/**
-	 * @return ReflectionClass<object>
+	 * @return ReflectionClass<covariant object>
 	 */
 	public function getContextClass(): ReflectionClass
 	{

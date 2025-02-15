@@ -13,11 +13,11 @@ final class ConstantStructure implements Structure
 
 	private ClassConstantSource $source;
 
-	/** @var array<ReflectionClass<object>> */
+	/** @var array<ReflectionClass<covariant object>> */
 	private array $duplicators;
 
 	/**
-	 * @param array<ReflectionClass<object>> $duplicators
+	 * @param array<ReflectionClass<covariant object>> $duplicators
 	 */
 	public function __construct(
 		ReflectionClassConstant $contextReflector,
@@ -41,7 +41,7 @@ final class ConstantStructure implements Structure
 	}
 
 	/**
-	 * @return array<ReflectionClass<object>>
+	 * @return array<ReflectionClass<covariant object>>
 	 */
 	public function getDuplicators(): array
 	{

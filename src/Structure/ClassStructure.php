@@ -8,13 +8,13 @@ use ReflectionClass;
 final class ClassStructure implements Structure
 {
 
-	/** @var ReflectionClass<object> */
+	/** @var ReflectionClass<covariant object> */
 	private ReflectionClass $contextReflector;
 
 	private ClassSource $source;
 
 	/**
-	 * @param ReflectionClass<object> $contextReflector
+	 * @param ReflectionClass<covariant object> $contextReflector
 	 */
 	public function __construct(ReflectionClass $contextReflector, ClassSource $source)
 	{
@@ -23,7 +23,7 @@ final class ClassStructure implements Structure
 	}
 
 	/**
-	 * @return ReflectionClass<object>
+	 * @return ReflectionClass<covariant object>
 	 */
 	public function getContextReflector(): ReflectionClass
 	{

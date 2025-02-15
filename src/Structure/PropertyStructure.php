@@ -13,11 +13,11 @@ final class PropertyStructure implements Structure
 
 	private PropertySource $source;
 
-	/** @var array<ReflectionClass<object>> */
+	/** @var array<ReflectionClass<covariant object>> */
 	private array $duplicators;
 
 	/**
-	 * @param array<ReflectionClass<object>> $duplicators
+	 * @param array<ReflectionClass<covariant object>> $duplicators
 	 */
 	public function __construct(
 		ReflectionProperty $contextReflector,
@@ -41,7 +41,7 @@ final class PropertyStructure implements Structure
 	}
 
 	/**
-	 * @return array<ReflectionClass<object>>
+	 * @return array<ReflectionClass<covariant object>>
 	 */
 	public function getDuplicators(): array
 	{

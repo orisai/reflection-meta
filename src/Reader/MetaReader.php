@@ -13,7 +13,7 @@ interface MetaReader
 
 	/**
 	 * @template T of object
-	 * @param ReflectionClass<object> $class
+	 * @param ReflectionClass<covariant object> $class
 	 * @param class-string<T>         $definitionClass
 	 * @return list<T>
 	 */

@@ -17,7 +17,7 @@ final class StructureBuilder
 {
 
 	/**
-	 * @param ReflectionClass<object> $class
+	 * @param ReflectionClass<covariant object> $class
 	 */
 	public static function build(ReflectionClass $class): HierarchyClassStructure
 	{
@@ -25,8 +25,8 @@ final class StructureBuilder
 	}
 
 	/**
-	 * @param ReflectionClass<object> $declaringClass
-	 * @param ReflectionClass<object> $contextClass
+	 * @param ReflectionClass<covariant object> $declaringClass
+	 * @param ReflectionClass<covariant object> $contextClass
 	 */
 	private static function createClassStructure(
 		ReflectionClass $declaringClass,
@@ -46,7 +46,7 @@ final class StructureBuilder
 	}
 
 	/**
-	 * @param ReflectionClass<object> $class
+	 * @param ReflectionClass<covariant object> $class
 	 */
 	private static function createParentStructure(ReflectionClass $class): ?HierarchyClassStructure
 	{
@@ -60,8 +60,8 @@ final class StructureBuilder
 	}
 
 	/**
-	 * @param ReflectionClass<object> $declaringClass
-	 * @param ReflectionClass<object> $contextClass
+	 * @param ReflectionClass<covariant object> $declaringClass
+	 * @param ReflectionClass<covariant object> $contextClass
 	 * @return list<HierarchyClassStructure>
 	 */
 	private static function createInterfacesStructure(
@@ -78,8 +78,8 @@ final class StructureBuilder
 	}
 
 	/**
-	 * @param ReflectionClass<object> $declaringClass
-	 * @param ReflectionClass<object> $contextClass
+	 * @param ReflectionClass<covariant object> $declaringClass
+	 * @param ReflectionClass<covariant object> $contextClass
 	 * @return list<HierarchyClassStructure>
 	 */
 	private static function createTraitsStructure(
@@ -96,8 +96,8 @@ final class StructureBuilder
 	}
 
 	/**
-	 * @param ReflectionClass<object> $declaringClass
-	 * @param ReflectionClass<object> $contextClass
+	 * @param ReflectionClass<covariant object> $declaringClass
+	 * @param ReflectionClass<covariant object> $contextClass
 	 * @return list<ConstantStructure>
 	 */
 	private static function createConstantsStructure(
@@ -124,8 +124,8 @@ final class StructureBuilder
 	}
 
 	/**
-	 * @param ReflectionClass<object> $declaringClass
-	 * @param ReflectionClass<object> $contextClass
+	 * @param ReflectionClass<covariant object> $declaringClass
+	 * @param ReflectionClass<covariant object> $contextClass
 	 * @return list<PropertyStructure>
 	 */
 	private static function createPropertiesStructure(
@@ -152,8 +152,8 @@ final class StructureBuilder
 	}
 
 	/**
-	 * @param ReflectionClass<object> $declaringClass
-	 * @param ReflectionClass<object> $contextClass
+	 * @param ReflectionClass<covariant object> $declaringClass
+	 * @param ReflectionClass<covariant object> $contextClass
 	 * @return list<MethodStructure>
 	 */
 	private static function createMethodsStructure(
