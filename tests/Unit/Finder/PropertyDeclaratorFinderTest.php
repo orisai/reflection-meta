@@ -169,12 +169,12 @@ final class PropertyDeclaratorFinderTest extends TestCase
 	/**
 	 * @param ReflectionClass<object> $declarator
 	 *
-	 * @dataProvider provideUniqueConstants
+	 * @dataProvider provideUniqueProperties
 	 */
-	public function testUniqueConstants(string $propertyName, ReflectionClass $declarator): void
+	public function testUniqueProperties(string $propertyName, ReflectionClass $declarator): void
 	{
-		$constant = new ReflectionProperty(UniquePropertiesTraitsClass::class, $propertyName);
-		$traits = PropertyDeclaratorFinder::getDeclaringTraits($constant);
+		$property = new ReflectionProperty(UniquePropertiesTraitsClass::class, $propertyName);
+		$traits = PropertyDeclaratorFinder::getDeclaringTraits($property);
 
 		self::assertEquals(
 			[
@@ -184,7 +184,7 @@ final class PropertyDeclaratorFinderTest extends TestCase
 		);
 	}
 
-	public function provideUniqueConstants(): Generator
+	public function provideUniqueProperties(): Generator
 	{
 		require_once __DIR__ . '/../../Doubles/Finder/unique-properties-traits.php';
 
