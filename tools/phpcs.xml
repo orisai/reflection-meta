@@ -31,5 +31,8 @@
 	<rule ref="SlevomatCodingStandard.Files.TypeNameMatchesFileName.NoMatchBetweenTypeNameAndFileName">
 		<exclude-pattern>tests/Doubles</exclude-pattern>
 	</rule>
+	<rule ref="SlevomatCodingStandard.Classes.SuperfluousTraitNaming">
+		<exclude-pattern>tests/Doubles</exclude-pattern>
+	</rule>
 
 </ruleset>

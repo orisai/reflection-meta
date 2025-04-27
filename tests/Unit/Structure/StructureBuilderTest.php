@@ -50,6 +50,8 @@ use Tests\Orisai\ReflectionMeta\Doubles\Structure\Properties\BuilderPropertyDoub
 use Tests\Orisai\ReflectionMeta\Doubles\Structure\Properties\BuilderPropertyDoubleParent1;
 use Tests\Orisai\ReflectionMeta\Doubles\Structure\Properties\BuilderPropertyDoubleTrait1;
 use Tests\Orisai\ReflectionMeta\Doubles\Structure\Properties\BuilderPropertyDoubleTrait2;
+use Tests\Orisai\ReflectionMeta\Doubles\Structure\PropertyOverride\OverridePropertyParent;
+use Tests\Orisai\ReflectionMeta\Doubles\Structure\PropertyOverride\OverridePropertyParentTrait;
 use Tests\Orisai\ReflectionMeta\Doubles\Structure\Traits\BuilderTraitDouble;
 use Tests\Orisai\ReflectionMeta\Doubles\Structure\Traits\BuilderTraitDoubleTrait1;
 use Tests\Orisai\ReflectionMeta\Doubles\Structure\Traits\BuilderTraitDoubleTrait2;
@@ -780,6 +782,55 @@ final class StructureBuilderTest extends TestCase
 						[
 							new ReflectionClass(BuilderPropertyDoubleTrait2::class),
 						],
+					),
+				],
+				[],
+				new ClassSource($class),
+			),
+			$structure,
+		);
+	}
+
+	public function testPropertyFromTraitOverride(): void
+	{
+		require_once __DIR__ . '/../../Doubles/Structure/property-override.php';
+
+		$class = new ReflectionClass(OverridePropertyParent::class);
+		$structure = StructureBuilder::build($class);
+
+		$trait = new HierarchyClassStructure(
+			$class,
+			null,
+			[],
+			[],
+			[],
+			[
+				new PropertyStructure(
+					$class->getProperty('test'),
+					new PropertySource(
+						new ReflectionProperty(OverridePropertyParentTrait::class, 'test'),
+					),
+					[],
+				),
+			],
+			[],
+			new ClassSource(new ReflectionClass(OverridePropertyParentTrait::class)),
+		);
+
+		self::assertEquals(
+			new HierarchyClassStructure(
+				$class,
+				null,
+				[],
+				[$trait],
+				[],
+				[
+					new PropertyStructure(
+						$class->getProperty('test'),
+						new PropertySource(
+							new ReflectionProperty(OverridePropertyParent::class, 'test'),
+						),
+						[],
 					),
 				],
 				[],

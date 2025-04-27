@@ -55,7 +55,7 @@ final class PropertyDeclaratorFinder
 		return array_merge(...$possibleByTrait);
 	}
 
-	private static function areDefinitionsIdentical(
+	public static function areDefinitionsIdentical(
 		ReflectionProperty $property1,
 		ReflectionProperty $property2
 	): bool

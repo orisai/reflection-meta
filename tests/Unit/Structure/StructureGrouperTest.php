@@ -24,6 +24,8 @@ use Tests\Orisai\ReflectionMeta\Doubles\Structure\Grouper\GrouperStructureParent
 use Tests\Orisai\ReflectionMeta\Doubles\Structure\Grouper\GrouperStructureTrait1;
 use Tests\Orisai\ReflectionMeta\Doubles\Structure\GrouperPHP81\GrouperStructureDoublePHP81;
 use Tests\Orisai\ReflectionMeta\Doubles\Structure\GrouperPHP81\GrouperStructureInterface1PHP81;
+use Tests\Orisai\ReflectionMeta\Doubles\Structure\PropertyOverride\OverridePropertyParent;
+use Tests\Orisai\ReflectionMeta\Doubles\Structure\PropertyOverride\OverridePropertyParentTrait;
 use const PHP_VERSION_ID;
 
 final class StructureGrouperTest extends TestCase
@@ -238,6 +240,34 @@ final class StructureGrouperTest extends TestCase
 					),
 				],
 			],
+		);
+	}
+
+	public function testPropertyFromTraitOverride(): void
+	{
+		require_once __DIR__ . '/../../Doubles/Structure/property-override.php';
+
+		$class = new ReflectionClass(OverridePropertyParent::class);
+		$structure = StructureBuilder::build($class);
+		$list = StructureFlattener::flatten($structure);
+		$group = StructureGrouper::group($list);
+
+		self::assertEquals(
+			[
+				'::test' => [
+					new PropertyStructure(
+						new ReflectionProperty(OverridePropertyParent::class, 'test'),
+						new PropertySource(new ReflectionProperty(OverridePropertyParentTrait::class, 'test')),
+						[],
+					),
+					new PropertyStructure(
+						new ReflectionProperty(OverridePropertyParent::class, 'test'),
+						new PropertySource(new ReflectionProperty(OverridePropertyParent::class, 'test')),
+						[],
+					),
+				],
+			],
+			$group->getGroupedProperties(),
 		);
 	}
 

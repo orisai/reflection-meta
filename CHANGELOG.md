@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased](https://github.com/orisai/reflection-meta/compare/1.0.3...v1.x)
 
+### Fixed
+
+- `StructureBuilder` - property defined in trait and modified in a class is not marked as a duplicate
+
 ## [1.0.3](https://github.com/orisai/reflection-meta/compare/1.0.2...1.0.3) - 2025-02-15
 
 ### Fixed

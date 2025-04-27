@@ -140,11 +140,21 @@ final class StructureBuilder
 				continue;
 			}
 
+			$duplicators = PropertyDeclaratorFinder::getDeclaringTraits($property);
+			foreach ($duplicators as $key => $duplicator) {
+				if (!PropertyDeclaratorFinder::areDefinitionsIdentical(
+					$property,
+					$duplicator->getProperty($property->getName()),
+				)) {
+					unset($duplicators[$key]);
+				}
+			}
+
 			$properties[] = new PropertyStructure(
 				$contextClass->getProperty($property->getName()),
 				new PropertySource($property),
 				// We have to keep duplicates because they can be sourced in different code paths
-				PropertyDeclaratorFinder::getDeclaringTraits($property),
+				$duplicators,
 			);
 		}
 
