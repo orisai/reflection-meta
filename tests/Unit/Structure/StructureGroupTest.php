@@ -21,8 +21,15 @@ final class StructureGroupTest extends TestCase
 
 	public function testEmpty(): void
 	{
-		$list = new StructureGroup([], [], [], []);
-		self::assertSame([], $list->getClasses());
+		$classes = [
+			new ClassStructure(
+				new ReflectionClass(stdClass::class),
+				new ClassSource(new ReflectionClass(stdClass::class)),
+			),
+		];
+
+		$list = new StructureGroup($classes, [], [], []);
+		self::assertSame($classes, $list->getClasses());
 		self::assertSame([], $list->getGroupedConstants());
 		self::assertSame([], $list->getGroupedProperties());
 		self::assertSame([], $list->getGroupedMethods());

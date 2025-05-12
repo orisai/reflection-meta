@@ -5,7 +5,7 @@ namespace Orisai\ReflectionMeta\Structure;
 final class StructureList
 {
 
-	/** @var list<ClassStructure> */
+	/** @var non-empty-list<ClassStructure> */
 	private array $classes;
 
 	/** @var list<ConstantStructure> */
@@ -18,10 +18,10 @@ final class StructureList
 	private array $methods;
 
 	/**
-	 * @param list<ClassStructure>    $classes
+	 * @param non-empty-list<ClassStructure> $classes
 	 * @param list<ConstantStructure> $constants
 	 * @param list<PropertyStructure> $properties
-	 * @param list<MethodStructure>   $methods
+	 * @param list<MethodStructure> $methods
 	 *
 	 * @internal
 	 * @see StructureFlattener::flatten()
@@ -35,7 +35,7 @@ final class StructureList
 	}
 
 	/**
-	 * @return list<ClassStructure>
+	 * @return non-empty-list<ClassStructure>
 	 */
 	public function getClasses(): array
 	{

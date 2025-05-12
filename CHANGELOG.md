@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased](https://github.com/orisai/reflection-meta/compare/1.0.4...v1.x)
 
+### Fixed
+
+- `StructureList`, `StructureGroup`
+	- list returned by `getClasses()` is non-empty
+
 ## [1.0.4](https://github.com/orisai/reflection-meta/compare/1.0.3...1.0.4) - 2025-04-27
 
 ### Fixed

@@ -21,8 +21,15 @@ final class StructureListTest extends TestCase
 
 	public function testEmpty(): void
 	{
-		$list = new StructureList([], [], [], []);
-		self::assertSame([], $list->getClasses());
+		$classes = [
+			new ClassStructure(
+				new ReflectionClass(stdClass::class),
+				new ClassSource(new ReflectionClass(stdClass::class)),
+			),
+		];
+
+		$list = new StructureList($classes, [], [], []);
+		self::assertSame($classes, $list->getClasses());
 		self::assertSame([], $list->getConstants());
 		self::assertSame([], $list->getProperties());
 		self::assertSame([], $list->getMethods());

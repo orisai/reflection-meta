@@ -5,7 +5,7 @@ namespace Orisai\ReflectionMeta\Structure;
 final class StructureGroup
 {
 
-	/** @var list<ClassStructure> */
+	/** @var non-empty-list<ClassStructure> */
 	private array $classes;
 
 	/** @var array<string, list<ConstantStructure>> */
@@ -18,10 +18,10 @@ final class StructureGroup
 	private array $methods;
 
 	/**
-	 * @param list<ClassStructure>                   $classes
+	 * @param non-empty-list<ClassStructure> $classes
 	 * @param array<string, list<ConstantStructure>> $constants
 	 * @param array<string, list<PropertyStructure>> $properties
-	 * @param array<string, list<MethodStructure>>   $methods
+	 * @param array<string, list<MethodStructure>> $methods
 	 *
 	 * @internal
 	 * @see StructureGrouper::group()
@@ -35,7 +35,7 @@ final class StructureGroup
 	}
 
 	/**
-	 * @return list<ClassStructure>
+	 * @return non-empty-list<ClassStructure>
 	 */
 	public function getClasses(): array
 	{
