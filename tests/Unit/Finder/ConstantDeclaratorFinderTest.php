@@ -125,7 +125,7 @@ final class ConstantDeclaratorFinderTest extends TestCase
 	}
 
 	/**
-	 * @param ReflectionClass<object> $declarator
+	 * @param ReflectionClass<covariant object> $declarator
 	 *
 	 * @dataProvider provideUniqueConstants
 	 */

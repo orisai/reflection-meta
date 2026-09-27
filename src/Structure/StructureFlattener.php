@@ -3,7 +3,6 @@
 namespace Orisai\ReflectionMeta\Structure;
 
 use function array_merge;
-use function assert;
 
 final class StructureFlattener
 {
@@ -61,8 +60,6 @@ final class StructureFlattener
 
 			$deduplicated[$name] = $class;
 		}
-
-		assert($deduplicated !== []);
 
 		return $deduplicated;
 	}

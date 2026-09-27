@@ -24,16 +24,17 @@ final class AnnotationFilter
 			return $docblock;
 		}
 
-		// Remove first line if empty
 		$firstLineKey = array_key_first($lines);
 		$firstLine = $lines[$firstLineKey];
+		$lastLineKey = array_key_last($lines);
+		$lastLine = $lines[$lastLineKey];
+
+		// Remove first line if empty
 		if (preg_match('/^\s*$/', $firstLine) === 1) {
 			unset($lines[$firstLineKey]);
 		}
 
 		// Remove last line if empty
-		$lastLineKey = array_key_last($lines);
-		$lastLine = $lines[$lastLineKey];
 		if (preg_match('/^\s*$/', $lastLine) === 1) {
 			unset($lines[$lastLineKey]);
 		}

@@ -167,7 +167,7 @@ final class PropertyDeclaratorFinderTest extends TestCase
 	}
 
 	/**
-	 * @param ReflectionClass<object> $declarator
+	 * @param ReflectionClass<covariant object> $declarator
 	 *
 	 * @dataProvider provideUniqueProperties
 	 */

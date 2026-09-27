@@ -38,12 +38,12 @@ parameters:
 
 		# Intentionally !=
 		-
-			message: '#^Loose comparison via "\!\=" is not allowed\.$#'
+			message: '#^Loose comparison via "\!\=" between array and array is not allowed\.$#'
 			count: 1
 			path: ../src/Finder/ConstantDeclaratorFinder.php
 
 		# Intentionally !=
 		-
-			message: '#^Loose comparison via "\!\=" is not allowed\.$#'
+			message: '#^Loose comparison via "\!\=" between array and array is not allowed\.$#'
 			count: 1
 			path: ../src/Finder/PropertyDeclaratorFinder.php
